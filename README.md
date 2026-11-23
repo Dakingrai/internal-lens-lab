@@ -39,3 +39,7 @@ The look is deliberately quiet: one column, serif titles, rows separated by hair
 ## Contributing
 
 Know a paper, post or tool that would help participants? Open a pull request adding it to `resources.js` with a one-to-three-sentence summary in your own words, plus its `papers/<slug>.html` page.
+
+## License
+
+The code is released under the [MIT License](LICENSE). The Looped Lens Challenge mark (`images/looped-lens-challenge.svg`) is the challenge organisers' artwork, and the papers listed belong to their authors; the summaries are our own.
