@@ -1,7 +1,7 @@
-/* Renders whichever page this is: the Resources tab (#groups) and a paper's notes page (#paper, papers/<slug>.html)
+/* Renders whichever page this is: the Readings tab (#groups) and a paper's notes page (#paper, papers/<slug>.html)
    from resources.js; the Research programs tab (#programs), a program's page (#program, program.html?p=<slug>) and a
    project's page (#project, project.html?p=<slug>), the Home tab (#home: experiments running or awaiting review) and an
-   experiment's own page (#experiment, experiments/<slug>.html) from programs.js. Resources: grouped by section in order of first use, rows in file order. The tab has one
+   experiment's own page (#experiment, experiments/<slug>.html) from programs.js. Readings: grouped by section in order of first use, rows in file order. The tab has one
    control, a filter by reading status (#filter); no sorting or other controls. Every page also gets the footer. */
 (function () {
   // the footer (rule 45): what this is, and where its source lives. A fork changes REPO to its own.
@@ -116,8 +116,8 @@
     });
 
     document.getElementById('count').textContent = shown.length === all.length
-      ? plural(all.length, 'resource')
-      : shown.length + ' of ' + plural(all.length, 'resource');
+      ? plural(all.length, 'reading')
+      : shown.length + ' of ' + plural(all.length, 'reading');
 
     root.textContent = '';
     order.forEach(function (name) {
@@ -194,7 +194,7 @@
     m.appendChild(newTabLink(host, pg.url));
   }
 
-  // a row in the Resources row style: title (a link), metadata, summary
+  // a row in the Readings row style: title (a link), metadata, summary
   function linkRow(title, href, meta, summary) {
     var li = el('li');
     var t = el('div', 'r-title');

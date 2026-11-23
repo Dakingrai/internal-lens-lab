@@ -8,7 +8,7 @@ It comes set up for the **[Looped Lens Challenge](https://ndif.us/looped-lens-ch
 
 ## What's inside
 
-- **Resources**: the papers behind the challenge, grouped by method, each with a short summary and its own notes page for your reading notes. Filter by what you've read.
+- **Readings**: the papers behind the challenge, grouped by method, each with a short summary and its own notes page for your reading notes. Filter by what you've read.
 - **Home**: the experiments running now, and those finished but not yet reviewed, across every project.
 - **Research programs**: the Looped Lens Challenge as a program, with a project for phase one (single-token readouts). Add your own projects, questions and reading lists under it. Each project can list its experiments, each with its own page written from `experiments/template.html`.
 

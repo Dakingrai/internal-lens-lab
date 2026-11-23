@@ -35,7 +35,7 @@
 
   /* photographs: one masthead per tab, a short wide band; dimmed a little in dark mode */
   --masthead-ratio:10 / 3; --masthead-max-h:264px; --masthead-min-h:150px; --photo-dim:none;
-  /* the Resources masthead is cut a little taller, so the orange chair shows whole */
+  /* the Readings masthead is cut a little taller, so the orange chair shows whole */
   --masthead-resources-ratio:3 / 1; --masthead-resources-max-h:293px;
   /* a program's mark: its own illustration, shown whole on its page */
   --mark-size:150px; --mark-size-row:192px; --mark-size-sm:128px; --mark-size-page-sm:96px; --mark-size-home:96px; --mark-size-home-sm:64px;   /* page, list row, list row on a phone, page on a phone */
