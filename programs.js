@@ -5,7 +5,14 @@
    images/, shown whole on its page, and one plain sentence describing it), projects.
    Project fields: title, slug, started, status (idea | planning | active | writing | done), question (the research
    question, one sentence), summary (one paragraph), resources (urls of entries in resources.js the project reads;
-   shown under "Reading" on its page).
+   shown under "Reading" on its page), experiments (optional; listed under "Experiments" on its page).
+   Experiment fields: title, status (planned | running | done | abandoned), date (when planned, else when run;
+   YYYY-MM-DD, YYYY-MM or YYYY), tags (plain words, one from each set: stage preliminary | main | replication; who
+   ran it AI-run | AI-assisted | hand-run; checking unreviewed | reviewed), code (optional link to the code),
+   href (its page, experiments/<slug>.html, copied from experiments/template.html; the title links to it),
+   summary (what it tests and how, in plain words), progress (optional, while it runs: percent, updated as a date,
+   now as one sentence on what is happening). Home lists every experiment that is running, and every one that is
+   done and still tagged unreviewed; it leaves Home when the tag becomes reviewed.
    Programs appear in file order, projects in file order within their program. Slugs name the pages
    (program.html?p=<slug>, project.html?p=<slug>), so project slugs must be unique across all programs.
    Seeded 2026-11-23 with one program and one project from the challenge page (ndif.us/looped-lens-challenge);

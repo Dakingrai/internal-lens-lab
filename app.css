@@ -1,11 +1,14 @@
 /* Page styles. Tokens only; the rules followed are docs/design-rules.md */
 *,*::before,*::after{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font:var(--fs-body)/var(--lh-body) var(--sans)}
-.wrap{max-width:var(--col-main);margin:0 auto;padding:0 var(--page-pad) var(--s-9)}
+/* a column, so the footer band sits at the bottom of the window on a short page */
+body{margin:0;min-height:100vh;display:flex;flex-direction:column;background:var(--bg);color:var(--ink);font:var(--fs-body)/var(--lh-body) var(--sans)}
+.wrap{flex:1 0 auto;width:100%;max-width:var(--col-main);margin:0 auto;padding:0 var(--page-pad) var(--s-9)}
 
 /* header + tabs (rule 4) */
 .site{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:var(--s-2) var(--s-4);padding:var(--s-5) 0 var(--s-4);border-bottom:var(--border)}
-.site .name{font:500 var(--fs-body)/var(--lh-ui) var(--sans);color:var(--ink);text-decoration:none}
+.site .name,.foot .name{font:400 var(--fs-h2)/var(--lh-heading) var(--serif);color:var(--ink);text-decoration:none}
+/* the glyph before the site name: favicon.svg's shape, coloured by the token so it follows light and dark (rule 46) */
+.site .name::before,.foot .name::before{content:"";display:inline-block;width:var(--glyph-size);height:var(--glyph-size);margin-right:var(--s-2);vertical-align:var(--glyph-drop);background:var(--highlight);-webkit-mask:url(favicon.svg) center/contain no-repeat;mask:url(favicon.svg) center/contain no-repeat}
 /* the light/dark switch (theme.js): a text button at the right of the header's first line */
 .site .theme-switch{order:1;margin-left:auto;font:var(--fs-meta)/var(--lh-ui) var(--sans);color:var(--ink-2);background:none;border:0;padding:0;cursor:pointer;transition:color var(--dur) var(--ease)}
 .site .theme-switch:hover{color:var(--ink)}
@@ -60,6 +63,23 @@ h1{font-size:var(--fs-title);margin-top:var(--s-7)}
 .meta{font-size:var(--fs-meta);line-height:var(--lh-ui);color:var(--ink-2);margin-top:var(--s-1)}
 .meta a{color:var(--ink-2);text-decoration:underline;text-decoration-color:var(--rule);text-underline-offset:3px;text-decoration-thickness:1px}
 .meta a:hover{color:var(--ink);text-decoration-color:var(--ink)}
+
+/* the footer on every page (rule 45): a sunk band across the whole window; on the page column, the wordmark and
+   description at the left and link rows at the right */
+.foot{background:var(--surface-sunk);border-top:var(--border);padding:var(--s-7) 0}
+.foot-in{max-width:var(--col-main);margin:0 auto;padding:0 var(--page-pad);display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-start;gap:var(--s-6) var(--s-8)}
+.foot-about{flex:1 1 var(--foot-text-min);max-width:var(--foot-about-max)}
+.foot p{margin:var(--s-3) 0 0;color:var(--ink-2)}
+.foot nav{flex:0 1 var(--foot-links-w)}
+.foot-links{list-style:none;margin:0;padding:0}
+.foot-links li + li{border-top:var(--border)}
+.foot-links a{display:flex;justify-content:space-between;gap:var(--s-4);padding:var(--s-3) 0;color:var(--ink);text-decoration:none}
+.foot-links li:first-child a{padding-top:var(--s-1)}
+.foot-links .arrow{color:var(--ink-3);transition:color var(--dur) var(--ease)}
+.foot-links a:hover .arrow{color:var(--ink)}
+@media (max-width:767px){
+  .foot nav{flex-basis:100%}
+}
 .summary{color:var(--ink-2);margin-top:var(--s-2)}
 
 /* a project's page: the research question with a rule on its left, no box or colour (rule 39) */
@@ -106,3 +126,21 @@ main h2[id],main h3[id]{scroll-margin-top:var(--s-6)}
   .toc-side{--toc-w:min(200px, (100vw - var(--col-main)) / 2 - var(--s-5) - var(--page-pad));display:block;position:fixed;top:var(--s-9);left:calc((100vw - var(--col-main)) / 2 - var(--toc-w) - var(--s-5));width:var(--toc-w);max-height:calc(100vh - var(--s-9) - var(--s-6));overflow:auto}
   .toc-top{display:none}
 }
+
+/* experiments (rules 47-54): rows on a project's page; on Home grouped by project, the program's mark in a left
+   column, each experiment with how far it has got as a line and a sentence, never a bar (house rule H3) */
+.prog-line{margin:var(--s-2) 0 0}
+.prog-now{margin:var(--s-1) 0 0;color:var(--ink)}
+.home-group{margin-top:var(--s-7)}
+.home-group.with-mark{grid-template-columns:var(--mark-size-home) minmax(0,1fr);gap:var(--s-5)}
+.home-group h2{font:400 var(--fs-h2)/var(--lh-heading) var(--serif);margin:0}
+.home-group h2 a{color:var(--ink);text-decoration:none}
+.home-group h2 a:hover{text-decoration:underline;text-decoration-color:var(--rule);text-underline-offset:3px;text-decoration-thickness:1px}
+.home-group .resources{margin-top:var(--s-3)}
+@media (max-width:599px){
+  .home-group.with-mark{grid-template-columns:var(--mark-size-home-sm) minmax(0,1fr);gap:var(--s-4)}
+}
+/* an experiment's page: its progress under the metadata line, between hairlines, then hand-written sections */
+.progress-block{max-width:var(--col-text);margin:var(--s-5) 0 0;padding:var(--s-3) 0 var(--s-4);border-top:var(--border);border-bottom:var(--border)}
+.progress-block .prog-line{margin-top:0}
+.progress-block + .toc-top{border-top:0;margin-top:0}   /* the contents list follows the progress; one hairline between them */

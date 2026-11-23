@@ -30,7 +30,7 @@
   /* layout: one column; section headings and rows share it */
   --col-main:880px; --col-text:680px; --page-pad:16px;
   --s-1:4px; --s-2:8px; --s-3:12px; --s-4:16px; --s-5:24px; --s-6:32px; --s-7:48px; --s-8:64px; --s-9:96px;
-  /* prose: a document read in the tool (a project page's summary); values as welfare-lab's note pages */
+  /* prose: a document read in the tool (a project page's summary) */
   --fs-prose:18px; --lh-prose:1.6;
 
   /* photographs: one masthead per tab, a short wide band; dimmed a little in dark mode */
@@ -38,7 +38,11 @@
   /* the Resources masthead is cut a little taller, so the orange chair shows whole */
   --masthead-resources-ratio:3 / 1; --masthead-resources-max-h:293px;
   /* a program's mark: its own illustration, shown whole on its page */
-  --mark-size:150px; --mark-size-row:192px; --mark-size-sm:128px; --mark-size-page-sm:96px;   /* page, list row, list row on a phone, page on a phone */
+  --mark-size:150px; --mark-size-row:192px; --mark-size-sm:128px; --mark-size-page-sm:96px; --mark-size-home:96px; --mark-size-home-sm:64px;   /* page, list row, list row on a phone, page on a phone */
+  /* the footer: the description's least and greatest width, and the width of the link rows */
+  --foot-text-min:280px; --foot-about-max:420px; --foot-links-w:260px;
+  /* the site's glyph before the name in the header */
+  --glyph-size:22px; --glyph-drop:-4px;
 
   /* shape, motion */
   --radius:3px; --border:1px solid var(--hairline);

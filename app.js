@@ -1,8 +1,14 @@
 /* Renders whichever page this is: the Resources tab (#groups) and a paper's notes page (#paper, papers/<slug>.html)
    from resources.js; the Research programs tab (#programs), a program's page (#program, program.html?p=<slug>) and a
-   project's page (#project, project.html?p=<slug>) from programs.js. Resources: grouped by section in order of first use, rows in file order. The tab has one
-   control, a filter by reading status (#filter); no sorting or other controls. */
+   project's page (#project, project.html?p=<slug>), the Home tab (#home: experiments running or awaiting review) and an
+   experiment's own page (#experiment, experiments/<slug>.html) from programs.js. Resources: grouped by section in order of first use, rows in file order. The tab has one
+   control, a filter by reading status (#filter); no sorting or other controls. Every page also gets the footer. */
 (function () {
+  // the footer (rule 45): what this is, and where its source lives. A fork changes REPO to its own.
+  var ABOUT = 'A workspace for reading and research on methods that put a model\u2019s internal features into words.';
+  var ABOUT_MORE = 'It ships with the resources for the Looped Lens Challenge; fork it to manage your own projects.';
+  var REPO = 'https://github.com/Dakingrai/internal-lens-lab';
+
   var MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
   function el(tag, cls, text) {
@@ -290,6 +296,18 @@
       d.appendChild(el('p', null, p.summary));
       root.appendChild(d);
     }
+    // experiments: one row each, in the data's order, above the reading list (rule 48)
+    var exps = p.experiments || [];
+    if (exps.length) {
+      var es = el('section', 'group');
+      var eh = el('h2', null, 'Experiments');
+      eh.appendChild(el('span', 'n', String(exps.length)));
+      es.appendChild(eh);
+      var el2 = el('ul', 'resources');
+      exps.forEach(function (x) { el2.appendChild(experimentRow(x, false)); });
+      es.appendChild(el2);
+      root.appendChild(es);
+    }
     var papers = (p.resources || []).map(resourceByUrl).filter(Boolean);
     if (papers.length) {
       var sec = el('section', 'group');
@@ -301,6 +319,161 @@
       sec.appendChild(ul);
       root.appendChild(sec);
     }
+  }
+
+  /* ---- Experiments: rows on a project's page, the Home tab, and an experiment's own page (rules 47-54) ---- */
+
+  // every experiment with its project and program, in the order of programs.js
+  function allExperiments() {
+    var out = [];
+    (window.PROGRAMS || []).forEach(function (pg) {
+      (pg.projects || []).forEach(function (p) {
+        (p.experiments || []).forEach(function (x) { out.push({ program: pg, project: p, x: x }); });
+      });
+    });
+    return out;
+  }
+
+  // status as a plain word, the date at the data's precision, then the tags as plain words (rule 47)
+  function experimentMeta(m, x) {
+    m.textContent = [capitalise(x.status), x.date ? fmtDate(x.date) : ''].concat(x.tags || []).filter(Boolean).join(' · ');
+    if (x.code) {
+      m.appendChild(document.createTextNode(' · '));
+      m.appendChild(newTabLink('Code', x.code));
+    }
+  }
+
+  // how far it has got: one meta line and one sentence, no bar (rule 50, house rule H3)
+  function appendProgress(box, x) {
+    var P = x.progress;
+    if (P) {
+      var pct = Math.max(0, Math.min(100, Math.round(P.percent || 0)));
+      box.appendChild(el('p', 'meta prog-line', 'About ' + pct + '% done' + (P.updated ? ' · updated ' + fmtDate(P.updated) : '')));
+      if (P.now) box.appendChild(el('p', 'prog-now', P.now));
+    } else if (x.status === 'running') {
+      box.appendChild(el('p', 'meta prog-line', 'No progress published yet.'));
+    }
+  }
+
+  // an experiment row: title (a link once it has a page), metadata line, then its summary, or on Home its progress
+  function experimentRow(x, onHome) {
+    var li = el('li');
+    var t = el('div', 'r-title');
+    if (x.href) { var a = el('a', null, x.title); a.href = x.href; t.appendChild(a); } else t.textContent = x.title;
+    li.appendChild(t);
+    var m = el('div', 'meta');
+    experimentMeta(m, x);
+    li.appendChild(m);
+    if (onHome) appendProgress(li, x);
+    else if (x.summary) li.appendChild(el('div', 'summary', x.summary));
+    return li;
+  }
+
+  function isWaiting(x) { return x.status === 'done' && (x.tags || []).indexOf('unreviewed') !== -1; }
+
+  // Home: the experiments running now, then those done and not yet reviewed, grouped by project; projects with
+  // something running first. A project's group shows its program's mark in a left column (rule 49).
+  function renderHome(root) {
+    var groups = [], byProject = {}, nRunning = 0, nWaiting = 0;
+    allExperiments().forEach(function (e) {
+      var run = e.x.status === 'running', wait = isWaiting(e.x);
+      if (!run && !wait) return;
+      if (run) nRunning++; else nWaiting++;
+      var g = byProject[e.project.slug];
+      if (!g) { g = byProject[e.project.slug] = { program: e.program, project: e.project, running: [], waiting: [] }; groups.push(g); }
+      (run ? g.running : g.waiting).push(e.x);
+    });
+    groups = groups.filter(function (g) { return g.running.length; }).concat(groups.filter(function (g) { return !g.running.length; }));
+    var count = plural(nRunning, 'experiment') + ' running';
+    if (nWaiting) count += ' · ' + nWaiting + ' done and unreviewed';
+    if (!nRunning && !nWaiting) count = 'No experiments running. Add one to a project in programs.js, with status running.';
+    document.getElementById('count').textContent = count;
+    groups.forEach(function (g) {
+      var sec = el('section', 'home-group');
+      var text = el('div', 'with-mark-text');
+      var h = el('h2'), a = el('a', null, g.project.title);
+      a.href = 'project.html?p=' + encodeURIComponent(g.project.slug);
+      h.appendChild(a);
+      text.appendChild(h);
+      var m = el('div', 'meta'), up = el('a', null, g.program.name);
+      up.href = 'program.html?p=' + encodeURIComponent(g.program.slug);
+      m.appendChild(up);
+      text.appendChild(m);
+      var ul = el('ul', 'resources');
+      g.running.concat(g.waiting).forEach(function (x) { ul.appendChild(experimentRow(x, true)); });
+      text.appendChild(ul);
+      if (g.program.image) {
+        sec.classList.add('with-mark');
+        var fig = el('a', 'mark');
+        fig.href = a.href;
+        fig.tabIndex = -1;
+        fig.appendChild(markImg(g.program, ''));
+        sec.appendChild(fig);
+      }
+      sec.appendChild(text);
+      root.appendChild(sec);
+    });
+  }
+
+  // an experiment's own page (experiments/<slug>.html): the kicker, title and metadata line come from programs.js,
+  // matched by the page's data-href; the sections below are written by hand (rules 51-53)
+  function renderExperiment(root) {
+    var href = root.getAttribute('data-href'), hit = null;
+    allExperiments().forEach(function (e) { if (e.x.href === href) hit = e; });
+    if (!hit) return;   // not listed yet: the page keeps its hand-written title
+    var k = document.getElementById('kicker');
+    k.textContent = '';
+    [['Research programs', '../programs.html'],
+     [hit.program.name, '../program.html?p=' + encodeURIComponent(hit.program.slug)],
+     [hit.project.title, '../project.html?p=' + encodeURIComponent(hit.project.slug)]].forEach(function (b, i) {
+      if (i) k.appendChild(document.createTextNode(' · '));
+      var a = el('a', null, b[0]); a.href = b[1]; k.appendChild(a);
+    });
+    document.title = hit.x.title + ' — Internal lens lab';
+    document.getElementById('title').textContent = hit.x.title;
+    experimentMeta(document.getElementById('meta'), hit.x);
+    var box = document.getElementById('progress');
+    if (box && (hit.x.progress || hit.x.status === 'running')) {
+      appendProgress(box, hit.x);
+      box.hidden = false;
+    }
+  }
+
+  function renderFooter() {
+    var wrap = document.querySelector('.wrap');
+    if (!wrap) return;
+    var home = document.querySelector('.site .name');
+    var f = el('footer', 'foot');
+    var inner = el('div', 'foot-in');
+    var about = el('div', 'foot-about');
+    var name = el('a', 'name', 'Internal lens lab');
+    name.href = home ? home.getAttribute('href') : 'index.html';
+    about.appendChild(name);
+    about.appendChild(el('p', null, ABOUT + ' ' + ABOUT_MORE));
+    inner.appendChild(about);
+    // the link rows: the header's tabs, then the repository
+    var nav = el('nav');
+    nav.setAttribute('aria-label', 'Footer');
+    var ul = el('ul', 'foot-links');
+    function row(text, href, outside) {
+      var li = el('li');
+      var a = el('a', null, text);
+      a.href = href;
+      if (outside) { a.target = '_blank'; a.rel = 'noopener'; }
+      var arrow = el('span', 'arrow', outside ? '\u2197' : '\u2192');
+      arrow.setAttribute('aria-hidden', 'true');
+      a.appendChild(arrow);
+      li.appendChild(a);
+      ul.appendChild(li);
+    }
+    Array.prototype.forEach.call(document.querySelectorAll('.site .tabs a'), function (t) {
+      row(t.textContent, t.getAttribute('href'));
+    });
+    row('GitHub', REPO, true);
+    nav.appendChild(ul);
+    inner.appendChild(nav);
+    f.appendChild(inner);
+    wrap.parentNode.insertBefore(f, wrap.nextSibling);
   }
 
   var groups = document.getElementById('groups');
@@ -315,4 +488,9 @@
   if (program) renderProgram(program);
   var project = document.getElementById('project');
   if (project) renderProject(project);
+  var home = document.getElementById('home');
+  if (home) renderHome(home);
+  var experiment = document.getElementById('experiment');
+  if (experiment) renderExperiment(experiment);
+  renderFooter();
 })();

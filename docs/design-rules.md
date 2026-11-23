@@ -4,11 +4,11 @@ Read this before adding or changing anything visual in this app, whether you are
 
 ## The page
 
-1. White page (`--bg`), one column (`--col-main`), text flush left. No sidebars, cards, shadows or boxes; the one exception is a long page's contents list (rule 29). Separate things with space or `--hairline`, never a border box.
-2. The interface is `--sans`: nav, labels, metadata, summaries, counts. A resource's title, the page title and section headings are `--serif`. Code is `--mono`.
+1. White page (`--bg`), one column (`--col-main`), text flush left. No sidebars, cards, shadows or boxes, and no filled surface but the footer band (rule 45); the one exception is a long page's contents list (rule 29). Separate things with space or `--hairline`, never a border box.
+2. The interface is `--sans`: nav, labels, metadata, summaries, counts. A resource's title, the page title, section headings and the site name in the header are `--serif`. Code is `--mono`.
 3. Page heading `--fs-title` serif weight 400; section heading `--fs-h2` serif weight 400. Never bold a heading.
-4. Header: site name in `--ink` weight 500 on the left, tabs on the right, the Light/Dark switch (`theme.js`) a `--fs-meta` `--ink-2` text button at the right of the first line. Tabs are `--fs-body` `--ink-2`; the active tab is `--ink` with a 2px `--ink` underline. No colour, pill or background on tabs.
-5. One hairline under the header; otherwise only the hairlines between rows.
+4. Header: the wordmark on the left, which is the glyph (rule 46) then the site name in `--serif` `--fs-h2` weight 400 `--ink`, tabs on the right, the Light/Dark switch (`theme.js`) a `--fs-meta` `--ink-2` text button at the right of the first line. Tabs are `--fs-body` `--ink-2`; the active tab is `--ink` with a 2px `--ink` underline. The tabs are Home, Resources and Research programs, in that order. No colour, pill or background on tabs.
+5. One hairline under the header and one on the footer's top edge (rule 45); otherwise only the hairlines between rows.
 6. Order of a tab: header, page title, lede, masthead if the tab has one, content.
 
 ## Photographs
@@ -48,7 +48,7 @@ Read this before adding or changing anything visual in this app, whether you are
 
 ## The Research programs tab
 
-32. The tab is three pages: `programs.html` lists the programs, `program.html?p=<slug>` is one program with its projects, `project.html?p=<slug>` is one project. All three keep the header with Research programs the active tab.
+32. The tab is three pages, plus each experiment's page (rule 51): `programs.html` lists the programs, `program.html?p=<slug>` is one program with its projects, `project.html?p=<slug>` is one project. All three keep the header with Research programs the active tab.
 33. `programs.html`: header, page title, lede, one count line in `--fs-meta` `--ink-3` reading `N programs`, then one row per program in the order of `programs.js`. Programs only: projects appear only on their program's page. No sections.
 34. A program row is a Resources row (rules 16–21): title links to its program page; metadata line reads status as a plain word ` · started <date>`, then the host of `url` (for example `ndif.us`) as a new-tab link styled as rule 19 when the program has one; summary is the aim. A program with a mark shows it in a left column, `--mark-size-row` wide (`--mark-size-sm` below 600px), `--s-5` from the text (`--s-4` on a phone), top-aligned; the mark links to the program page but is skipped by the keyboard and has empty alt, since the title says the same.
 35. `program.html`: kicker, then the program's mark in a left column, `--mark-size` wide (`--mark-size-page-sm` below 600px), `--s-6` from the text (`--s-4` on a phone), top-aligned, beside the program's name as the page title, one metadata line (status ` · ` started ` · ` host link) and the aim as the lede (`--fs-lede` `--ink-2`); then one count line `N projects` and one row per project in the data's order, full width. Without a mark the title block is one column.
@@ -60,7 +60,26 @@ Read this before adding or changing anything visual in this app, whether you are
 41. The Reading section opens with `Reading` (`--fs-h2` serif) and its count, then the project's papers as full Resources rows in the data's order. Omitted when the project lists none.
 42. A program may have one mark: its own illustration (`image` and `imageAlt` in `programs.js`, a file in `images/`, SVG where there is one). It appears in the left column of its row on `programs.html` and of its page's title block (rules 34–35), square, shown whole and never cropped. No caption, credit, border, shadow, radius, filter or overlay, and it does not animate. A program without one shows nothing there. Project pages carry no image.
 43. Status is always a plain word, never a coloured tag, badge or icon. Nothing on these pages is coloured.
-44. Nothing else on a program or project page (experiments, notes, submissions, deadlines, progress) unless it is needed; anything new should follow the patterns above (rows, plain-word states, ink links).
+44. Nothing else on a program or project page (notes, submissions, deadlines) apart from experiments (rules 47–54) unless it is needed; anything new should follow the patterns above (rows, plain-word states, ink links).
+
+## The glyph
+
+46. The site has one glyph, `favicon.svg`: an open loop that comes back to a point. It is the browser-tab icon on every page and sits before the site name in the header at `--glyph-size`, in `--highlight`. This is the one place a colour appears outside figures; nothing else in the header, rows or footer is coloured. The file itself carries the light value of `--highlight` as a hex, since a favicon cannot read tokens. It also opens the footer's wordmark (rule 45). It never animates and is not used anywhere else.
+
+## The footer
+
+45. Every page ends with one footer, drawn by `app.js`: a band across the whole window in `--surface-sunk` with a `--hairline` on its top edge, sitting at the bottom of the window on a short page. Its content keeps to the page column, in two parts. At the left, the wordmark (rule 4) linking to Resources, and under it one or two sentences in `--sans` `--fs-body` `--ink-2`, no wider than `--foot-about-max`, saying what the tool is. At the right, `--foot-links-w` wide, one row per link separated by `--hairline`: the header's tabs, then `GitHub`, each in `--ink` with an arrow at the right in `--ink-3` (`→` inside the app, `↗` for the repository, which opens in a new tab); the arrow turns `--ink` on hover. On a phone the rows go under the description at full width. This band is the one filled surface on a page. No icon beyond the glyph, no copyright line, no further links. A fork points the link at its own repository.
+
+## Home and experiments
+
+47. An experiment belongs to a project (`experiments` in `programs.js`). Its metadata line is `--sans` `--fs-meta` `--ink-2`: status as a plain word (Planned, Running, Done, Abandoned) ` · ` date at the data's precision ` · ` its tags as plain words (one each of stage, who ran it, checking), then `Code` as a new-tab link styled as rule 19 when it has one. Never a pill, badge, icon or colour.
+48. On a project's page, `Experiments` (`--fs-h2` serif, with its count) comes after the summary and before Reading, one row per experiment in the data's order: title (a link to its page once it has `href`, plain text before), the metadata line, then its summary. Omitted when the project has none.
+49. `home.html` is the first tab, Home, and the site name in the header links to it. Order: page title, lede, one count line in `--fs-meta` `--ink-3` (`N experiments running · M done and unreviewed`, or a plain sentence saying none are running), then one group per project that has an experiment running, or done and still tagged `unreviewed`; projects with something running first, then the data's order. A group is the project's title (`--fs-h2` serif, a link to its page), a metadata line with its program as a link, then its experiments as rows. When the program has a mark, it sits in a left column beside the whole group, `--mark-size-home` (`--mark-size-home-sm` below 600px), as rule 34's row mark.
+50. On Home an experiment's row shows, in its summary's place, how far it has got: `About N% done · updated <date>` in the metadata style, then the `now` sentence in `--fs-body` `--ink`. A running experiment with no progress reads "No progress published yet." No progress bar, meter or colour (house rule H3).
+51. An experiment's own page, `experiments/<slug>.html`, is copied from `experiments/template.html`: kicker `Research programs · <program> · <project>` (three links, rule 38's style), the title, the metadata line, then, when it has progress, the progress block (rule 50's line and sentence between two `--hairline`s, `--col-text` wide), then the contents list (rule 29), then the hand-written sections.
+52. Its sections, as `h2`, in order: In short; What we do; Competing explanations; What we expect; What would make us distrust a result; Results. Prose as rule 26. They are written before the experiment runs, and predictions are not edited once results exist.
+53. An experiment leaves Home when its checking tag becomes `reviewed`, or when it is planned or abandoned. Only the person who owns the project changes a tag to `reviewed`.
+54. Nothing else on Home (summaries of projects, art, totals, charts) unless it is asked for.
 
 ## Motion and focus
 
@@ -78,3 +97,5 @@ Read this before adding or changing anything visual in this app, whether you are
 - [ ] On Research programs, the count equals the programs in `programs.js`, the list shows no projects, and each program page's count equals its projects.
 - [ ] A project's Reading rows are the same rows the Resources tab shows; every url in `resources` matches an entry in `resources.js`.
 - [ ] Tabs: active tab underlined in ink, not coloured. Headings not bold.
+- [ ] Home lists exactly the experiments that are running, or done and tagged unreviewed; its count line matches; no progress bar anywhere.
+- [ ] Every experiment with an `href` has its page, and the page's `data-href` matches.
