@@ -1,0 +1,7 @@
+# Local tool state with machine-specific paths
+.loi/
+.codex/
+.claude/settings.local.json
+
+# OS clutter
+.DS_Store
