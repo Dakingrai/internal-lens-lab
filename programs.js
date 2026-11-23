@@ -1,7 +1,8 @@
 /* The data for the Research programs tab. One object per program, each holding its projects; edit by hand.
    Program fields: name, slug, url (optional: the program's own page outside the app, such as a challenge's; shown
    as its host on the metadata line), started (YYYY-MM-DD), status (active | paused | done), aim (what the program
-   is trying to do, one paragraph), projects.
+   is trying to do, one paragraph), image and imageAlt (optional: the program's own illustration, a file in
+   images/, shown whole on its page, and one plain sentence describing it), projects.
    Project fields: title, slug, started, status (idea | planning | active | writing | done), question (the research
    question, one sentence), summary (one paragraph), resources (urls of entries in resources.js the project reads;
    shown under "Reading" on its page).
@@ -16,6 +17,8 @@ window.PROGRAMS = [
     url: "https://ndif.us/looped-lens-challenge/",
     started: "2026-11-23",
     status: "active",
+    image: "images/looped-lens-challenge.svg",
+    imageAlt: "The Looped Lens Challenge mark: a purple shape of four rounded lobes joined in a cross, with a blue disc at its centre.",
     aim: "An open challenge run by NDIF with Thinking Machines, Goodfire and Northeastern University: build the lens that best reads Inkling 2 Mini, saying in tokens what the model computes at a layer but does not write out. The model has no single residual stream, since each layer reads its own mix of earlier layers, and its core layers 6 to 17 run three times, so it tests whether lenses built for ordinary transformers still work. Experiments are written with nnsight and run on NDIF, in phases of growing difficulty.",
     projects: [
       {

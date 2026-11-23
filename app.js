@@ -201,15 +201,35 @@
     return li;
   }
 
+  // a program's mark: its own illustration, shown whole (rule 42). Decorative beside the program's name in a
+  // list, so empty alt there; described on the program's own page.
+  function markImg(pg, alt) {
+    var img = el('img');
+    img.src = pg.image;
+    img.alt = alt;
+    return img;
+  }
+
+  // the Research programs tab lists programs only; projects appear on a program's page (rules 33-34)
   function renderPrograms(root) {
     var all = window.PROGRAMS || [];
-    var nProjects = all.reduce(function (n, p) { return n + (p.projects || []).length; }, 0);
-    document.getElementById('count').textContent = plural(all.length, 'program') + ' · ' + plural(nProjects, 'project');
+    document.getElementById('count').textContent = plural(all.length, 'program');
     var ul = el('ul', 'resources');
     all.forEach(function (pg) {
-      var li = linkRow(pg.name, 'program.html?p=' + encodeURIComponent(pg.slug),
-        statusLine(pg) + ' · ' + plural((pg.projects || []).length, 'project'), pg.aim);
-      appendProgramLink(li.querySelector('.meta'), pg);
+      var href = 'program.html?p=' + encodeURIComponent(pg.slug);
+      var row = linkRow(pg.name, href, statusLine(pg), pg.aim);
+      appendProgramLink(row.querySelector('.meta'), pg);
+      if (!pg.image) { ul.appendChild(row); return; }
+      // mark in the left column, the row's title, metadata and aim in the right
+      var li = el('li', 'with-mark');
+      var fig = el('a', 'mark');
+      fig.href = href;
+      fig.tabIndex = -1;   // the title is the link a keyboard reaches; the mark repeats it for the mouse
+      fig.appendChild(markImg(pg, ''));
+      var text = el('div', 'with-mark-text');
+      while (row.firstChild) text.appendChild(row.firstChild);
+      li.appendChild(fig);
+      li.appendChild(text);
       ul.appendChild(li);
     });
     root.appendChild(ul);
@@ -228,7 +248,8 @@
     k.appendChild(up);
   }
 
-  // a program's page: kicker, name, status line, aim as the lede, masthead, then its projects as rows
+  // a program's page: kicker, then its mark in the left column beside the name, status line and aim, then its
+  // projects as rows (rule 35)
   function renderProgram(root) {
     var pg = programBySlug(slugParam());
     if (!pg) { document.getElementById('count').textContent = 'No such program.'; return; }
@@ -238,6 +259,13 @@
     m.textContent = statusLine(pg);
     appendProgramLink(m, pg);
     document.getElementById('lede').textContent = pg.aim || '';
+    if (pg.image) {
+      var fig = document.getElementById('mark');
+      fig.appendChild(markImg(pg, pg.imageAlt || ''));
+      fig.hidden = false;
+    } else {
+      document.getElementById('head').classList.remove('with-mark');   // no mark: one column
+    }
     var ps = pg.projects || [];
     document.getElementById('count').textContent = plural(ps.length, 'project');
     var ul = el('ul', 'resources');
@@ -247,7 +275,7 @@
     root.appendChild(ul);
   }
 
-  // a project's page: kicker, title, status line, masthead, the question, the summary as prose, then Reading
+  // a project's page: kicker, title, status line, the question, the summary as prose, then Reading
   function renderProject(root) {
     var hit = projectBySlug(slugParam());
     if (!hit) { root.appendChild(el('p', 'count', 'No such project.')); return; }

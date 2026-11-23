@@ -4,7 +4,7 @@ A workspace for research programs and projects on methods that inspect and verba
 
 ## Design
 
-Before adding or changing anything visual, read `docs/design-rules.md` and follow it. Use the variables in `tokens.css`, never raw hex or px. In short: one column; rows separated by hairlines, never cards; headings never bold; links in ink, never blue; statuses as plain words, never coloured pills; one photograph per tab, with nothing over it. Anything the rules do not cover (experiments, submissions, figures in notes) should reuse those patterns rather than add new chrome.
+Before adding or changing anything visual, read `docs/design-rules.md` and follow it. Use the variables in `tokens.css`, never raw hex or px. In short: one column; rows separated by hairlines, never cards; headings never bold; links in ink, never blue; statuses as plain words, never coloured pills; one photograph on Resources and at most one illustration per program, with nothing over them. Anything the rules do not cover (experiments, submissions, figures in notes) should reuse those patterns rather than add new chrome.
 
 ## Layout
 
@@ -16,7 +16,7 @@ Before adding or changing anything visual, read `docs/design-rules.md` and follo
 - `app.js` — renders every page from `resources.js` and `programs.js`.
 - `app.css` — page styles, tokens only. `tokens.css` — colours, type and spacing, light and dark.
 - `theme.js` — the Light/Dark switch in the header; `toc.js` — contents list on long notes pages; `cite.js` — links "Surname et al." to that paper's notes page.
-- `images/` — the two masthead photographs.
+- `images/` — the Resources masthead photograph and each program's illustration.
 - `docs/design-rules.md` — the design rules.
 
 Run locally: `python3 -m http.server 8770` (or the `internal-lens-lab` entry in `.claude/launch.json`).
@@ -27,4 +27,4 @@ Add an object to `window.RESOURCES` in `resources.js`, in its section, newest fi
 
 ## Adding a program or project
 
-Add an object to `window.PROGRAMS` in `programs.js` (`name`, `slug`, optional `url` for the program's own site, `started`, `status` of active | paused | done, `aim`, `projects`), or a project to a program's `projects` (`title`, `slug` unique across all programs, `started`, `status` of idea | planning | active | writing | done, `question`, `summary`, `resources` as urls matching entries in `resources.js`). Write the aim, question and summary in the words of the person whose project it is.
+Add an object to `window.PROGRAMS` in `programs.js` (`name`, `slug`, optional `url` for the program's own site, `started`, `status` of active | paused | done, `aim`, optional `image` and `imageAlt` for the program's own illustration in `images/`, `projects`), or a project to a program's `projects` (`title`, `slug` unique across all programs, `started`, `status` of idea | planning | active | writing | done, `question`, `summary`, `resources` as urls matching entries in `resources.js`). Write the aim, question and summary in the words of the person whose project it is.

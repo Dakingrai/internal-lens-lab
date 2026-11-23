@@ -1,6 +1,6 @@
 # Design rules
 
-Read this before adding or changing anything visual in this app, whether you are a person or a coding agent. Values come from `tokens.css`; use the variables, never raw hex or px. The look follows a few principles: one quiet column of serif titles and sans metadata; rows, not cards; colour only where it means something; states as plain words; one photograph per tab. Keeping to these rules keeps every fork recognisably the same tool.
+Read this before adding or changing anything visual in this app, whether you are a person or a coding agent. Values come from `tokens.css`; use the variables, never raw hex or px. The look follows a few principles: one quiet column of serif titles and sans metadata; rows, not cards; colour only where it means something; states as plain words; one photograph on Resources and at most one illustration per program. Keeping to these rules keeps every fork recognisably the same tool.
 
 ## The page
 
@@ -9,15 +9,15 @@ Read this before adding or changing anything visual in this app, whether you are
 3. Page heading `--fs-title` serif weight 400; section heading `--fs-h2` serif weight 400. Never bold a heading.
 4. Header: site name in `--ink` weight 500 on the left, tabs on the right, the Light/Dark switch (`theme.js`) a `--fs-meta` `--ink-2` text button at the right of the first line. Tabs are `--fs-body` `--ink-2`; the active tab is `--ink` with a 2px `--ink` underline. No colour, pill or background on tabs.
 5. One hairline under the header; otherwise only the hairlines between rows.
-6. Order of a tab: header, page title, lede, masthead, content.
+6. Order of a tab: header, page title, lede, masthead if the tab has one, content.
 
 ## Photographs
 
-7. One photograph per tab, its masthead, between the lede and the content, full column width. Resources uses `--masthead-resources-ratio` up to `--masthead-resources-max-h`; any later tab uses `--masthead-ratio` between `--masthead-min-h` and `--masthead-max-h`. `object-fit: cover`.
+7. At most one photograph per tab, its masthead, between the lede and the content, full column width. Resources uses `--masthead-resources-ratio` up to `--masthead-resources-max-h`; any later tab uses `--masthead-ratio` between `--masthead-min-h` and `--masthead-max-h`. `object-fit: cover`.
 8. No text, caption, credit, border, shadow or overlay. Corner radius `--radius`. Alt text is one plain sentence.
 9. Dark mode applies `filter: var(--photo-dim)` and nothing else.
 10. Nothing in or around the masthead animates.
-11. Resources uses `images/masthead-resources-{880,1760}.jpg` (the classroom), with `srcset` and `sizes` matching `--col-main`. A new tab may get its own photograph, following rules 7–10, or reuse one of these.
+11. Resources uses `images/masthead-resources-{880,1760}.jpg` (the classroom), with `srcset` and `sizes` matching `--col-main`. A new tab may get its own photograph, following rules 7–10. Research programs has none; a program's own illustration is its mark (rule 42).
 12. Photographs appear only as mastheads.
 
 ## The list of resources
@@ -49,16 +49,16 @@ Read this before adding or changing anything visual in this app, whether you are
 ## The Research programs tab
 
 32. The tab is three pages: `programs.html` lists the programs, `program.html?p=<slug>` is one program with its projects, `project.html?p=<slug>` is one project. All three keep the header with Research programs the active tab.
-33. `programs.html`: header, page title, lede, masthead (`images/masthead-programs-*.jpg`), one count line in `--fs-meta` `--ink-3` reading `N programs · M projects`, then one row per program in the order of `programs.js`. No sections.
-34. A program row is a Resources row (rules 16–21): title links to its program page; metadata line reads status as a plain word ` · started <date>` ` · N projects`, then the host of `url` (for example `ndif.us`) as a new-tab link styled as rule 19 when the program has one; summary is the aim.
-35. `program.html`: kicker, the program's name as the page title, one metadata line (status ` · ` started ` · ` host link), the aim as the lede (`--fs-lede` `--ink-2`), masthead, one count line `N projects`, then one row per project in the data's order.
+33. `programs.html`: header, page title, lede, one count line in `--fs-meta` `--ink-3` reading `N programs`, then one row per program in the order of `programs.js`. Programs only: projects appear only on their program's page. No sections.
+34. A program row is a Resources row (rules 16–21): title links to its program page; metadata line reads status as a plain word ` · started <date>`, then the host of `url` (for example `ndif.us`) as a new-tab link styled as rule 19 when the program has one; summary is the aim. A program with a mark shows it in a left column, `--mark-size-row` wide (`--mark-size-sm` below 600px), `--s-5` from the text (`--s-4` on a phone), top-aligned; the mark links to the program page but is skipped by the keyboard and has empty alt, since the title says the same.
+35. `program.html`: kicker, then the program's mark in a left column, `--mark-size` wide (`--mark-size-page-sm` below 600px), `--s-6` from the text (`--s-4` on a phone), top-aligned, beside the program's name as the page title, one metadata line (status ` · ` started ` · ` host link) and the aim as the lede (`--fs-lede` `--ink-2`); then one count line `N projects` and one row per project in the data's order, full width. Without a mark the title block is one column.
 36. A project row: title links to its project page; metadata line status ` · ` started; summary is the research question.
-37. `project.html`: kicker, title, one metadata line (status ` · ` started), masthead, the question block, the summary as prose, then the Reading section.
+37. `project.html`: kicker, title, one metadata line (status ` · ` started), the question block, the summary as prose, then the Reading section.
 38. The kicker is `--sans` `--fs-meta` `--ink-3`, `--s-2` above the title. On a program page it is `Research programs`; on a project page `Research programs · <program name>`, both links in `--ink-2` with a 1px `--rule` underline, `--ink` on hover.
 39. The question block (`.question-page`) is the question in `--serif` `--fs-h2` weight 400 `--ink`, a 2px `--rule` line on its left, `--s-4` left padding. No background, box, colour or label.
 40. The summary is prose in `--col-text`, `--serif` `--fs-prose` / `--lh-prose` `--ink`.
 41. The Reading section opens with `Reading` (`--fs-h2` serif) and its count, then the project's papers as full Resources rows in the data's order. Omitted when the project lists none.
-42. All three pages show the barn masthead (`masthead-programs`, `--masthead-ratio`), with rules 7–10.
+42. A program may have one mark: its own illustration (`image` and `imageAlt` in `programs.js`, a file in `images/`, SVG where there is one). It appears in the left column of its row on `programs.html` and of its page's title block (rules 34–35), square, shown whole and never cropped. No caption, credit, border, shadow, radius, filter or overlay, and it does not animate. A program without one shows nothing there. Project pages carry no image.
 43. Status is always a plain word, never a coloured tag, badge or icon. Nothing on these pages is coloured.
 44. Nothing else on a program or project page (experiments, notes, submissions, deadlines, progress) unless it is needed; anything new should follow the patterns above (rows, plain-word states, ink links).
 
@@ -72,9 +72,9 @@ Read this before adding or changing anything visual in this app, whether you are
 - [ ] No raw colour or size values; every one is a token.
 - [ ] No feature was added that the page does not need.
 - [ ] Reads correctly at 375px and in dark mode, with no sideways scroll.
-- [ ] Exactly one photograph on the tab, with alt text, nothing over it.
+- [ ] At most one image on a page (the Resources masthead, or a program's mark in its row or beside its title), with alt text, nothing over it.
 - [ ] The count equals the objects in `resources.js`; section counts add up to it.
 - [ ] Every paper has a `papers/<slug>.html`.
-- [ ] On Research programs, the count line's two numbers equal the programs and projects in `programs.js`, and each program row's project count matches its page.
+- [ ] On Research programs, the count equals the programs in `programs.js`, the list shows no projects, and each program page's count equals its projects.
 - [ ] A project's Reading rows are the same rows the Resources tab shows; every url in `resources` matches an entry in `resources.js`.
 - [ ] Tabs: active tab underlined in ink, not coloured. Headings not bold.

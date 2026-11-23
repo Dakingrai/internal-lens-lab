@@ -25,6 +25,21 @@ h1{font-size:var(--fs-title);margin-top:var(--s-7)}
 .masthead{margin:0 0 var(--s-6)}
 .masthead img{display:block;width:100%;aspect-ratio:var(--masthead-ratio);height:auto;max-height:var(--masthead-max-h);min-height:var(--masthead-min-h);object-fit:cover;border-radius:var(--radius);filter:var(--photo-dim)}
 .masthead.resources img{aspect-ratio:var(--masthead-resources-ratio);max-height:var(--masthead-resources-max-h)}
+/* a program's mark: its illustration, whole, in a left column beside the program's text (rule 42). On the
+   program's page it sits beside the title, metadata line and aim; in the list, beside the row. */
+.with-mark{display:grid;grid-template-columns:var(--mark-size) minmax(0,1fr);gap:var(--s-6);align-items:start}
+.with-mark-text{min-width:0}
+.mark{display:block;margin:0}
+.mark img{display:block;width:100%;height:auto;aspect-ratio:1;object-fit:contain}
+#head{margin-top:var(--s-2)}
+#head h1{margin-top:0}
+#head.with-mark .mark{margin-top:var(--s-1)}
+.resources li.with-mark{grid-template-columns:var(--mark-size-row) minmax(0,1fr);gap:var(--s-5)}
+@media (max-width:599px){
+  .with-mark{gap:var(--s-4)}
+  #head.with-mark{grid-template-columns:var(--mark-size-page-sm) minmax(0,1fr)}
+  .resources li.with-mark{grid-template-columns:var(--mark-size-sm) minmax(0,1fr);gap:var(--s-4)}
+}
 
 /* the reading-status filter shares the count line: options left, count right (rules 13, 22-24) */
 .countline{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:var(--s-2) var(--s-4)}
@@ -50,7 +65,7 @@ h1{font-size:var(--fs-title);margin-top:var(--s-7)}
 /* a project's page: the research question with a rule on its left, no box or colour (rule 39) */
 .question-page{max-width:var(--col-text);font:400 var(--fs-h2)/var(--lh-heading) var(--serif);color:var(--ink);border-left:2px solid var(--rule);padding-left:var(--s-4);margin:0 0 var(--s-5)}
 .meta + .lede{margin-top:var(--s-3)}
-.meta + .masthead{margin-top:var(--s-5)}
+.meta + .masthead,.meta + #project{margin-top:var(--s-5)}
 
 /* a paper's notes page and the program and project pages: kicker, title, metadata line (rules 25-28, 38) */
 .kicker{font-size:var(--fs-meta);line-height:var(--lh-ui);color:var(--ink-3);margin:var(--s-7) 0 0}
