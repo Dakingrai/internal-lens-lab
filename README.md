@@ -4,7 +4,7 @@ A small, static workspace for research on **inspecting and verbalizing what a mo
 
 It comes set up for the **[Looped Lens Challenge](https://ndif.us/looped-lens-challenge/)**, an open challenge run by NDIF with Thinking Machines, Goodfire and Northeastern University: build the lens that best reads Inkling 2 Mini, a model whose middle layers run three times and which has no single residual stream. The repo gathers the background reading and a starting project for phase one, so every participant begins from the same material.
 
-**Fork it, and make it your own lab notebook for the challenge.**
+**See it live at [internal-lens.lifeofideas.com](https://internal-lens.lifeofideas.com).** Fork it, and make it your own lab notebook for the challenge.
 
 ## What's inside
 
