@@ -134,7 +134,7 @@ window.RESOURCES = [
     venue: "Alignment Forum",
     section: "Evaluation",
     status: "unread",
-    summary: "A benchmark of 3,356 questions in 27 families, built for Qwen-3.6-27B, where the model must compute an intermediate value in a single forward pass that never appears in the prompt; an activation-to-text reader scores by surfacing that value, judged by LLMs. Single-token readers (logit, tuned, J- and R-lens) surface useful content but cannot express order or compositions, while natural language autoencoders surface the most but almost every readout also contains a claim the context contradicts. The benchmark is open source (github.com/camilablank/workspace-bench), and the Looped Lens Challenge's phase one uses tasks in its style.",
+    summary: "A benchmark of 3,356 questions in 27 families, built for Qwen-3.6-27B, where the model must compute an intermediate value in a single forward pass that never appears in the prompt; an activation-to-text reader scores by surfacing that value, judged by LLMs. Single-token readers (logit, tuned, J- and R-lens) surface useful content but cannot express order or compositions, while natural language autoencoders surface the most but almost every readout also contains a claim the context contradicts. The benchmark is open source (github.com/camila-blank/workspace-bench), and the Looped Lens Challenge's phase one uses tasks in its style.",
   },
   {
     title: "Interpreting Inkling 2 Mini",

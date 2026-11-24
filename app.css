@@ -144,3 +144,52 @@ main h2[id],main h3[id]{scroll-margin-top:var(--s-6)}
 .progress-block{max-width:var(--col-text);margin:var(--s-5) 0 0;padding:var(--s-3) 0 var(--s-4);border-top:var(--border);border-bottom:var(--border)}
 .progress-block .prog-line{margin-top:0}
 .progress-block + .toc-top{border-top:0;margin-top:0}   /* the contents list follows the progress; one hairline between them */
+
+/* figures, tables and worked examples inside notes (proposed; reuses the design lab's figure patterns): marks are
+   neutral until the text points at one; the one it points at takes --highlight (look here); arrows and structure in
+   --ink-3 and --rule; no other colour. Verdicts are words with a mark, never green or red. */
+.prose .fig{margin:var(--s-5) 0 var(--s-6);font:var(--fs-body)/var(--lh-body) var(--sans)}
+.fig svg{display:block;width:100%;height:auto}
+.fig figcaption{margin-top:var(--s-3);font:var(--fs-meta)/var(--lh-ui) var(--sans);color:var(--ink-2)}
+.fig figcaption b{font-weight:500;color:var(--ink)}
+.fig text{font-family:var(--sans);font-size:var(--fs-label);fill:var(--ink-2)}
+.fig .t-strong{fill:var(--ink);font-weight:500}
+.fig .t-num{fill:var(--ink);font-size:var(--fs-item);font-weight:500}
+.fig .t-var{fill:var(--ink);font-family:var(--serif);font-style:italic;font-size:var(--fs-item)}
+.fig .t-hi{fill:var(--highlight-ink);font-weight:500}
+.fig .box{fill:var(--surface-sunk);stroke:var(--rule);stroke-width:1}
+.fig .box-hi{fill:var(--highlight-wash);stroke:var(--highlight);stroke-width:1.5}
+.fig .group{fill:none;stroke:var(--rule);stroke-width:1;stroke-dasharray:4 3}
+.fig .arrow{fill:none;stroke:var(--ink-3);stroke-width:1.5}
+.fig .arrowhead{fill:var(--ink-3)}
+.fig .cell{fill:var(--seq-1)}
+.fig .cell-hi{fill:var(--highlight)}
+.fig .key{display:inline-block;width:var(--s-3);height:var(--s-3);border-radius:2px;vertical-align:-1px;margin:0 var(--s-1) 0 var(--s-3);background:var(--seq-1)}
+.fig .key:first-of-type{margin-left:0}
+.fig .key-hi{background:var(--highlight)}
+.prose .tbl{border-collapse:collapse;width:100%;margin:var(--s-4) 0 var(--s-5);font:var(--fs-meta)/var(--lh-ui) var(--sans);color:var(--ink)}
+.prose .tbl th{font-weight:500;color:var(--ink-3);text-align:left}
+.prose .tbl th,.prose .tbl td{padding:var(--s-2) var(--s-3) var(--s-2) 0;border-bottom:var(--border);vertical-align:top}
+.prose .example{margin:var(--s-3) 0 var(--s-5);padding-left:var(--s-4);border-left:2px solid var(--rule)}
+.prose .example dt{font:var(--fs-meta)/var(--lh-ui) var(--sans);color:var(--ink-3)}
+.prose .example dd{margin:0 0 var(--s-3)}
+.prose .example dd:last-child{margin-bottom:0}
+.prose .eq{text-align:center;font-style:italic}
+.prose .step{font:500 var(--fs-body)/var(--lh-ui) var(--sans);color:var(--ink);margin:var(--s-5) 0 var(--s-2)}
+.prose a.src{font:var(--fs-meta) var(--sans);color:var(--ink-3);text-decoration-color:var(--rule);white-space:nowrap}
+.prose a.src:hover{color:var(--ink)}
+.fig .pair{display:grid;grid-template-columns:1fr 1fr;gap:var(--s-5);border-top:var(--border);border-bottom:var(--border);padding:var(--s-4) 0}
+.fig .pair p{margin:0 0 var(--s-2)}
+.fig .pair .lbl{font-size:var(--fs-meta);color:var(--ink-3);margin:var(--s-3) 0 0}
+.fig .readers{list-style:none;margin:var(--s-2) 0 0;padding:0;border-top:var(--border)}
+.fig .readers li{display:grid;grid-template-columns:5.5em 1fr auto;gap:var(--s-3);padding:var(--s-2) 0;border-bottom:var(--border);align-items:baseline}
+.fig .readers .who{font-weight:500;color:var(--ink)}
+.fig .readers .says{color:var(--ink-2)}
+.fig .readers .yes{color:var(--ink);white-space:nowrap}
+.fig .readers .no{color:var(--ink-3);white-space:nowrap}
+@media (max-width:599px){ .fig .pair{grid-template-columns:1fr} .fig .readers li{grid-template-columns:1fr auto} .fig .readers .says{grid-column:1 / -1;grid-row:2} }
+.fig .nowrap{white-space:nowrap}
+.fig .nowrap:first-child .key,.fig br + .nowrap .key{margin-left:0}
+/* a wide diagram keeps its labels readable on a phone by scrolling inside its figure, never the page */
+.fig.wide{overflow-x:auto}
+.fig.wide svg{min-width:var(--fig-min)}

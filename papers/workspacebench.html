@@ -34,7 +34,195 @@
 <section>
 <h2>Notes</h2>
 <!-- Reading notes go inside the div below: <p> paragraphs, <h3> subheadings, <ul> lists. Empty shows "No notes yet." -->
-<div class="prose" id="notes"></div>
+<div class="prose" id="notes">
+<p class="meta">From a conversation with ChatGPT on 24 Nov 2026 (<a class="src" href="https://chatgpt.com/share/6b05aa25-cd10-83ea-8b27-a12e037a53d5" target="_blank" rel="noopener">shared chat</a>), in answer to “can you help me understand how workspacebench is prepared?”. The answer is kept word for word, apart from one section left out (on how it relates to the asker’s own research); its illustrations are redrawn in this site’s colours.</p>
+
+<p>The central idea behind WorkspaceBench is to construct tasks where a language model must presumably compute some intermediate information internally, without explicitly stating that information in either its input or output. The benchmark then evaluates whether interpretability methods can recover that information from the model’s activations.</p>
+<p>It was originally developed for Qwen-3.6-27B and consists of 3,356 questions across 27 evaluation families, covering reasoning, multihop computation, concept recognition, and AI safety. <a class="src" href="https://www.alignmentforum.org/posts/Zeg2JztbdhguL48uH/workspacebench-evaluating-interpretability-methods-for-the" target="_blank" rel="noopener">AI Alignment Forum</a></p>
+
+<h3>1. The fundamental problem</h3>
+<p>Suppose we have a model performing the computation:</p>
+<figure class="fig wide">
+<svg viewBox="0 0 680 250" style="--fig-min:600px" role="img" aria-label="The input prompt X goes into the model's internal computation, X to an intermediate Z to Y, which gives the final answer Y. An interpretability method reads Z and produces a predicted intermediate Z-hat.">
+  <defs><marker id="wsb-a1" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="8" markerHeight="8" orient="auto"><path class="arrowhead" d="M0 0 L8 4 L0 8 Z"/></marker></defs>
+  <rect class="box" x="0" y="50" width="112" height="44" rx="4"/><text class="t-strong" x="56" y="76" text-anchor="middle">Input prompt (X)</text>
+  <path class="arrow" d="M114 72 H136" marker-end="url(#wsb-a1)"/>
+  <rect class="group" x="140" y="8" width="380" height="234" rx="6"/><text x="152" y="27">Internal computation</text>
+  <rect class="box" x="160" y="50" width="50" height="44" rx="4"/><text class="t-var" x="185" y="78" text-anchor="middle">X</text>
+  <path class="arrow" d="M212 72 H236" marker-end="url(#wsb-a1)"/>
+  <rect class="box-hi" x="240" y="50" width="130" height="44" rx="4"/><text class="t-hi" x="305" y="76" text-anchor="middle">Intermediate Z</text>
+  <path class="arrow" d="M372 72 H396" marker-end="url(#wsb-a1)"/>
+  <rect class="box" x="400" y="50" width="50" height="44" rx="4"/><text class="t-var" x="425" y="78" text-anchor="middle">Y</text>
+  <path class="arrow" d="M305 96 V126" marker-end="url(#wsb-a1)"/>
+  <rect class="box" x="220" y="130" width="170" height="40" rx="4"/><text class="t-strong" x="305" y="154" text-anchor="middle">Interpretability method</text>
+  <path class="arrow" d="M305 172 V198" marker-end="url(#wsb-a1)"/>
+  <text class="t-hi" x="305" y="222" text-anchor="middle">Predicted intermediate Ẑ</text>
+  <path class="arrow" d="M522 72 H546" marker-end="url(#wsb-a1)"/>
+  <rect class="box" x="550" y="50" width="130" height="44" rx="4"/><text class="t-strong" x="615" y="76" text-anchor="middle">Final answer (Y)</text>
+</svg>
+</figure>
+<p>We can observe the input <i>X</i> and output <i>Y</i>, but we don’t know the actual intermediate representation <i>Z</i>.</p>
+<p>Without knowing <i>Z</i>, how can we evaluate whether an interpretability method such as J-lens, Patchscopes, or Natural Language Autoencoders is faithfully reading the model’s internal computation?</p>
+<p>WorkspaceBench addresses this by <b>designing tasks for which we have a strong prior about what the intermediate variable should be.</b></p>
+<p>Importantly, this is inferred ground truth rather than directly verified mechanistic ground truth.</p>
+
+<h3>2. How do they prepare the dataset?</h3>
+<p class="step">Step 1: Design tasks with predictable intermediate variables</p>
+<p>Consider this illustrative arithmetic example:</p>
+<dl class="example">
+  <dt>Input prompt</dt><dd>Compute (32 − 19) × 4. Only provide the final answer.</dd>
+  <dt>Expected model output</dt><dd>52</dd>
+  <dt>Interpretability target</dt><dd>13</dd>
+</dl>
+<figure class="fig">
+<svg viewBox="0 0 320 104" role="img" aria-label="32 minus 19 is the input operation; 13 is the hidden target; times 4 gives the final answer 52." style="max-width:440px">
+  <defs><marker id="wsb-a2" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path class="arrowhead" d="M0 0 L8 4 L0 8 Z"/></marker></defs>
+  <rect class="box" x="5" y="16" width="92" height="48" rx="6"/><text class="t-num" x="51" y="46" text-anchor="middle">32 − 19</text>
+  <path class="arrow" d="M100 40 H118" marker-end="url(#wsb-a2)"/>
+  <rect class="box-hi" x="122" y="16" width="76" height="48" rx="6"/><text class="t-num" x="160" y="46" text-anchor="middle">13</text>
+  <path class="arrow" d="M201 40 H219" marker-end="url(#wsb-a2)"/>
+  <text x="210" y="28" text-anchor="middle">×4</text>
+  <rect class="box" x="223" y="16" width="92" height="48" rx="6"/><text class="t-num" x="269" y="46" text-anchor="middle">52</text>
+  <text x="51" y="84" text-anchor="middle">Input operation</text><text class="t-hi" x="160" y="84" text-anchor="middle">Hidden target</text><text x="269" y="84" text-anchor="middle">Final answer</text>
+</svg>
+</figure>
+<p>The hypothesis is that the model internally represents 13 somewhere in its residual stream.</p>
+<p>They construct many different task families using this general principle, although not all families require an intermediate computation.</p>
+
+<p class="step">Step 2: Filter questions based on model capability</p>
+<p>They apply four main quality checks:</p>
+<ul>
+  <li><b>Behavioral correctness:</b> Sample 10 responses at temperature 0.8, without CoT, requiring greater than 80% accuracy.</li>
+  <li><b>Input exclusion:</b> The intermediate should not explicitly appear in the input for hidden-intermediate tasks.</li>
+  <li><b>Output exclusion:</b> The model should not verbalize the intermediate in its generated answers.</li>
+  <li><b>Solution consistency:</b> For ambiguous tasks, repeated sampling is used to establish a consistent solution.</li>
+</ul>
+<p>Essentially, they condition the benchmark on what the underlying model is already capable of doing. Otherwise, failure to extract an intermediate could be attributable to model incapability rather than interpretability-method failure. <a class="src" href="https://www.alignmentforum.org/posts/Zeg2JztbdhguL48uH/workspacebench-evaluating-interpretability-methods-for-the" target="_blank" rel="noopener">AI Alignment Forum</a></p>
+
+<p class="step">Step 3: Determine where to read activations</p>
+<p>They examine residual stream activations across layers and token positions. For computationally expensive readers, they sometimes preselect promising token positions through preliminary sweeps.</p>
+<p>The benchmark can then associate a question with a target concept and a set of activation locations.</p>
+<figure class="fig">
+<svg viewBox="0 0 340 246" role="img" aria-label="A grid of activations by layer (20 to 60) and token position (the tokens of the prompt, then the last position). Only the cells at the last token position, across all layers, are selected for readout." style="max-width:480px">
+  <g><rect class="cell" x="44" y="17" width="25" height="14" rx="2"/><rect class="cell" x="71" y="17" width="25" height="14" rx="2"/><rect class="cell" x="98" y="17" width="25" height="14" rx="2"/><rect class="cell" x="125" y="17" width="25" height="14" rx="2"/><rect class="cell" x="152" y="17" width="25" height="14" rx="2"/><rect class="cell" x="179" y="17" width="25" height="14" rx="2"/><rect class="cell" x="206" y="17" width="25" height="14" rx="2"/><rect class="cell" x="233" y="17" width="25" height="14" rx="2"/><rect class="cell" x="260" y="17" width="25" height="14" rx="2"/><rect class="cell-hi" x="287" y="17" width="25" height="14" rx="2"/><rect class="cell" x="44" y="33" width="25" height="14" rx="2"/><rect class="cell" x="71" y="33" width="25" height="14" rx="2"/><rect class="cell" x="98" y="33" width="25" height="14" rx="2"/><rect class="cell" x="125" y="33" width="25" height="14" rx="2"/><rect class="cell" x="152" y="33" width="25" height="14" rx="2"/><rect class="cell" x="179" y="33" width="25" height="14" rx="2"/><rect class="cell" x="206" y="33" width="25" height="14" rx="2"/><rect class="cell" x="233" y="33" width="25" height="14" rx="2"/><rect class="cell" x="260" y="33" width="25" height="14" rx="2"/><rect class="cell-hi" x="287" y="33" width="25" height="14" rx="2"/><rect class="cell" x="44" y="49" width="25" height="14" rx="2"/><rect class="cell" x="71" y="49" width="25" height="14" rx="2"/><rect class="cell" x="98" y="49" width="25" height="14" rx="2"/><rect class="cell" x="125" y="49" width="25" height="14" rx="2"/><rect class="cell" x="152" y="49" width="25" height="14" rx="2"/><rect class="cell" x="179" y="49" width="25" height="14" rx="2"/><rect class="cell" x="206" y="49" width="25" height="14" rx="2"/><rect class="cell" x="233" y="49" width="25" height="14" rx="2"/><rect class="cell" x="260" y="49" width="25" height="14" rx="2"/><rect class="cell-hi" x="287" y="49" width="25" height="14" rx="2"/><rect class="cell" x="44" y="65" width="25" height="14" rx="2"/><rect class="cell" x="71" y="65" width="25" height="14" rx="2"/><rect class="cell" x="98" y="65" width="25" height="14" rx="2"/><rect class="cell" x="125" y="65" width="25" height="14" rx="2"/><rect class="cell" x="152" y="65" width="25" height="14" rx="2"/><rect class="cell" x="179" y="65" width="25" height="14" rx="2"/><rect class="cell" x="206" y="65" width="25" height="14" rx="2"/><rect class="cell" x="233" y="65" width="25" height="14" rx="2"/><rect class="cell" x="260" y="65" width="25" height="14" rx="2"/><rect class="cell-hi" x="287" y="65" width="25" height="14" rx="2"/><rect class="cell" x="44" y="81" width="25" height="14" rx="2"/><rect class="cell" x="71" y="81" width="25" height="14" rx="2"/><rect class="cell" x="98" y="81" width="25" height="14" rx="2"/><rect class="cell" x="125" y="81" width="25" height="14" rx="2"/><rect class="cell" x="152" y="81" width="25" height="14" rx="2"/><rect class="cell" x="179" y="81" width="25" height="14" rx="2"/><rect class="cell" x="206" y="81" width="25" height="14" rx="2"/><rect class="cell" x="233" y="81" width="25" height="14" rx="2"/><rect class="cell" x="260" y="81" width="25" height="14" rx="2"/><rect class="cell-hi" x="287" y="81" width="25" height="14" rx="2"/><rect class="cell" x="44" y="97" width="25" height="14" rx="2"/><rect class="cell" x="71" y="97" width="25" height="14" rx="2"/><rect class="cell" x="98" y="97" width="25" height="14" rx="2"/><rect class="cell" x="125" y="97" width="25" height="14" rx="2"/><rect class="cell" x="152" y="97" width="25" height="14" rx="2"/><rect class="cell" x="179" y="97" width="25" height="14" rx="2"/><rect class="cell" x="206" y="97" width="25" height="14" rx="2"/><rect class="cell" x="233" y="97" width="25" height="14" rx="2"/><rect class="cell" x="260" y="97" width="25" height="14" rx="2"/><rect class="cell-hi" x="287" y="97" width="25" height="14" rx="2"/><rect class="cell" x="44" y="113" width="25" height="14" rx="2"/><rect class="cell" x="71" y="113" width="25" height="14" rx="2"/><rect class="cell" x="98" y="113" width="25" height="14" rx="2"/><rect class="cell" x="125" y="113" width="25" height="14" rx="2"/><rect class="cell" x="152" y="113" width="25" height="14" rx="2"/><rect class="cell" x="179" y="113" width="25" height="14" rx="2"/><rect class="cell" x="206" y="113" width="25" height="14" rx="2"/><rect class="cell" x="233" y="113" width="25" height="14" rx="2"/><rect class="cell" x="260" y="113" width="25" height="14" rx="2"/><rect class="cell-hi" x="287" y="113" width="25" height="14" rx="2"/><rect class="cell" x="44" y="129" width="25" height="14" rx="2"/><rect class="cell" x="71" y="129" width="25" height="14" rx="2"/><rect class="cell" x="98" y="129" width="25" height="14" rx="2"/><rect class="cell" x="125" y="129" width="25" height="14" rx="2"/><rect class="cell" x="152" y="129" width="25" height="14" rx="2"/><rect class="cell" x="179" y="129" width="25" height="14" rx="2"/><rect class="cell" x="206" y="129" width="25" height="14" rx="2"/><rect class="cell" x="233" y="129" width="25" height="14" rx="2"/><rect class="cell" x="260" y="129" width="25" height="14" rx="2"/><rect class="cell-hi" x="287" y="129" width="25" height="14" rx="2"/><rect class="cell" x="44" y="145" width="25" height="14" rx="2"/><rect class="cell" x="71" y="145" width="25" height="14" rx="2"/><rect class="cell" x="98" y="145" width="25" height="14" rx="2"/><rect class="cell" x="125" y="145" width="25" height="14" rx="2"/><rect class="cell" x="152" y="145" width="25" height="14" rx="2"/><rect class="cell" x="179" y="145" width="25" height="14" rx="2"/><rect class="cell" x="206" y="145" width="25" height="14" rx="2"/><rect class="cell" x="233" y="145" width="25" height="14" rx="2"/><rect class="cell" x="260" y="145" width="25" height="14" rx="2"/><rect class="cell-hi" x="287" y="145" width="25" height="14" rx="2"/><rect class="cell" x="44" y="161" width="25" height="14" rx="2"/><rect class="cell" x="71" y="161" width="25" height="14" rx="2"/><rect class="cell" x="98" y="161" width="25" height="14" rx="2"/><rect class="cell" x="125" y="161" width="25" height="14" rx="2"/><rect class="cell" x="152" y="161" width="25" height="14" rx="2"/><rect class="cell" x="179" y="161" width="25" height="14" rx="2"/><rect class="cell" x="206" y="161" width="25" height="14" rx="2"/><rect class="cell" x="233" y="161" width="25" height="14" rx="2"/><rect class="cell" x="260" y="161" width="25" height="14" rx="2"/><rect class="cell-hi" x="287" y="161" width="25" height="14" rx="2"/><rect class="cell" x="44" y="177" width="25" height="14" rx="2"/><rect class="cell" x="71" y="177" width="25" height="14" rx="2"/><rect class="cell" x="98" y="177" width="25" height="14" rx="2"/><rect class="cell" x="125" y="177" width="25" height="14" rx="2"/><rect class="cell" x="152" y="177" width="25" height="14" rx="2"/><rect class="cell" x="179" y="177" width="25" height="14" rx="2"/><rect class="cell" x="206" y="177" width="25" height="14" rx="2"/><rect class="cell" x="233" y="177" width="25" height="14" rx="2"/><rect class="cell" x="260" y="177" width="25" height="14" rx="2"/><rect class="cell-hi" x="287" y="177" width="25" height="14" rx="2"/></g>
+  <g text-anchor="end"><text x="31" y="29">60</text><text x="31" y="45">56</text><text x="31" y="61">52</text><text x="31" y="77">48</text><text x="31" y="93">44</text><text x="31" y="109">40</text><text x="31" y="125">36</text><text x="31" y="141">32</text><text x="31" y="157">28</text><text x="31" y="173">24</text><text x="31" y="189">20</text></g>
+  <g text-anchor="middle"><text x="56" y="211">(</text><text x="83" y="211">32</text><text x="110" y="211">−</text><text x="137" y="211">19</text><text x="164" y="211">)</text><text x="191" y="211">×</text><text x="218" y="211">4</text><text x="245" y="211">.</text><text x="272" y="211">...</text><text x="299" y="211">last</text></g>
+  <text x="175" y="238" text-anchor="middle">Token position</text>
+  <text x="9" y="108" transform="rotate(-90 9 108)" text-anchor="middle">Layer</text>
+</svg>
+<figcaption><b>Activation readout locations.</b> Illustrative example — not actual experimental data.<br><span class="nowrap"><span class="key key-hi"></span>Selected readout cells</span> <span class="nowrap"><span class="key"></span>Other activations</span></figcaption>
+</figure>
+<p>Each interpretability method receives the selected activations and attempts to describe their contents.</p>
+
+<h3>3. What kinds of tasks do they construct?</h3>
+<p>I would conceptually divide their tasks into five types based on how the target information is established.</p>
+<table class="tbl">
+  <thead><tr><th>Type</th><th>Illustrative task</th><th>Target</th></tr></thead>
+  <tbody>
+    <tr><td>Computational</td><td>(32 − 19) × 4</td><td>13</td></tr>
+    <tr><td>Knowledge retrieval</td><td>Symbol of the element with atomic number 26</td><td>Iron</td></tr>
+    <tr><td>Implicit association</td><td>A description of confinement behind bars</td><td>Prison</td></tr>
+    <tr><td>Directed modulation</td><td>Keep a mango in mind while copying an unrelated sentence</td><td>Mango</td></tr>
+    <tr><td>Safety</td><td>Model performs a deceptive action</td><td>Anticipated deceptive action</td></tr>
+  </tbody>
+</table>
+<p>These are quite different in terms of how confidently we can expect the target to exist in the model’s activations.</p>
+
+<p class="step">Computational tasks</p>
+<figure class="fig">
+<svg viewBox="0 0 360 64" role="img" aria-label="23, then 11, then 5, then 2: repeated integer halving, with 11 and 5 as the targets." style="max-width:420px">
+  <defs><marker id="wsb-a4" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path class="arrowhead" d="M0 0 L8 4 L0 8 Z"/></marker></defs>
+  <rect class="box" x="2" y="8" width="62" height="48" rx="6"/><text class="t-num" x="33" y="38" text-anchor="middle">23</text>
+  <path class="arrow" d="M68 32 H92" marker-end="url(#wsb-a4)"/>
+  <rect class="box-hi" x="97" y="8" width="62" height="48" rx="6"/><text class="t-num" x="128" y="38" text-anchor="middle">11</text>
+  <path class="arrow" d="M163 32 H187" marker-end="url(#wsb-a4)"/>
+  <rect class="box-hi" x="192" y="8" width="62" height="48" rx="6"/><text class="t-num" x="223" y="38" text-anchor="middle">5</text>
+  <path class="arrow" d="M258 32 H282" marker-end="url(#wsb-a4)"/>
+  <rect class="box" x="287" y="8" width="62" height="48" rx="6"/><text class="t-num" x="318" y="38" text-anchor="middle">2</text>
+</svg>
+<figcaption><b>Multistep arithmetic.</b> Repeated integer halving — targets: 11 and 5</figcaption>
+</figure>
+<p>These have relatively strong ground truth because the intermediate is mathematically defined.</p>
+<p>Other computational tasks include applying successive transformation rules and identifying the consequences of bugs in programs. <a class="src" href="https://www.alignmentforum.org/posts/Zeg2JztbdhguL48uH/workspacebench-evaluating-interpretability-methods-for-the" target="_blank" rel="noopener">AI Alignment Forum</a></p>
+
+<p class="step">Implicit association tasks</p>
+<p>These are more interesting from the perspective of extracting abstract concepts.</p>
+<p>For example, consider this invented scenario:</p>
+<dl class="example">
+  <dt>Prompt</dt><dd>Sarah congratulates her closest friend on receiving a promotion. After sending the message, she wonders why she hasn’t achieved the same success.</dd>
+  <dt>Expected concept</dt><dd>Envy toward her friend over the promotion.</dd>
+  <dt>Possible alternative concepts</dt><dd>Pride, disappointment, admiration, resentment.</dd>
+</dl>
+<p>The reader needs to identify not only the emotion but also its subject and object. Some tasks explicitly evaluate whether the reader preserves relational structure rather than merely recovering a collection of relevant words. <a class="src" href="https://www.alignmentforum.org/posts/Zeg2JztbdhguL48uH/workspacebench-evaluating-interpretability-methods-for-the" target="_blank" rel="noopener">AI Alignment Forum</a></p>
+<p>However, there is no guarantee the model actually represents envy in this example.</p>
+
+<p class="step">Directed modulation tasks</p>
+<p>These are particularly interesting for testing whether the model maintains information unrelated to its immediate next-token prediction.</p>
+<figure class="fig">
+<div class="pair">
+  <div><p><b>Condition A</b></p><p>Think about a mango while copying the following sentence.</p><p class="lbl">Output</p><p>The meeting ended early.</p></div>
+  <div><p><b>Condition B</b></p><p>Do not think about a mango while copying the following sentence.</p><p class="lbl">Output</p><p>The meeting ended early.</p></div>
+</div>
+</figure>
+<p>The interpretability method reads activations during the identical continuation, and the researchers compare concept recovery across conditions.</p>
+<p>This is one way to test whether a method extracts information beyond what is immediately needed for output prediction.</p>
+
+<h3>4. How do they evaluate interpretability methods?</h3>
+<p>They compare both single-token and multi-token readers.</p>
+<table class="tbl">
+  <thead><tr><th>Method</th><th>Readout format</th></tr></thead>
+  <tbody>
+    <tr><td>Logit lens</td><td>Vocabulary tokens</td></tr>
+    <tr><td>Tuned lens</td><td>Vocabulary tokens</td></tr>
+    <tr><td>J-lens</td><td>Vocabulary tokens</td></tr>
+    <tr><td>R-lens</td><td>Vocabulary tokens</td></tr>
+    <tr><td>Template lens</td><td>Words and phrases</td></tr>
+    <tr><td>SAE</td><td>Feature descriptions</td></tr>
+    <tr><td>Patchscopes</td><td>Natural language</td></tr>
+    <tr><td>NLA</td><td>Natural language</td></tr>
+    <tr><td>Oracle Lens</td><td>Natural language</td></tr>
+  </tbody>
+</table>
+<p>An LLM judge determines whether the resulting readout contains the expected information. The precise grading rule depends on the task family.</p>
+<figure class="fig">
+<p><b>Target: Iron</b></p>
+<ul class="readers">
+  <li><span class="who">Reader A</span><span class="says">iron, metal, Fe, element</span><span class="yes">✓ contains it</span></li>
+  <li><span class="who">Reader B</span><span class="says">chemical symbol, periodic table</span><span class="no">✗ misses it</span></li>
+  <li><span class="who">Reader C</span><span class="says">The element being retrieved is iron.</span><span class="yes">✓ contains it</span></li>
+</ul>
+<figcaption><b>Illustrative evaluation of a multihop task</b></figcaption>
+</figure>
+<p>The current repository also provides two useful baselines: guessing without activation readouts and answering using only the original prompt. <a class="src" href="https://github.com/camila-blank/workspace-bench" target="_blank" rel="noopener">camila-blank/workspace-bench · GitHub</a></p>
+<p>They separately evaluate hallucination because a verbose reader could recover more target concepts simply by making more claims.</p>
+
+<h3>5. How reliable is their ground truth?</h3>
+<p>This is probably the most important methodological limitation.</p>
+<p>I would distinguish three levels of evidence:</p>
+<table class="tbl">
+  <thead><tr><th>Ground truth</th><th>What is established?</th><th>WorkspaceBench</th></tr></thead>
+  <tbody>
+    <tr><td>Task-level</td><td>A reasonable algorithm would compute the intermediate</td><td>Yes</td></tr>
+    <tr><td>Representational</td><td>The model actually encodes that intermediate</td><td>Not independently established</td></tr>
+    <tr><td>Causal</td><td>The model uses that representation to produce its answer</td><td>Not systematically established</td></tr>
+  </tbody>
+</table>
+<p>For instance, consider:</p>
+<p class="eq">(32 − 19) × 4</p>
+<p>We assume the model computes:</p>
+<p class="eq">13 × 4 = 52</p>
+<p>But the model could instead compute:</p>
+<p class="eq">128 − 76 = 52</p>
+<p>Or it could perform an approximate distributed computation that never explicitly represents 13 as a distinct variable.</p>
+<p>Therefore, recovering 13 is not necessarily evidence that the model uses 13. Similarly, failing to recover 13 does not necessarily mean the interpretability method is bad.</p>
+<p>There is also the reverse problem: an activation reader might reconstruct the input and independently solve the problem, rather than faithfully recover the model’s computation.</p>
+<p>The authors explicitly acknowledge this limitation.</p>
+
+<h3>6. How to use their dataset?</h3>
+<p>Yes. Their <a href="https://github.com/camila-blank/workspace-bench" target="_blank" rel="noopener">GitHub repository</a> provides question banks, grading procedures, activation extraction pipelines, and implementations of several readers.</p>
+<p>They also provide <a href="https://huggingface.co/datasets/agu18dec/workspacebench_residuals" target="_blank" rel="noopener">precomputed residual stream activations on Hugging Face</a>, meaning that you can experiment with new activation readers without repeatedly running Qwen-3.6-27B. The repository has been expanded since the original blog post. <a class="src" href="https://github.com/camila-blank/workspace-bench" target="_blank" rel="noopener">camila-blank/workspace-bench · GitHub</a></p>
+<p><b>My overall understanding:</b> WorkspaceBench is primarily a benchmark of whether interpretability methods can verbalize <i>expected latent information</i>, rather than whether they can faithfully reconstruct the model’s actual computational algorithm. That distinction is important when interpreting its results.</p>
+</div>
 </section>
 </main>
 
