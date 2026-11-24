@@ -1,0 +1,7988 @@
+{
+ "lens": "logit lens",
+ "lens_note": "The model's own final norm and unembedding applied to the state entering each layer visit. No trained weights.",
+ "model": "thinkingmachines/Inkling-2-Mini",
+ "dataset": "practice",
+ "generated": "2026-11-24",
+ "top": 10,
+ "visits": [
+  {
+   "visit": 0,
+   "layer": 0,
+   "run": 0
+  },
+  {
+   "visit": 1,
+   "layer": 1,
+   "run": 0
+  },
+  {
+   "visit": 2,
+   "layer": 2,
+   "run": 0
+  },
+  {
+   "visit": 3,
+   "layer": 3,
+   "run": 0
+  },
+  {
+   "visit": 4,
+   "layer": 4,
+   "run": 0
+  },
+  {
+   "visit": 5,
+   "layer": 5,
+   "run": 0
+  },
+  {
+   "visit": 6,
+   "layer": 6,
+   "run": 0
+  },
+  {
+   "visit": 7,
+   "layer": 7,
+   "run": 0
+  },
+  {
+   "visit": 8,
+   "layer": 8,
+   "run": 0
+  },
+  {
+   "visit": 9,
+   "layer": 9,
+   "run": 0
+  },
+  {
+   "visit": 10,
+   "layer": 10,
+   "run": 0
+  },
+  {
+   "visit": 11,
+   "layer": 11,
+   "run": 0
+  },
+  {
+   "visit": 12,
+   "layer": 12,
+   "run": 0
+  },
+  {
+   "visit": 13,
+   "layer": 13,
+   "run": 0
+  },
+  {
+   "visit": 14,
+   "layer": 14,
+   "run": 0
+  },
+  {
+   "visit": 15,
+   "layer": 15,
+   "run": 0
+  },
+  {
+   "visit": 16,
+   "layer": 16,
+   "run": 0
+  },
+  {
+   "visit": 17,
+   "layer": 17,
+   "run": 0
+  },
+  {
+   "visit": 18,
+   "layer": 6,
+   "run": 1
+  },
+  {
+   "visit": 19,
+   "layer": 7,
+   "run": 1
+  },
+  {
+   "visit": 20,
+   "layer": 8,
+   "run": 1
+  },
+  {
+   "visit": 21,
+   "layer": 9,
+   "run": 1
+  },
+  {
+   "visit": 22,
+   "layer": 10,
+   "run": 1
+  },
+  {
+   "visit": 23,
+   "layer": 11,
+   "run": 1
+  },
+  {
+   "visit": 24,
+   "layer": 12,
+   "run": 1
+  },
+  {
+   "visit": 25,
+   "layer": 13,
+   "run": 1
+  },
+  {
+   "visit": 26,
+   "layer": 14,
+   "run": 1
+  },
+  {
+   "visit": 27,
+   "layer": 15,
+   "run": 1
+  },
+  {
+   "visit": 28,
+   "layer": 16,
+   "run": 1
+  },
+  {
+   "visit": 29,
+   "layer": 17,
+   "run": 1
+  },
+  {
+   "visit": 30,
+   "layer": 6,
+   "run": 2
+  },
+  {
+   "visit": 31,
+   "layer": 7,
+   "run": 2
+  },
+  {
+   "visit": 32,
+   "layer": 8,
+   "run": 2
+  },
+  {
+   "visit": 33,
+   "layer": 9,
+   "run": 2
+  },
+  {
+   "visit": 34,
+   "layer": 10,
+   "run": 2
+  },
+  {
+   "visit": 35,
+   "layer": 11,
+   "run": 2
+  },
+  {
+   "visit": 36,
+   "layer": 12,
+   "run": 2
+  },
+  {
+   "visit": 37,
+   "layer": 13,
+   "run": 2
+  },
+  {
+   "visit": 38,
+   "layer": 14,
+   "run": 2
+  },
+  {
+   "visit": 39,
+   "layer": 15,
+   "run": 2
+  },
+  {
+   "visit": 40,
+   "layer": 16,
+   "run": 2
+  },
+  {
+   "visit": 41,
+   "layer": 17,
+   "run": 2
+  },
+  {
+   "visit": 42,
+   "layer": 18,
+   "run": 0
+  },
+  {
+   "visit": 43,
+   "layer": 19,
+   "run": 0
+  },
+  {
+   "visit": 44,
+   "layer": 20,
+   "run": 0
+  },
+  {
+   "visit": 45,
+   "layer": 21,
+   "run": 0
+  },
+  {
+   "visit": 46,
+   "layer": 22,
+   "run": 0
+  },
+  {
+   "visit": 47,
+   "layer": 23,
+   "run": 0
+  }
+ ],
+ "loop": {
+  "start": 6,
+  "end": 18,
+  "passes": 3
+ },
+ "rank_note": "rank is the 1-based rank of the best token that writes the intermediate exactly (any case, with or without a leading space).",
+ "questions": [
+  {
+   "id": "athlete-05",
+   "readouts": [
+    {
+     "visit": 0,
+     "tokens": [
+      "<|content_thinking|>",
+      "मानना",
+      "瓩",
+      "সোমবার",
+      "kw",
+      "<|content_text|>",
+      "䗚",
+      "పంపు",
+      "犉",
+      "klær"
+     ],
+     "rank": 69288
+    },
+    {
+     "visit": 1,
+     "tokens": [
+      " и",
+      " BRA",
+      " GO",
+      " +",
+      "𬊈",
+      " PRI",
+      ",",
+      " ",
+      " -",
+      "/"
+     ],
+     "rank": 94346
+    },
+    {
+     "visit": 2,
+     "tokens": [
+      " and",
+      " or",
+      " и",
+      ",",
+      "/",
+      " ",
+      " (",
+      " -",
+      "-",
+      ":"
+     ],
+     "rank": 45285
+    },
+    {
+     "visit": 3,
+     "tokens": [
+      " and",
+      " or",
+      " и",
+      ",",
+      "/",
+      " ",
+      " (",
+      " /",
+      " -",
+      " или"
+     ],
+     "rank": 51693
+    },
+    {
+     "visit": 4,
+     "tokens": [
+      " or",
+      " и",
+      ",",
+      " and",
+      "/",
+      " ",
+      " -",
+      " (",
+      ":",
+      " /"
+     ],
+     "rank": 45258
+    },
+    {
+     "visit": 5,
+     "tokens": [
+      ",",
+      " and",
+      " or",
+      " -",
+      "/",
+      " и",
+      " ",
+      " (",
+      ":",
+      "-"
+     ],
+     "rank": 45249
+    },
+    {
+     "visit": 6,
+     "tokens": [
+      ",",
+      " -",
+      "?",
+      ":",
+      " и",
+      " ",
+      " and",
+      "-",
+      "\n",
+      " answer"
+     ],
+     "rank": 42568
+    },
+    {
+     "visit": 7,
+     "tokens": [
+      ",",
+      " and",
+      " и",
+      " or",
+      "/",
+      " (",
+      ";",
+      ".",
+      "-",
+      " /"
+     ],
+     "rank": 11114
+    },
+    {
+     "visit": 8,
+     "tokens": [
+      " and",
+      ",",
+      " и",
+      " or",
+      "/",
+      " (",
+      " و",
+      " và",
+      "、",
+      ";"
+     ],
+     "rank": 12132
+    },
+    {
+     "visit": 9,
+     "tokens": [
+      ",",
+      " and",
+      " и",
+      " or",
+      "/",
+      " (",
+      ";",
+      "、",
+      "-",
+      " và"
+     ],
+     "rank": 19725
+    },
+    {
+     "visit": 10,
+     "tokens": [
+      ",",
+      " and",
+      " и",
+      " or",
+      "/",
+      ";",
+      " -",
+      " (",
+      ".",
+      "-"
+     ],
+     "rank": 34025
+    },
+    {
+     "visit": 11,
+     "tokens": [
+      ",",
+      " and",
+      " и",
+      "/",
+      " or",
+      " -",
+      ";",
+      " (",
+      ".",
+      "-"
+     ],
+     "rank": 31627
+    },
+    {
+     "visit": 12,
+     "tokens": [
+      ",",
+      " and",
+      " и",
+      "/",
+      ";",
+      " or",
+      "\n\n",
+      " (",
+      " -",
+      " og"
+     ],
+     "rank": 37284
+    },
+    {
+     "visit": 13,
+     "tokens": [
+      ",",
+      " and",
+      " (",
+      "isser",
+      " ",
+      " .",
+      " Lun",
+      "、",
+      " Y",
+      "."
+     ],
+     "rank": 80414
+    },
+    {
+     "visit": 14,
+     "tokens": [
+      ",",
+      " Ł",
+      " Lun",
+      " Chile",
+      " and",
+      "脀",
+      " Fin",
+      "イ",
+      " alias",
+      " Sow"
+     ],
+     "rank": 82158
+    },
+    {
+     "visit": 15,
+     "tokens": [
+      " wiki",
+      " alias",
+      " associated",
+      " ",
+      " icon",
+      " NASA",
+      ",",
+      " հայ",
+      "袮",
+      "wiki"
+     ],
+     "rank": 67100
+    },
+    {
+     "visit": 16,
+     "tokens": [
+      " famous",
+      " icon",
+      " person",
+      " origin",
+      "娌",
+      " प्रसिद्ध",
+      "�",
+      " ప్రసిద్ధ",
+      " O",
+      " Pablo"
+     ],
+     "rank": 13704
+    },
+    {
+     "visit": 17,
+     "tokens": [
+      "\r\n",
+      " former",
+      ",",
+      " c",
+      " ",
+      " —",
+      " historical",
+      " Bridge",
+      " og",
+      " O"
+     ],
+     "rank": 40067
+    },
+    {
+     "visit": 18,
+     "tokens": [
+      ",",
+      " -",
+      "?",
+      ":",
+      " и",
+      " ",
+      " and",
+      "-",
+      "\n",
+      " answer"
+     ],
+     "rank": 42568
+    },
+    {
+     "visit": 19,
+     "tokens": [
+      ",",
+      " and",
+      " и",
+      "/",
+      " or",
+      " (",
+      ";",
+      ".",
+      "、",
+      ":"
+     ],
+     "rank": 7006
+    },
+    {
+     "visit": 20,
+     "tokens": [
+      ",",
+      " and",
+      " и",
+      " or",
+      "/",
+      " (",
+      "、",
+      ";",
+      " et",
+      " "
+     ],
+     "rank": 1436
+    },
+    {
+     "visit": 21,
+     "tokens": [
+      " and",
+      ",",
+      " и",
+      " or",
+      " (",
+      " et",
+      "/",
+      "、",
+      " ",
+      ";"
+     ],
+     "rank": 2500
+    },
+    {
+     "visit": 22,
+     "tokens": [
+      ",",
+      " and",
+      " и",
+      " (",
+      " or",
+      "、",
+      " và",
+      ";",
+      " ",
+      "."
+     ],
+     "rank": 394
+    },
+    {
+     "visit": 23,
+     "tokens": [
+      " and",
+      ",",
+      " и",
+      " (",
+      " or",
+      "\n\n",
+      " et",
+      " -",
+      "/",
+      " và"
+     ],
+     "rank": 320
+    },
+    {
+     "visit": 24,
+     "tokens": [
+      " and",
+      ",",
+      " et",
+      " -",
+      "\n\n",
+      " (",
+      " и",
+      " Canadian",
+      " Mine",
+      " e"
+     ],
+     "rank": 119
+    },
+    {
+     "visit": 25,
+     "tokens": [
+      "的",
+      "�",
+      " Y",
+      " tek",
+      "Ñ",
+      " Ta",
+      " dan",
+      " B",
+      "hoh",
+      "Baa"
+     ],
+     "rank": 20447
+    },
+    {
+     "visit": 26,
+     "tokens": [
+      " प्रसिद्ध",
+      " U",
+      " dan",
+      " SAS",
+      " K",
+      " Gé",
+      " Mine",
+      " Marine",
+      " HP",
+      " E"
+     ],
+     "rank": 9788
+    },
+    {
+     "visit": 27,
+     "tokens": [
+      " प्रसिद्ध",
+      " Mine",
+      " famoso",
+      " Milli",
+      " ప్రసిద్ధ",
+      "�",
+      " famous",
+      " E",
+      " U",
+      " marine"
+     ],
+     "rank": 24399
+    },
+    {
+     "visit": 28,
+     "tokens": [
+      " प्रसिद्ध",
+      " ప్రసిద్ధ",
+      "प्रसिद्ध",
+      " famous",
+      " מפורסם",
+      " مشهور",
+      " famoso",
+      " bekann",
+      " مشہور",
+      " معروف"
+     ],
+     "rank": 14355
+    },
+    {
+     "visit": 29,
+     "tokens": [
+      " ప్రసిద్ధ",
+      " प्रसिद्ध",
+      " U",
+      " national",
+      " known",
+      " Found",
+      " You",
+      " found",
+      " former",
+      " robot"
+     ],
+     "rank": 22981
+    },
+    {
+     "visit": 30,
+     "tokens": [
+      ",",
+      " -",
+      "?",
+      ":",
+      " и",
+      " ",
+      " and",
+      "-",
+      "\n",
+      " answer"
+     ],
+     "rank": 42568
+    },
+    {
+     "visit": 31,
+     "tokens": [
+      ",",
+      " and",
+      "/",
+      " и",
+      " or",
+      ";",
+      " (",
+      ".",
+      " ",
+      " →"
+     ],
+     "rank": 6834
+    },
+    {
+     "visit": 32,
+     "tokens": [
+      ",",
+      " and",
+      " и",
+      "/",
+      " or",
+      " (",
+      ";",
+      ".",
+      " ",
+      " et"
+     ],
+     "rank": 111
+    },
+    {
+     "visit": 33,
+     "tokens": [
+      ",",
+      " и",
+      "\n\n",
+      "/",
+      " ",
+      " and",
+      "�",
+      " Football",
+      " et",
+      "Hockey"
+     ],
+     "rank": 10
+    },
+    {
+     "visit": 34,
+     "tokens": [
+      ",",
+      "-",
+      "\n\n",
+      "hockey",
+      " skat",
+      " и",
+      "，",
+      "�",
+      " ",
+      " and"
+     ],
+     "rank": 3
+    },
+    {
+     "visit": 35,
+     "tokens": [
+      ",",
+      " skat",
+      "hockey",
+      "帾",
+      "吘",
+      "\n\n",
+      " Football",
+      "�",
+      "-",
+      "貅"
+     ],
+     "rank": 3
+    },
+    {
+     "visit": 36,
+     "tokens": [
+      " skat",
+      "hockey",
+      "Hockey",
+      "skat",
+      "rink",
+      "吘",
+      " sports",
+      " team",
+      " frozen",
+      " football"
+     ],
+     "rank": 2
+    },
+    {
+     "visit": 37,
+     "tokens": [
+      "r",
+      " K",
+      " BAL",
+      ",",
+      "Ĝ",
+      "珨",
+      " G",
+      " B",
+      "BAL",
+      "�"
+     ],
+     "rank": 160959
+    },
+    {
+     "visit": 38,
+     "tokens": [
+      " K",
+      "긷",
+      "K",
+      " mak",
+      "Ŏ",
+      " BAL",
+      " Sö",
+      "Sö",
+      "�",
+      " G"
+     ],
+     "rank": 136825
+    },
+    {
+     "visit": 39,
+     "tokens": [
+      "긷",
+      "နိုင်ငံ",
+      "哏",
+      "琂",
+      "윷",
+      " zä",
+      " K",
+      " brand",
+      "ră",
+      "gã"
+     ],
+     "rank": 131653
+    },
+    {
+     "visit": 40,
+     "tokens": [
+      " guitar",
+      " chief",
+      " football",
+      "朎",
+      " Korean",
+      " brand",
+      " Who",
+      " national",
+      " career",
+      " belongs"
+     ],
+     "rank": 38602
+    },
+    {
+     "visit": 41,
+     "tokens": [
+      "\n\n",
+      " domestic",
+      " brand",
+      " horse",
+      ")",
+      " **",
+      " ground",
+      " U",
+      " belongs",
+      " R"
+     ],
+     "rank": 21909
+    },
+    {
+     "visit": 42,
+     "tokens": [
+      "ష్ణ",
+      " fond",
+      "ฟุตบอล",
+      "hâ",
+      "拺",
+      "սառը",
+      " déput",
+      "Pokemon",
+      "粅",
+      "крв"
+     ],
+     "rank": 17858
+    },
+    {
+     "visit": 43,
+     "tokens": [
+      "hockey",
+      " ice",
+      "Hockey",
+      "Canadi",
+      " Canada",
+      " skat",
+      " Canadian",
+      " jääk",
+      "冰",
+      " कनाडा"
+     ],
+     "rank": 1
+    },
+    {
+     "visit": 44,
+     "tokens": [
+      "hockey",
+      " ice",
+      "Hockey",
+      " skat",
+      "Edmonton",
+      "冰",
+      "Canadi",
+      " Canadian",
+      " Canada",
+      " jääk"
+     ],
+     "rank": 1
+    },
+    {
+     "visit": 45,
+     "tokens": [
+      " Canada",
+      "hockey",
+      "Hockey",
+      " ice",
+      " Canadian",
+      " skat",
+      "Edmonton",
+      "Sidney",
+      "Canadi",
+      "Pittsburgh"
+     ],
+     "rank": 2
+    },
+    {
+     "visit": 46,
+     "tokens": [
+      "hockey",
+      "Hockey",
+      " Canada",
+      "Canadi",
+      "Canada",
+      "Edmonton",
+      " ice",
+      " Canadian",
+      " skat",
+      "Montreal"
+     ],
+     "rank": 1
+    },
+    {
+     "visit": 47,
+     "tokens": [
+      "<|content_thinking|>",
+      "<|content_text|>",
+      "ยุ",
+      "晏",
+      "作者",
+      "स्तित्व",
+      "داة",
+      "idd",
+      "ughn",
+      "来源"
+     ],
+     "rank": 1105
+    }
+   ]
+  },
+  {
+   "id": "athlete-15",
+   "readouts": [
+    {
+     "visit": 0,
+     "tokens": [
+      "<|content_thinking|>",
+      "मानना",
+      "瓩",
+      "সোমবার",
+      "kw",
+      "<|content_text|>",
+      "䗚",
+      "పంపు",
+      "犉",
+      "klær"
+     ],
+     "rank": 46047
+    },
+    {
+     "visit": 1,
+     "tokens": [
+      " и",
+      " BRA",
+      " +",
+      ",",
+      "𬊈",
+      " GO",
+      "/",
+      " and",
+      " -",
+      " PRI"
+     ],
+     "rank": 28022
+    },
+    {
+     "visit": 2,
+     "tokens": [
+      " and",
+      ",",
+      " or",
+      " и",
+      "/",
+      " ",
+      " (",
+      "-",
+      "4",
+      ":"
+     ],
+     "rank": 35315
+    },
+    {
+     "visit": 3,
+     "tokens": [
+      " and",
+      " or",
+      " и",
+      ",",
+      "/",
+      " ",
+      " (",
+      " /",
+      " -",
+      ":"
+     ],
+     "rank": 63058
+    },
+    {
+     "visit": 4,
+     "tokens": [
+      " и",
+      ",",
+      " and",
+      " or",
+      "/",
+      " ",
+      " (",
+      ":",
+      " -",
+      " /"
+     ],
+     "rank": 28328
+    },
+    {
+     "visit": 5,
+     "tokens": [
+      ",",
+      " and",
+      "/",
+      " or",
+      " -",
+      " и",
+      " ",
+      " (",
+      ":",
+      "-"
+     ],
+     "rank": 12402
+    },
+    {
+     "visit": 6,
+     "tokens": [
+      ",",
+      "?",
+      ":",
+      " -",
+      " и",
+      " ",
+      " and",
+      "-",
+      "\n",
+      " or"
+     ],
+     "rank": 8371
+    },
+    {
+     "visit": 7,
+     "tokens": [
+      ",",
+      " and",
+      " и",
+      " or",
+      "/",
+      " (",
+      ";",
+      ".",
+      "-",
+      " /"
+     ],
+     "rank": 41872
+    },
+    {
+     "visit": 8,
+     "tokens": [
+      " and",
+      ",",
+      " и",
+      " or",
+      "/",
+      " (",
+      " và",
+      "、",
+      ";",
+      " или"
+     ],
+     "rank": 54271
+    },
+    {
+     "visit": 9,
+     "tokens": [
+      ",",
+      " and",
+      " и",
+      " or",
+      "/",
+      " (",
+      ";",
+      "-",
+      " và",
+      "、"
+     ],
+     "rank": 63589
+    },
+    {
+     "visit": 10,
+     "tokens": [
+      ",",
+      " and",
+      " и",
+      " or",
+      "/",
+      ";",
+      " -",
+      " (",
+      ".",
+      "-"
+     ],
+     "rank": 21425
+    },
+    {
+     "visit": 11,
+     "tokens": [
+      ",",
+      " and",
+      " и",
+      "/",
+      " or",
+      ";",
+      " -",
+      ".",
+      "-",
+      " ("
+     ],
+     "rank": 23551
+    },
+    {
+     "visit": 12,
+     "tokens": [
+      " and",
+      ",",
+      " и",
+      "/",
+      ";",
+      " or",
+      "\n\n",
+      " (",
+      " -",
+      "."
+     ],
+     "rank": 12158
+    },
+    {
+     "visit": 13,
+     "tokens": [
+      ",",
+      " and",
+      " (",
+      ".",
+      "、",
+      " и",
+      " B",
+      "的",
+      " .",
+      ":"
+     ],
+     "rank": 57267
+    },
+    {
+     "visit": 14,
+     "tokens": [
+      " and",
+      ",",
+      " Ł",
+      "�",
+      "イ",
+      " Chile",
+      "ically",
+      " Fern",
+      "ero",
+      "."
+     ],
+     "rank": 10500
+    },
+    {
+     "visit": 15,
+     "tokens": [
+      " histor",
+      " historical",
+      " history",
+      " исторический",
+      " истор",
+      " ",
+      " and",
+      ",",
+      " K",
+      "_"
+     ],
+     "rank": 14553
+    },
+    {
+     "visit": 16,
+     "tokens": [
+      " historical",
+      " histor",
+      " origin",
+      " history",
+      " famous",
+      " industrial",
+      " истор",
+      "تاريخي",
+      " nei",
+      " fame"
+     ],
+     "rank": 4904
+    },
+    {
+     "visit": 17,
+     "tokens": [
+      " historical",
+      " histor",
+      "\r\n",
+      " истор",
+      " former",
+      " —",
+      ",",
+      " and",
+      " O",
+      " "
+     ],
+     "rank": 6259
+    },
+    {
+     "visit": 18,
+     "tokens": [
+      ",",
+      "?",
+      ":",
+      " -",
+      " и",
+      " ",
+      " and",
+      "-",
+      "\n",
+      " or"
+     ],
+     "rank": 8371
+    },
+    {
+     "visit": 19,
+     "tokens": [
+      ",",
+      " and",
+      " и",
+      "/",
+      " or",
+      " (",
+      ";",
+      ".",
+      "、",
+      ":"
+     ],
+     "rank": 25591
+    },
+    {
+     "visit": 20,
+     "tokens": [
+      ",",
+      " and",
+      " и",
+      " or",
+      "/",
+      " (",
+      "、",
+      ";",
+      " ",
+      " và"
+     ],
+     "rank": 6488
+    },
+    {
+     "visit": 21,
+     "tokens": [
+      ",",
+      " and",
+      " и",
+      " or",
+      "/",
+      " (",
+      " et",
+      " ",
+      "、",
+      " và"
+     ],
+     "rank": 1267
+    },
+    {
+     "visit": 22,
+     "tokens": [
+      ",",
+      " and",
+      " (",
+      " or",
+      " и",
+      "、",
+      "/",
+      ".",
+      " —",
+      " et"
+     ],
+     "rank": 62
+    },
+    {
+     "visit": 23,
+     "tokens": [
+      ",",
+      " and",
+      " и",
+      " (",
+      "/",
+      " et",
+      " —",
+      " or",
+      "、",
+      "\n\n"
+     ],
+     "rank": 27
+    },
+    {
+     "visit": 24,
+     "tokens": [
+      ",",
+      " (",
+      " and",
+      "\n\n",
+      "/",
+      " *",
+      " и",
+      " or",
+      ")",
+      "​"
+     ],
+     "rank": 12
+    },
+    {
+     "visit": 25,
+     "tokens": [
+      "的",
+      " Hil",
+      "bea",
+      "�",
+      " ",
+      "μού",
+      "ilen",
+      ",",
+      "--",
+      " SP"
+     ],
+     "rank": 41013
+    },
+    {
+     "visit": 26,
+     "tokens": [
+      " प्रसिद्ध",
+      " ",
+      " Yi",
+      "頧",
+      "偉",
+      " Hil",
+      " Go",
+      " یکی",
+      " Solo",
+      "嶚"
+     ],
+     "rank": 61803
+    },
+    {
+     "visit": 27,
+     "tokens": [
+      " belongs",
+      " thuộc",
+      " प्रसिद्ध",
+      "偉",
+      " ",
+      "า",
+      "музык",
+      " S",
+      "嶚",
+      "ఔ"
+     ],
+     "rank": 51854
+    },
+    {
+     "visit": 28,
+     "tokens": [
+      " प्रसिद्ध",
+      " ప్రసిద్ధ",
+      " מפורסם",
+      " famous",
+      "பே",
+      "clássic",
+      "प्रसिद्ध",
+      " pioneer",
+      "伟",
+      " author"
+     ],
+     "rank": 7679
+    },
+    {
+     "visit": 29,
+     "tokens": [
+      " found",
+      "‌",
+      " ప్రసిద్ధ",
+      " revolution",
+      " former",
+      " SAN",
+      " S",
+      "An",
+      " known",
+      " Sof"
+     ],
+     "rank": 5617
+    },
+    {
+     "visit": 30,
+     "tokens": [
+      ",",
+      "?",
+      ":",
+      " -",
+      " и",
+      " ",
+      " and",
+      "-",
+      "\n",
+      " or"
+     ],
+     "rank": 8371
+    },
+    {
+     "visit": 31,
+     "tokens": [
+      ",",
+      " and",
+      " и",
+      "/",
+      ";",
+      " (",
+      " or",
+      ".",
+      " et",
+      " "
+     ],
+     "rank": 17694
+    },
+    {
+     "visit": 32,
+     "tokens": [
+      ",",
+      " and",
+      " и",
+      "/",
+      " or",
+      ";",
+      " (",
+      " ",
+      ".",
+      " -"
+     ],
+     "rank": 1152
+    },
+    {
+     "visit": 33,
+     "tokens": [
+      ",",
+      " и",
+      " ",
+      " and",
+      "/",
+      " (",
+      " et",
+      " or",
+      " o",
+      " →"
+     ],
+     "rank": 13
+    },
+    {
+     "visit": 34,
+     "tokens": [
+      " golf",
+      ",",
+      "Golf",
+      "⛳",
+      "golf",
+      "/",
+      "Olimpi",
+      " (",
+      " →",
+      " /"
+     ],
+     "rank": 1
+    },
+    {
+     "visit": 35,
+     "tokens": [
+      " golf",
+      ",",
+      " *",
+      "Golf",
+      " ",
+      " r",
+      " competitive",
+      " y",
+      "�",
+      "/"
+     ],
+     "rank": 1
+    },
+    {
+     "visit": 36,
+     "tokens": [
+      " golf",
+      "Golf",
+      " gol",
+      " tourn",
+      "golf",
+      "⛳",
+      "🏌",
+      " competitive",
+      " hole",
+      " игры"
+     ],
+     "rank": 1
+    },
+    {
+     "visit": 37,
+     "tokens": [
+      ",",
+      " K",
+      "頧",
+      " H",
+      "r",
+      " Y",
+      "'",
+      " r",
+      " M",
+      " Be"
+     ],
+     "rank": 122379
+    },
+    {
+     "visit": 38,
+     "tokens": [
+      " K",
+      "K",
+      ",",
+      " mak",
+      "ator",
+      " H",
+      "H",
+      " onco",
+      " प्रसिद्ध",
+      " G"
+     ],
+     "rank": 67481
+    },
+    {
+     "visit": 39,
+     "tokens": [
+      " K",
+      " प्रसिद्ध",
+      ",",
+      " **",
+      "軎",
+      " Be",
+      " מפורסם",
+      "吘",
+      " bee",
+      "музык"
+     ],
+     "rank": 9059
+    },
+    {
+     "visit": 40,
+     "tokens": [
+      " מפורסם",
+      " प्रसिद्ध",
+      " K",
+      " football",
+      " Be",
+      "प्रसिद्ध",
+      " fame",
+      " World",
+      " chief",
+      "暚"
+     ],
+     "rank": 305
+    },
+    {
+     "visit": 41,
+     "tokens": [
+      " horse",
+      " **",
+      " K",
+      " tape",
+      ")",
+      "\n\n",
+      "​",
+      "ண்ப",
+      " R",
+      " football"
+     ],
+     "rank": 319
+    },
+    {
+     "visit": 42,
+     "tokens": [
+      "ฟุตบอล",
+      "儌",
+      "սառը",
+      "拺",
+      " مشهور",
+      "敩",
+      "�",
+      "鍉",
+      "lfd",
+      "齅"
+     ],
+     "rank": 1857
+    },
+    {
+     "visit": 43,
+     "tokens": [
+      " golf",
+      "golf",
+      "Golf",
+      " gol",
+      "🏌",
+      "⛳",
+      " sport",
+      "tennis",
+      " Gol",
+      " sports"
+     ],
+     "rank": 1
+    },
+    {
+     "visit": 44,
+     "tokens": [
+      " golf",
+      " gol",
+      "Golf",
+      "golf",
+      "⛳",
+      " tee",
+      "🏌",
+      "골",
+      " Gol",
+      "голь"
+     ],
+     "rank": 1
+    },
+    {
+     "visit": 45,
+     "tokens": [
+      " golf",
+      " gol",
+      "Golf",
+      "golf",
+      "⛳",
+      " professional",
+      " Gol",
+      " tee",
+      " course",
+      "🏌"
+     ],
+     "rank": 1
+    },
+    {
+     "visit": 46,
+     "tokens": [
+      " golf",
+      " gol",
+      "Golf",
+      "golf",
+      "⛳",
+      " go",
+      "ゴ",
+      " Gol",
+      "골",
+      "Gol"
+     ],
+     "rank": 1
+    },
+    {
+     "visit": 47,
+     "tokens": [
+      "<|content_thinking|>",
+      "作者",
+      "<|content_text|>",
+      "expr",
+      "来源",
+      "gondi",
+      "图片",
+      "تخطيط",
+      "muj",
+      "Golf"
+     ],
+     "rank": 8
+    }
+   ]
+  },
+  {
+   "id": "landmark-19",
+   "readouts": [
+    {
+     "visit": 0,
+     "tokens": [
+      "<|content_thinking|>",
+      "मानना",
+      "瓩",
+      "সোমবার",
+      "kw",
+      "<|content_text|>",
+      "䗚",
+      "పంపు",
+      "犉",
+      "klær"
+     ],
+     "rank": 17127
+    },
+    {
+     "visit": 1,
+     "tokens": [
+      " и",
+      " BRA",
+      ",",
+      " +",
+      " ",
+      " PRI",
+      "/",
+      " GO",
+      " -",
+      "𬊈"
+     ],
+     "rank": 177700
+    },
+    {
+     "visit": 2,
+     "tokens": [
+      " and",
+      ",",
+      " и",
+      " or",
+      "/",
+      " ",
+      " (",
+      ":",
+      " -",
+      " /"
+     ],
+     "rank": 169740
+    },
+    {
+     "visit": 3,
+     "tokens": [
+      " and",
+      " or",
+      ",",
+      " и",
+      "/",
+      " ",
+      " (",
+      " /",
+      ":",
+      " -"
+     ],
+     "rank": 158348
+    },
+    {
+     "visit": 4,
+     "tokens": [
+      ",",
+      " и",
+      " or",
+      " and",
+      "/",
+      " ",
+      ":",
+      " (",
+      " -",
+      " /"
+     ],
+     "rank": 154760
+    },
+    {
+     "visit": 5,
+     "tokens": [
+      ",",
+      " and",
+      " or",
+      " и",
+      "/",
+      " -",
+      " ",
+      " (",
+      ":",
+      " /"
+     ],
+     "rank": 104687
+    },
+    {
+     "visit": 6,
+     "tokens": [
+      ",",
+      ":",
+      " и",
+      " ",
+      " -",
+      "?",
+      " and",
+      "/",
+      "-",
+      " answer"
+     ],
+     "rank": 68848
+    },
+    {
+     "visit": 7,
+     "tokens": [
+      " and",
+      ",",
+      " и",
+      " or",
+      "/",
+      ";",
+      " (",
+      ".",
+      " /",
+      "-"
+     ],
+     "rank": 21541
+    },
+    {
+     "visit": 8,
+     "tokens": [
+      " and",
+      ",",
+      " и",
+      " or",
+      "/",
+      " (",
+      ";",
+      ".",
+      "、",
+      " или"
+     ],
+     "rank": 17645
+    },
+    {
+     "visit": 9,
+     "tokens": [
+      " and",
+      ",",
+      " и",
+      " or",
+      "/",
+      " (",
+      ";",
+      " -",
+      " và",
+      "."
+     ],
+     "rank": 5072
+    },
+    {
+     "visit": 10,
+     "tokens": [
+      ",",
+      " и",
+      " and",
+      "/",
+      " or",
+      " -",
+      " (",
+      ";",
+      ".",
+      "-"
+     ],
+     "rank": 14157
+    },
+    {
+     "visit": 11,
+     "tokens": [
+      " и",
+      ",",
+      " and",
+      "/",
+      " -",
+      " …",
+      " or",
+      ".",
+      " ...",
+      "-"
+     ],
+     "rank": 6480
+    },
+    {
+     "visit": 12,
+     "tokens": [
+      ",",
+      " and",
+      " и",
+      " …",
+      "\n\n",
+      " -",
+      " (",
+      "/",
+      " ...",
+      ";"
+     ],
+     "rank": 443
+    },
+    {
+     "visit": 13,
+     "tokens": [
+      ",",
+      " and",
+      "的",
+      " (",
+      "、",
+      " ",
+      "ರು",
+      ":",
+      "鼋",
+      "."
+     ],
+     "rank": 3723
+    },
+    {
+     "visit": 14,
+     "tokens": [
+      ",",
+      " -",
+      " and",
+      " Lun",
+      " ",
+      " K",
+      " Dataset",
+      " Ł",
+      " Ger",
+      " Wikipedia"
+     ],
+     "rank": 9469
+    },
+    {
+     "visit": 15,
+     "tokens": [
+      " ప్రసిద్ధ",
+      " controversy",
+      " ",
+      " K",
+      ",",
+      " and",
+      " associated",
+      " Wikipedia",
+      " प्रसिद्ध",
+      " found"
+     ],
+     "rank": 3341
+    },
+    {
+     "visit": 16,
+     "tokens": [
+      " controversy",
+      " geopol",
+      " origin",
+      " shelter",
+      " cuisine",
+      " asal",
+      " industrial",
+      " U",
+      " geo",
+      " гор"
+     ],
+     "rank": 933
+    },
+    {
+     "visit": 17,
+     "tokens": [
+      " ",
+      " Vor",
+      ",",
+      " geopol",
+      " D",
+      " \"",
+      " pain",
+      " dato",
+      " Cold",
+      " Bridge"
+     ],
+     "rank": 4658
+    },
+    {
+     "visit": 18,
+     "tokens": [
+      ",",
+      ":",
+      " и",
+      " ",
+      " -",
+      "?",
+      " and",
+      "/",
+      "-",
+      " answer"
+     ],
+     "rank": 68848
+    },
+    {
+     "visit": 19,
+     "tokens": [
+      ",",
+      " and",
+      " и",
+      "/",
+      " or",
+      "、",
+      ";",
+      " (",
+      ".",
+      ":"
+     ],
+     "rank": 95698
+    },
+    {
+     "visit": 20,
+     "tokens": [
+      ",",
+      " and",
+      " и",
+      "/",
+      " (",
+      ";",
+      "、",
+      " or",
+      ".",
+      ":"
+     ],
+     "rank": 8995
+    },
+    {
+     "visit": 21,
+     "tokens": [
+      ",",
+      " и",
+      " and",
+      "/",
+      ";",
+      " (",
+      " or",
+      "、",
+      ".",
+      " và"
+     ],
+     "rank": 850
+    },
+    {
+     "visit": 22,
+     "tokens": [
+      ",",
+      " and",
+      " or",
+      " (",
+      " и",
+      "/",
+      " -",
+      ".",
+      ";",
+      ":"
+     ],
+     "rank": 206
+    },
+    {
+     "visit": 23,
+     "tokens": [
+      ",",
+      " bl",
+      " R",
+      "洉",
+      " Beach",
+      "柶",
+      "輬",
+      " (",
+      " An",
+      ";"
+     ],
+     "rank": 145
+    },
+    {
+     "visit": 24,
+     "tokens": [
+      " Australian",
+      " Sydney",
+      " ऑस्ट्रेलिया",
+      " Australia",
+      "أستر",
+      " Austral",
+      "ఆస్ట్రే",
+      "NSW",
+      " Austr",
+      " neighbour"
+     ],
+     "rank": 4
+    },
+    {
+     "visit": 25,
+     "tokens": [
+      " I",
+      " HP",
+      " ∗",
+      " BAL",
+      "的",
+      " SE",
+      " E",
+      "�",
+      "Atari",
+      " Su"
+     ],
+     "rank": 13292
+    },
+    {
+     "visit": 26,
+     "tokens": [
+      " H",
+      " IS",
+      ",",
+      " I",
+      " in",
+      " ",
+      " K",
+      " Arab",
+      " MRI",
+      "Bash"
+     ],
+     "rank": 6049
+    },
+    {
+     "visit": 27,
+     "tokens": [
+      " E",
+      " belongs",
+      " em",
+      " found",
+      "�",
+      "тат",
+      " H",
+      " located",
+      ",",
+      " Me"
+     ],
+     "rank": 19715
+    },
+    {
+     "visit": 28,
+     "tokens": [
+      " E",
+      " H",
+      " native",
+      " found",
+      "媆",
+      " Spain",
+      " Mile",
+      " in",
+      " Japan",
+      ","
+     ],
+     "rank": 1193
+    },
+    {
+     "visit": 29,
+     "tokens": [
+      " Malaysia",
+      " D",
+      " E",
+      " UK",
+      " found",
+      " Uk",
+      " Georgia",
+      ",",
+      " Spain",
+      " in"
+     ],
+     "rank": 374
+    },
+    {
+     "visit": 30,
+     "tokens": [
+      ",",
+      ":",
+      " и",
+      " ",
+      " -",
+      "?",
+      " and",
+      "/",
+      "-",
+      " answer"
+     ],
+     "rank": 68848
+    },
+    {
+     "visit": 31,
+     "tokens": [
+      ",",
+      " and",
+      " и",
+      "/",
+      " or",
+      " (",
+      ";",
+      "、",
+      ".",
+      " -"
+     ],
+     "rank": 66124
+    },
+    {
+     "visit": 32,
+     "tokens": [
+      ",",
+      " and",
+      " or",
+      " и",
+      "/",
+      " (",
+      ";",
+      " -",
+      ":",
+      "."
+     ],
+     "rank": 5232
+    },
+    {
+     "visit": 33,
+     "tokens": [
+      ",",
+      " и",
+      " and",
+      "/",
+      " or",
+      " (",
+      " [",
+      " ...",
+      ";",
+      "."
+     ],
+     "rank": 96
+    },
+    {
+     "visit": 34,
+     "tokens": [
+      ",",
+      " и",
+      " and",
+      "/",
+      " (",
+      " or",
+      ";",
+      " [",
+      ".",
+      " ..."
+     ],
+     "rank": 77
+    },
+    {
+     "visit": 35,
+     "tokens": [
+      ",",
+      "\n\n",
+      " …",
+      " ...",
+      " Australian",
+      " !",
+      " [",
+      "柶",
+      " (",
+      " Australia"
+     ],
+     "rank": 10
+    },
+    {
+     "visit": 36,
+     "tokens": [
+      " Sydney",
+      " Australian",
+      " Australia",
+      " ऑस्ट्रेलिया",
+      " Austr",
+      " beach",
+      " neighbour",
+      "ఆస్ట్రే",
+      " Austral",
+      "أستر"
+     ],
+     "rank": 3
+    },
+    {
+     "visit": 37,
+     "tokens": [
+      " DE",
+      "晑",
+      "SO",
+      "ÉE",
+      "LAND",
+      "IER",
+      "Lyndon",
+      "LAN",
+      "�",
+      "CER"
+     ],
+     "rank": 29806
+    },
+    {
+     "visit": 38,
+     "tokens": [
+      "SO",
+      " DE",
+      " SO",
+      " H",
+      " U",
+      " D",
+      " I",
+      " J",
+      "H",
+      " Me"
+     ],
+     "rank": 4642
+    },
+    {
+     "visit": 39,
+     "tokens": [
+      "�",
+      "policj",
+      "dueñ",
+      " Be",
+      " F",
+      "⌅",
+      "�",
+      " DE",
+      " SO",
+      " Me"
+     ],
+     "rank": 2243
+    },
+    {
+     "visit": 40,
+     "tokens": [
+      " United",
+      " Japan",
+      " Be",
+      " New",
+      " It",
+      "inglaterra",
+      " South",
+      " Mile",
+      " Brazil",
+      " England"
+     ],
+     "rank": 30
+    },
+    {
+     "visit": 41,
+     "tokens": [
+      " England",
+      " British",
+      " East",
+      " land",
+      " Malaysia",
+      " Pakistan",
+      " Georgia",
+      " GB",
+      " English",
+      " Ireland"
+     ],
+     "rank": 147
+    },
+    {
+     "visit": 42,
+     "tokens": [
+      "椗",
+      "狫",
+      " тар",
+      " hunderd",
+      "䪸",
+      " Austr",
+      "刵",
+      "篧",
+      "————",
+      "🇳"
+     ],
+     "rank": 9369
+    },
+    {
+     "visit": 43,
+     "tokens": [
+      " Sydney",
+      "Sydney",
+      " Australia",
+      " surf",
+      " Australian",
+      "悉",
+      "NSW",
+      "sydney",
+      " beach",
+      "Surf"
+     ],
+     "rank": 3
+    },
+    {
+     "visit": 44,
+     "tokens": [
+      " Australia",
+      " Australian",
+      " Sydney",
+      "澳",
+      "Australia",
+      " Austr",
+      "Sydney",
+      " ऑस्ट्रेलिया",
+      "Australian",
+      "أستر"
+     ],
+     "rank": 1
+    },
+    {
+     "visit": 45,
+     "tokens": [
+      " Australia",
+      " Sydney",
+      " Australian",
+      "Australia",
+      "澳",
+      "Sydney",
+      " Austr",
+      "NSW",
+      " Austral",
+      "sydney"
+     ],
+     "rank": 1
+    },
+    {
+     "visit": 46,
+     "tokens": [
+      " Sydney",
+      " Australia",
+      " Australian",
+      "Sydney",
+      "悉",
+      "澳",
+      "Sidney",
+      "Australia",
+      " Ав",
+      " AU"
+     ],
+     "rank": 2
+    },
+    {
+     "visit": 47,
+     "tokens": [
+      "<|content_thinking|>",
+      "<|content_text|>",
+      "作者",
+      "عاج",
+      "sra",
+      "expr",
+      "출",
+      "�",
+      "全文",
+      "騒"
+     ],
+     "rank": 12882
+    }
+   ]
+  },
+  {
+   "id": "landmark-13",
+   "readouts": [
+    {
+     "visit": 0,
+     "tokens": [
+      "<|content_thinking|>",
+      "मानना",
+      "瓩",
+      "সোমবার",
+      "kw",
+      "<|content_text|>",
+      "䗚",
+      "పంపు",
+      "犉",
+      "klær"
+     ],
+     "rank": 17691
+    },
+    {
+     "visit": 1,
+     "tokens": [
+      " и",
+      " BRA",
+      " +",
+      ",",
+      " PRI",
+      "/",
+      " ",
+      " -",
+      "𬊈",
+      " :"
+     ],
+     "rank": 60031
+    },
+    {
+     "visit": 2,
+     "tokens": [
+      " and",
+      ",",
+      " or",
+      " и",
+      "/",
+      " ",
+      " (",
+      ":",
+      " -",
+      " /"
+     ],
+     "rank": 79538
+    },
+    {
+     "visit": 3,
+     "tokens": [
+      " and",
+      " or",
+      ",",
+      " и",
+      "/",
+      " ",
+      " (",
+      " /",
+      " -",
+      ":"
+     ],
+     "rank": 103499
+    },
+    {
+     "visit": 4,
+     "tokens": [
+      ",",
+      " и",
+      " and",
+      " or",
+      "/",
+      " ",
+      ":",
+      " (",
+      " -",
+      " /"
+     ],
+     "rank": 110642
+    },
+    {
+     "visit": 5,
+     "tokens": [
+      ",",
+      " and",
+      " or",
+      "/",
+      " и",
+      " -",
+      " ",
+      " (",
+      ":",
+      " /"
+     ],
+     "rank": 114197
+    },
+    {
+     "visit": 6,
+     "tokens": [
+      ",",
+      ":",
+      " и",
+      " -",
+      " and",
+      "?",
+      " ",
+      "/",
+      "-",
+      " answer"
+     ],
+     "rank": 70697
+    },
+    {
+     "visit": 7,
+     "tokens": [
+      ",",
+      " and",
+      " и",
+      " or",
+      "/",
+      ";",
+      " (",
+      ".",
+      "-",
+      " /"
+     ],
+     "rank": 92898
+    },
+    {
+     "visit": 8,
+     "tokens": [
+      " and",
+      ",",
+      " и",
+      " or",
+      "/",
+      " (",
+      ";",
+      " или",
+      ".",
+      "、"
+     ],
+     "rank": 99072
+    },
+    {
+     "visit": 9,
+     "tokens": [
+      " and",
+      " и",
+      ",",
+      " or",
+      "/",
+      " (",
+      ";",
+      " или",
+      ".",
+      " và"
+     ],
+     "rank": 106432
+    },
+    {
+     "visit": 10,
+     "tokens": [
+      " и",
+      ",",
+      " and",
+      "/",
+      " or",
+      " (",
+      " -",
+      ".",
+      ";",
+      " или"
+     ],
+     "rank": 61296
+    },
+    {
+     "visit": 11,
+     "tokens": [
+      " и",
+      ",",
+      " and",
+      "/",
+      " …",
+      " -",
+      ".",
+      " or",
+      "-",
+      " ("
+     ],
+     "rank": 52785
+    },
+    {
+     "visit": 12,
+     "tokens": [
+      " and",
+      ",",
+      " и",
+      "/",
+      " …",
+      ";",
+      " (",
+      "\n\n",
+      " -",
+      "."
+     ],
+     "rank": 8503
+    },
+    {
+     "visit": 13,
+     "tokens": [
+      ",",
+      " Lun",
+      " Wi",
+      "ument",
+      " and",
+      "zili",
+      "gass",
+      " (",
+      " Ba",
+      " Kr"
+     ],
+     "rank": 6142
+    },
+    {
+     "visit": 14,
+     "tokens": [
+      ",",
+      " Lun",
+      "🐼",
+      " in",
+      " and",
+      " Wikipedia",
+      " refers",
+      " (",
+      " alias",
+      "—"
+     ],
+     "rank": 6564
+    },
+    {
+     "visit": 15,
+     "tokens": [
+      " Lun",
+      " found",
+      " Wikipedia",
+      " ప్రసిద్ధ",
+      " ",
+      " and",
+      " histor",
+      " B",
+      ",",
+      "‌"
+     ],
+     "rank": 1447
+    },
+    {
+     "visit": 16,
+     "tokens": [
+      " U",
+      " Lun",
+      " famous",
+      " French",
+      " Kr",
+      "\r\n",
+      " Wood",
+      " Arch",
+      "�",
+      " O"
+     ],
+     "rank": 1285
+    },
+    {
+     "visit": 17,
+     "tokens": [
+      " ",
+      " Vor",
+      " D",
+      "\r\n",
+      " and",
+      ",",
+      " U",
+      "​",
+      " E",
+      "#"
+     ],
+     "rank": 2497
+    },
+    {
+     "visit": 18,
+     "tokens": [
+      ",",
+      ":",
+      " и",
+      " -",
+      " and",
+      "?",
+      " ",
+      "/",
+      "-",
+      " answer"
+     ],
+     "rank": 70697
+    },
+    {
+     "visit": 19,
+     "tokens": [
+      ",",
+      " and",
+      " и",
+      "/",
+      " (",
+      " or",
+      ";",
+      "、",
+      ".",
+      ":"
+     ],
+     "rank": 64622
+    },
+    {
+     "visit": 20,
+     "tokens": [
+      ",",
+      " и",
+      " and",
+      "/",
+      " (",
+      " or",
+      ".",
+      ";",
+      "、",
+      ":"
+     ],
+     "rank": 53627
+    },
+    {
+     "visit": 21,
+     "tokens": [
+      ",",
+      " и",
+      " and",
+      " (",
+      "/",
+      "、",
+      " or",
+      ".",
+      ";",
+      " ["
+     ],
+     "rank": 36617
+    },
+    {
+     "visit": 22,
+     "tokens": [
+      ",",
+      " и",
+      " and",
+      ".",
+      " (",
+      "、",
+      "/",
+      " or",
+      ";",
+      " -"
+     ],
+     "rank": 18244
+    },
+    {
+     "visit": 23,
+     "tokens": [
+      ",",
+      " и",
+      " (",
+      " and",
+      ".",
+      "/",
+      " ",
+      " C",
+      " or",
+      " og"
+     ],
+     "rank": 21603
+    },
+    {
+     "visit": 24,
+     "tokens": [
+      " Polish",
+      " polsk",
+      " Polsk",
+      " Krak",
+      " og",
+      " dla",
+      "yl",
+      "owski",
+      " Pi",
+      " na"
+     ],
+     "rank": 12
+    },
+    {
+     "visit": 25,
+     "tokens": [
+      " Brazil",
+      " Saudi",
+      "�",
+      " I",
+      "Azores",
+      "I",
+      "‌",
+      " Ukra",
+      "Atari",
+      "--"
+     ],
+     "rank": 2231
+    },
+    {
+     "visit": 26,
+     "tokens": [
+      " in",
+      " Me",
+      " I",
+      " Arab",
+      ",",
+      "Tunis",
+      " H",
+      " ",
+      " S",
+      " Saudi"
+     ],
+     "rank": 2277
+    },
+    {
+     "visit": 27,
+     "tokens": [
+      " located",
+      " belongs",
+      " Fort",
+      " Bru",
+      " D",
+      " Me",
+      " in",
+      " ",
+      " E",
+      ","
+     ],
+     "rank": 380
+    },
+    {
+     "visit": 28,
+     "tokens": [
+      " Fort",
+      " E",
+      " Bru",
+      " in",
+      ",",
+      " found",
+      " uk",
+      " Ge",
+      " Me",
+      " D"
+     ],
+     "rank": 670
+    },
+    {
+     "visit": 29,
+     "tokens": [
+      " E",
+      " D",
+      " found",
+      " in",
+      " Fort",
+      ",",
+      " Sof",
+      "\n",
+      " R",
+      " nan"
+     ],
+     "rank": 1024
+    },
+    {
+     "visit": 30,
+     "tokens": [
+      ",",
+      ":",
+      " и",
+      " -",
+      " and",
+      "?",
+      " ",
+      "/",
+      "-",
+      " answer"
+     ],
+     "rank": 70697
+    },
+    {
+     "visit": 31,
+     "tokens": [
+      ",",
+      " and",
+      " и",
+      "/",
+      " or",
+      " (",
+      "、",
+      ".",
+      "-",
+      " "
+     ],
+     "rank": 60061
+    },
+    {
+     "visit": 32,
+     "tokens": [
+      ",",
+      " and",
+      " и",
+      "/",
+      " (",
+      " or",
+      ".",
+      "、",
+      ":",
+      ";"
+     ],
+     "rank": 25901
+    },
+    {
+     "visit": 33,
+     "tokens": [
+      ",",
+      " and",
+      " и",
+      "/",
+      " (",
+      "、",
+      " et",
+      ".",
+      "\n\n",
+      " or"
+     ],
+     "rank": 10098
+    },
+    {
+     "visit": 34,
+     "tokens": [
+      ",",
+      " and",
+      " и",
+      " (",
+      ".",
+      " et",
+      "/",
+      "、",
+      " og",
+      " ,"
+     ],
+     "rank": 7021
+    },
+    {
+     "visit": 35,
+     "tokens": [
+      ",",
+      " and",
+      " et",
+      " и",
+      " (",
+      "\n\n",
+      ".",
+      " og",
+      "/",
+      "、"
+     ],
+     "rank": 21777
+    },
+    {
+     "visit": 36,
+     "tokens": [
+      " city",
+      "မြို့",
+      " Krak",
+      " vibr",
+      " central",
+      " poz",
+      " città",
+      " og",
+      "yl",
+      " Poz"
+     ],
+     "rank": 992
+    },
+    {
+     "visit": 37,
+     "tokens": [
+      ",",
+      "的",
+      " K",
+      " H",
+      "REE",
+      " DE",
+      " Saudi",
+      "晑",
+      " G",
+      "爲"
+     ],
+     "rank": 20009
+    },
+    {
+     "visit": 38,
+     "tokens": [
+      " K",
+      " G",
+      " H",
+      "REE",
+      ",",
+      " woon",
+      " D",
+      " Lun",
+      " S",
+      " Be"
+     ],
+     "rank": 1549
+    },
+    {
+     "visit": 39,
+     "tokens": [
+      " K",
+      ",",
+      " Be",
+      " c",
+      " D",
+      " ",
+      " Bru",
+      "甿",
+      " G",
+      "policj"
+     ],
+     "rank": 1432
+    },
+    {
+     "visit": 40,
+     "tokens": [
+      " città",
+      " Be",
+      "مدينة",
+      "㧜",
+      "mieśc",
+      "艋",
+      " Dü",
+      " مدينة",
+      " Paris",
+      " Zürich"
+     ],
+     "rank": 5254
+    },
+    {
+     "visit": 41,
+     "tokens": [
+      " Land",
+      " Paris",
+      "‬",
+      " Jerusalem",
+      ")",
+      " London",
+      " D",
+      " land",
+      " Québec",
+      " Answer"
+     ],
+     "rank": 18971
+    },
+    {
+     "visit": 42,
+     "tokens": [
+      "椗",
+      "鍉",
+      "狫",
+      "🏙",
+      "脭",
+      "僯",
+      "徥",
+      "asaray",
+      "拺",
+      "瓨"
+     ],
+     "rank": 81979
+    },
+    {
+     "visit": 43,
+     "tokens": [
+      " Krak",
+      "Krakow",
+      " Polish",
+      "Warsaw",
+      " Poland",
+      "krakow",
+      "Krak",
+      " Warszawa",
+      " Polsk",
+      "Polish"
+     ],
+     "rank": 5
+    },
+    {
+     "visit": 44,
+     "tokens": [
+      " Krak",
+      "Krakow",
+      "Krak",
+      "krakow",
+      " Polish",
+      " Kra",
+      " Poland",
+      " Кра",
+      "Warsaw",
+      " Wa"
+     ],
+     "rank": 7
+    },
+    {
+     "visit": 45,
+     "tokens": [
+      " Krak",
+      "Krakow",
+      "Krak",
+      " Kra",
+      "krakow",
+      " Кра",
+      "krak",
+      "Warsaw",
+      "Kra",
+      " C"
+     ],
+     "rank": 19
+    },
+    {
+     "visit": 46,
+     "tokens": [
+      "Krakow",
+      " Krak",
+      " C",
+      " Kra",
+      "Krak",
+      "C",
+      "Kra",
+      " کرا",
+      "krakow",
+      "krak"
+     ],
+     "rank": 56
+    },
+    {
+     "visit": 47,
+     "tokens": [
+      "<|content_thinking|>",
+      " Kra",
+      "Krakow",
+      "全文",
+      "作者",
+      "바",
+      "Kra",
+      "蕘",
+      "ยุ",
+      "챊"
+     ],
+     "rank": 19986
+    }
+   ]
+  },
+  {
+   "id": "musician-05",
+   "readouts": [
+    {
+     "visit": 0,
+     "tokens": [
+      "<|content_thinking|>",
+      "मानना",
+      "瓩",
+      "সোমবার",
+      "kw",
+      "<|content_text|>",
+      "䗚",
+      "పంపు",
+      "犉",
+      "klær"
+     ],
+     "rank": 39501
+    },
+    {
+     "visit": 1,
+     "tokens": [
+      " и",
+      " BRA",
+      " GO",
+      " +",
+      " -",
+      "𬊈",
+      "/",
+      " ",
+      ",",
+      " :"
+     ],
+     "rank": 83886
+    },
+    {
+     "visit": 2,
+     "tokens": [
+      " and",
+      " и",
+      ",",
+      " or",
+      "/",
+      " ",
+      " (",
+      ":",
+      " -",
+      " /"
+     ],
+     "rank": 85142
+    },
+    {
+     "visit": 3,
+     "tokens": [
+      " and",
+      " or",
+      ",",
+      " и",
+      "/",
+      " ",
+      " (",
+      " /",
+      " -",
+      ":"
+     ],
+     "rank": 59872
+    },
+    {
+     "visit": 4,
+     "tokens": [
+      ",",
+      " and",
+      " or",
+      " и",
+      "/",
+      " ",
+      " (",
+      ":",
+      " -",
+      " /"
+     ],
+     "rank": 83542
+    },
+    {
+     "visit": 5,
+     "tokens": [
+      ",",
+      " and",
+      "/",
+      " or",
+      " -",
+      " ",
+      " и",
+      " (",
+      ":",
+      " /"
+     ],
+     "rank": 59978
+    },
+    {
+     "visit": 6,
+     "tokens": [
+      ",",
+      " -",
+      " ",
+      "?",
+      ":",
+      "/",
+      " and",
+      "-",
+      " и",
+      " —"
+     ],
+     "rank": 47118
+    },
+    {
+     "visit": 7,
+     "tokens": [
+      ",",
+      " and",
+      " и",
+      " or",
+      "/",
+      " (",
+      ";",
+      ".",
+      "-",
+      " /"
+     ],
+     "rank": 44233
+    },
+    {
+     "visit": 8,
+     "tokens": [
+      " and",
+      ",",
+      " и",
+      " or",
+      "/",
+      " (",
+      ";",
+      ".",
+      "、",
+      " و"
+     ],
+     "rank": 15910
+    },
+    {
+     "visit": 9,
+     "tokens": [
+      ",",
+      " and",
+      " и",
+      " or",
+      "/",
+      " (",
+      ";",
+      ".",
+      "、",
+      "-"
+     ],
+     "rank": 11322
+    },
+    {
+     "visit": 10,
+     "tokens": [
+      ",",
+      " and",
+      " и",
+      " or",
+      "/",
+      " (",
+      ";",
+      " -",
+      ".",
+      "-"
+     ],
+     "rank": 10504
+    },
+    {
+     "visit": 11,
+     "tokens": [
+      " and",
+      ",",
+      " и",
+      "/",
+      " or",
+      " (",
+      " -",
+      " …",
+      ";",
+      " ..."
+     ],
+     "rank": 14110
+    },
+    {
+     "visit": 12,
+     "tokens": [
+      ",",
+      " and",
+      " и",
+      "/",
+      "\n\n",
+      ";",
+      " (",
+      " or",
+      " -",
+      " K"
+     ],
+     "rank": 7195
+    },
+    {
+     "visit": 13,
+     "tokens": [
+      " and",
+      ",",
+      " (",
+      " и",
+      "、",
+      ".",
+      " ",
+      " .",
+      " và",
+      " D"
+     ],
+     "rank": 128124
+    },
+    {
+     "visit": 14,
+     "tokens": [
+      ",",
+      " and",
+      " (",
+      ":",
+      " Lun",
+      "和",
+      ".",
+      " U",
+      " Ł",
+      " -"
+     ],
+     "rank": 108462
+    },
+    {
+     "visit": 15,
+     "tokens": [
+      " wiki",
+      " associated",
+      " histor",
+      " history",
+      ",",
+      " and",
+      " K",
+      " bio",
+      " icon",
+      " origin"
+     ],
+     "rank": 61602
+    },
+    {
+     "visit": 16,
+     "tokens": [
+      " famous",
+      " farmer",
+      " O",
+      " origin",
+      " industrial",
+      " D",
+      " nei",
+      ",",
+      " known",
+      " pastor"
+     ],
+     "rank": 56073
+    },
+    {
+     "visit": 17,
+     "tokens": [
+      " —",
+      "\r\n",
+      " D",
+      " O",
+      " Victor",
+      " folk",
+      ",",
+      " c",
+      " W",
+      " agricul"
+     ],
+     "rank": 86244
+    },
+    {
+     "visit": 18,
+     "tokens": [
+      ",",
+      " -",
+      " ",
+      "?",
+      ":",
+      "/",
+      " and",
+      "-",
+      " и",
+      " —"
+     ],
+     "rank": 47118
+    },
+    {
+     "visit": 19,
+     "tokens": [
+      ",",
+      " and",
+      " и",
+      "/",
+      " or",
+      " (",
+      ";",
+      ".",
+      ":",
+      "、"
+     ],
+     "rank": 33161
+    },
+    {
+     "visit": 20,
+     "tokens": [
+      ",",
+      " and",
+      " и",
+      "/",
+      " or",
+      " (",
+      ";",
+      "、",
+      "\n\n",
+      " "
+     ],
+     "rank": 5889
+    },
+    {
+     "visit": 21,
+     "tokens": [
+      ",",
+      " and",
+      " и",
+      " or",
+      "/",
+      " (",
+      "\n\n",
+      " et",
+      ";",
+      " "
+     ],
+     "rank": 5040
+    },
+    {
+     "visit": 22,
+     "tokens": [
+      ",",
+      " and",
+      "\n\n",
+      " et",
+      " or",
+      " (",
+      " -",
+      " și",
+      " —",
+      " и"
+     ],
+     "rank": 3497
+    },
+    {
+     "visit": 23,
+     "tokens": [
+      ",",
+      " and",
+      " и",
+      "\n\n",
+      " et",
+      " -",
+      " or",
+      " és",
+      " og",
+      " și"
+     ],
+     "rank": 10107
+    },
+    {
+     "visit": 24,
+     "tokens": [
+      " and",
+      "\n\n",
+      " og",
+      " et",
+      " és",
+      " -",
+      ")",
+      " și",
+      " và",
+      "​"
+     ],
+     "rank": 2758
+    },
+    {
+     "visit": 25,
+     "tokens": [
+      ",",
+      "的",
+      " ",
+      " (",
+      " и",
+      " and",
+      " M",
+      " Ta",
+      " Y",
+      " T"
+     ],
+     "rank": 136936
+    },
+    {
+     "visit": 26,
+     "tokens": [
+      "的",
+      " SAS",
+      " प्रसिद्ध",
+      " S",
+      " K",
+      "bea",
+      " sas",
+      "Nol",
+      "SAS",
+      "--"
+     ],
+     "rank": 164625
+    },
+    {
+     "visit": 27,
+     "tokens": [
+      " प्रसिद्ध",
+      " famous",
+      " K",
+      " (",
+      " S",
+      " famoso",
+      ",",
+      "bea",
+      " ",
+      " and"
+     ],
+     "rank": 108613
+    },
+    {
+     "visit": 28,
+     "tokens": [
+      " famous",
+      " प्रसिद्ध",
+      " ప్రసిద్ధ",
+      " pioneer",
+      " famoso",
+      "знаменит",
+      " ünlü",
+      " nổi",
+      "著名",
+      " revolution"
+     ],
+     "rank": 39671
+    },
+    {
+     "visit": 29,
+     "tokens": [
+      " revolution",
+      " pioneer",
+      " found",
+      " ప్రసిద్ధ",
+      ")",
+      " -",
+      " प्रसिद्ध",
+      " arch",
+      " famous",
+      "​"
+     ],
+     "rank": 36018
+    },
+    {
+     "visit": 30,
+     "tokens": [
+      ",",
+      " -",
+      " ",
+      "?",
+      ":",
+      "/",
+      " and",
+      "-",
+      " и",
+      " —"
+     ],
+     "rank": 47118
+    },
+    {
+     "visit": 31,
+     "tokens": [
+      ",",
+      " and",
+      " и",
+      "/",
+      " or",
+      ";",
+      " (",
+      ".",
+      " →",
+      "、"
+     ],
+     "rank": 35389
+    },
+    {
+     "visit": 32,
+     "tokens": [
+      ",",
+      " and",
+      " и",
+      ";",
+      "/",
+      " or",
+      " (",
+      ".",
+      " →",
+      "\n\n"
+     ],
+     "rank": 444
+    },
+    {
+     "visit": 33,
+     "tokens": [
+      ",",
+      " and",
+      " и",
+      ";",
+      "\n\n",
+      " or",
+      " ",
+      "/",
+      " (",
+      "."
+     ],
+     "rank": 189
+    },
+    {
+     "visit": 34,
+     "tokens": [
+      ",",
+      "\n\n",
+      " and",
+      " и",
+      " ",
+      " or",
+      " folk",
+      " et",
+      " (",
+      ";"
+     ],
+     "rank": 223
+    },
+    {
+     "visit": 35,
+     "tokens": [
+      ",",
+      "\n\n",
+      " ",
+      " folk",
+      " и",
+      " ninguém",
+      " ...",
+      " '",
+      "焻",
+      " és"
+     ],
+     "rank": 478
+    },
+    {
+     "visit": 36,
+     "tokens": [
+      " folk",
+      " Texas",
+      " traditional",
+      " guitar",
+      " traditions",
+      " tradition",
+      " Southern",
+      " Colorado",
+      " American",
+      " பாரம்பரிய"
+     ],
+     "rank": 25
+    },
+    {
+     "visit": 37,
+     "tokens": [
+      ",",
+      "�",
+      "、",
+      "苼",
+      " (",
+      "/",
+      "坆",
+      "荿",
+      " Gr",
+      "�"
+     ],
+     "rank": 174115
+    },
+    {
+     "visit": 38,
+     "tokens": [
+      ",",
+      " and",
+      "S",
+      " K",
+      " S",
+      "/",
+      "，",
+      " ",
+      "、",
+      " и"
+     ],
+     "rank": 169482
+    },
+    {
+     "visit": 39,
+     "tokens": [
+      ",",
+      " and",
+      " ",
+      "\\",
+      "S",
+      " F",
+      "/",
+      " K",
+      "皒",
+      " S"
+     ],
+     "rank": 146250
+    },
+    {
+     "visit": 40,
+     "tokens": [
+      ",",
+      "皒",
+      " classic",
+      ")",
+      " MID",
+      " U",
+      "będzi",
+      "\\",
+      " SAN",
+      "徥"
+     ],
+     "rank": 122245
+    },
+    {
+     "visit": 41,
+     "tokens": [
+      "​",
+      " **",
+      "\\",
+      ")",
+      " U",
+      " R",
+      " NT",
+      " *",
+      "\n\n",
+      " _"
+     ],
+     "rank": 144080
+    },
+    {
+     "visit": 42,
+     "tokens": [
+      "➙",
+      "➩",
+      "➨",
+      "娖",
+      "սառը",
+      "狫",
+      "➝",
+      "萰",
+      "鍉",
+      "víncul"
+     ],
+     "rank": 194251
+    },
+    {
+     "visit": 43,
+     "tokens": [
+      " southern",
+      " Texas",
+      "banjo",
+      " guitar",
+      " Southern",
+      " folk",
+      "Tennessee",
+      " preach",
+      "Appalach",
+      " cotton"
+     ],
+     "rank": 3
+    },
+    {
+     "visit": 44,
+     "tokens": [
+      "banjo",
+      " Texas",
+      " folk",
+      "Appalach",
+      " mountain",
+      "Tennessee",
+      " Southern",
+      " rural",
+      "🤠",
+      " guitar"
+     ],
+     "rank": 1
+    },
+    {
+     "visit": 45,
+     "tokens": [
+      "banjo",
+      " western",
+      " mountain",
+      " Western",
+      "Appalach",
+      "Tennessee",
+      " folk",
+      " American",
+      " rural",
+      " country"
+     ],
+     "rank": 1
+    },
+    {
+     "visit": 46,
+     "tokens": [
+      " blue",
+      " country",
+      "蓝",
+      "blue",
+      "country",
+      " string",
+      "Sweeney",
+      " mountain",
+      " bill",
+      " old"
+     ],
+     "rank": 21
+    },
+    {
+     "visit": 47,
+     "tokens": [
+      "<|content_thinking|>",
+      "가",
+      "Bash",
+      "作者",
+      "𨪚",
+      "图片",
+      "<|content_text|>",
+      "来源",
+      "jav",
+      "bd"
+     ],
+     "rank": 279
+    }
+   ]
+  },
+  {
+   "id": "musician-16",
+   "readouts": [
+    {
+     "visit": 0,
+     "tokens": [
+      "<|content_thinking|>",
+      "मानना",
+      "瓩",
+      "সোমবার",
+      "kw",
+      "<|content_text|>",
+      "䗚",
+      "పంపు",
+      "犉",
+      "klær"
+     ],
+     "rank": 24424
+    },
+    {
+     "visit": 1,
+     "tokens": [
+      " и",
+      " BRA",
+      " GO",
+      " +",
+      " PRI",
+      " -",
+      "/",
+      "𬊈",
+      " KR",
+      " "
+     ],
+     "rank": 43673
+    },
+    {
+     "visit": 2,
+     "tokens": [
+      " and",
+      " or",
+      ",",
+      " и",
+      "/",
+      " ",
+      " (",
+      ":",
+      " -",
+      "-"
+     ],
+     "rank": 46372
+    },
+    {
+     "visit": 3,
+     "tokens": [
+      " and",
+      " or",
+      ",",
+      " и",
+      "/",
+      " ",
+      " (",
+      " /",
+      " -",
+      ":"
+     ],
+     "rank": 40853
+    },
+    {
+     "visit": 4,
+     "tokens": [
+      ",",
+      " or",
+      " and",
+      " и",
+      "/",
+      " ",
+      " (",
+      ":",
+      " -",
+      " /"
+     ],
+     "rank": 27264
+    },
+    {
+     "visit": 5,
+     "tokens": [
+      ",",
+      "/",
+      " and",
+      " or",
+      " -",
+      " ",
+      " и",
+      " (",
+      ":",
+      "-"
+     ],
+     "rank": 6481
+    },
+    {
+     "visit": 6,
+     "tokens": [
+      ",",
+      " -",
+      " ",
+      ":",
+      "?",
+      " and",
+      "/",
+      "-",
+      " и",
+      "\n"
+     ],
+     "rank": 1503
+    },
+    {
+     "visit": 7,
+     "tokens": [
+      ",",
+      " and",
+      " и",
+      " or",
+      "/",
+      " (",
+      ";",
+      ".",
+      "-",
+      " /"
+     ],
+     "rank": 57634
+    },
+    {
+     "visit": 8,
+     "tokens": [
+      ",",
+      " and",
+      " и",
+      " or",
+      "/",
+      " (",
+      ";",
+      ".",
+      "、",
+      " و"
+     ],
+     "rank": 34810
+    },
+    {
+     "visit": 9,
+     "tokens": [
+      ",",
+      " and",
+      " и",
+      " or",
+      "/",
+      " (",
+      ";",
+      ".",
+      "、",
+      " và"
+     ],
+     "rank": 23890
+    },
+    {
+     "visit": 10,
+     "tokens": [
+      ",",
+      " and",
+      " и",
+      " or",
+      "/",
+      " (",
+      ";",
+      ".",
+      " -",
+      "-"
+     ],
+     "rank": 5156
+    },
+    {
+     "visit": 11,
+     "tokens": [
+      " and",
+      ",",
+      " и",
+      "/",
+      " or",
+      " (",
+      " -",
+      " ...",
+      " …",
+      ";"
+     ],
+     "rank": 13378
+    },
+    {
+     "visit": 12,
+     "tokens": [
+      " and",
+      ",",
+      " и",
+      "/",
+      ";",
+      " (",
+      "\n\n",
+      " or",
+      " -",
+      "."
+     ],
+     "rank": 13549
+    },
+    {
+     "visit": 13,
+     "tokens": [
+      ",",
+      " and",
+      " (",
+      " и",
+      " và",
+      "、",
+      " .",
+      ".",
+      " -",
+      " "
+     ],
+     "rank": 37688
+    },
+    {
+     "visit": 14,
+     "tokens": [
+      ",",
+      " and",
+      " (",
+      " bio",
+      " -",
+      "的",
+      ")",
+      ":",
+      " Lun",
+      " CIA"
+     ],
+     "rank": 20353
+    },
+    {
+     "visit": 15,
+     "tokens": [
+      " dec",
+      " histor",
+      " SO",
+      " CIA",
+      ",",
+      " origin",
+      " icon",
+      " associated",
+      " origins",
+      " and"
+     ],
+     "rank": 4412
+    },
+    {
+     "visit": 16,
+     "tokens": [
+      " famous",
+      " origin",
+      " farmer",
+      " personality",
+      "\r\n",
+      " film",
+      " industrial",
+      " person",
+      " and",
+      " O"
+     ],
+     "rank": 3606
+    },
+    {
+     "visit": 17,
+     "tokens": [
+      "\r\n",
+      " Sof",
+      " —",
+      " O",
+      " and",
+      " D",
+      " ",
+      " Fro",
+      " Frank",
+      " Kr"
+     ],
+     "rank": 2024
+    },
+    {
+     "visit": 18,
+     "tokens": [
+      ",",
+      " -",
+      " ",
+      ":",
+      "?",
+      " and",
+      "/",
+      "-",
+      " и",
+      "\n"
+     ],
+     "rank": 1503
+    },
+    {
+     "visit": 19,
+     "tokens": [
+      ",",
+      " and",
+      " и",
+      "/",
+      " or",
+      " (",
+      ";",
+      "、",
+      ":",
+      "."
+     ],
+     "rank": 38914
+    },
+    {
+     "visit": 20,
+     "tokens": [
+      ",",
+      " and",
+      " и",
+      "/",
+      " or",
+      " (",
+      "、",
+      ";",
+      " ",
+      " et"
+     ],
+     "rank": 3778
+    },
+    {
+     "visit": 21,
+     "tokens": [
+      ",",
+      " and",
+      " и",
+      "/",
+      " or",
+      " (",
+      " ",
+      "\n\n",
+      ";",
+      " et"
+     ],
+     "rank": 1832
+    },
+    {
+     "visit": 22,
+     "tokens": [
+      ",",
+      " and",
+      "\n\n",
+      "/",
+      " or",
+      " -",
+      " et",
+      " (",
+      " ",
+      " и"
+     ],
+     "rank": 137
+    },
+    {
+     "visit": 23,
+     "tokens": [
+      ",",
+      " and",
+      " и",
+      "/",
+      " or",
+      " et",
+      " e",
+      " -",
+      "\n\n",
+      "�"
+     ],
+     "rank": 171
+    },
+    {
+     "visit": 24,
+     "tokens": [
+      " guitar",
+      "�",
+      " bl",
+      " and",
+      " et",
+      "\n\n",
+      "�",
+      " *",
+      " -",
+      " r"
+     ],
+     "rank": 1
+    },
+    {
+     "visit": 25,
+     "tokens": [
+      "的",
+      " Ga",
+      "bea",
+      " Ta",
+      " ",
+      "和",
+      " Y",
+      " S",
+      " (",
+      " coron"
+     ],
+     "rank": 10619
+    },
+    {
+     "visit": 26,
+     "tokens": [
+      "的",
+      "--",
+      " S",
+      " Y",
+      " Ga",
+      " Bru",
+      "bea",
+      " sculpt",
+      " Mine",
+      " chính"
+     ],
+     "rank": 20560
+    },
+    {
+     "visit": 27,
+     "tokens": [
+      " प्रसिद्ध",
+      " Mine",
+      "--",
+      " Solo",
+      " S",
+      " famous",
+      " E",
+      " Gé",
+      " chính",
+      "Gé"
+     ],
+     "rank": 2477
+    },
+    {
+     "visit": 28,
+     "tokens": [
+      " प्रसिद्ध",
+      " famous",
+      "знаменит",
+      " ప్రసిద్ధ",
+      "प्रसिद्ध",
+      " famoso",
+      " ünlü",
+      " مشهور",
+      " nổi",
+      "clássic"
+     ],
+     "rank": 1381
+    },
+    {
+     "visit": 29,
+     "tokens": [
+      " प्रसिद्ध",
+      "\r\n",
+      " D",
+      " Lion",
+      " known",
+      " famous",
+      " Y",
+      " Sof",
+      " Mine",
+      " E"
+     ],
+     "rank": 751
+    },
+    {
+     "visit": 30,
+     "tokens": [
+      ",",
+      " -",
+      " ",
+      ":",
+      "?",
+      " and",
+      "/",
+      "-",
+      " и",
+      "\n"
+     ],
+     "rank": 1503
+    },
+    {
+     "visit": 31,
+     "tokens": [
+      ",",
+      " and",
+      " и",
+      "/",
+      " or",
+      ";",
+      ".",
+      " (",
+      " ",
+      "、"
+     ],
+     "rank": 24090
+    },
+    {
+     "visit": 32,
+     "tokens": [
+      ",",
+      " and",
+      " и",
+      "/",
+      ";",
+      " or",
+      " (",
+      ".",
+      "\n\n",
+      " et"
+     ],
+     "rank": 795
+    },
+    {
+     "visit": 33,
+     "tokens": [
+      ",",
+      " и",
+      " and",
+      ";",
+      "\n\n",
+      "/",
+      " et",
+      " or",
+      " (",
+      " "
+     ],
+     "rank": 219
+    },
+    {
+     "visit": 34,
+     "tokens": [
+      ",",
+      " and",
+      "/",
+      "\n\n",
+      " и",
+      " -",
+      ";",
+      " et",
+      " or",
+      " ("
+     ],
+     "rank": 35
+    },
+    {
+     "visit": 35,
+     "tokens": [
+      ",",
+      " and",
+      "/",
+      " и",
+      " -",
+      "\n\n",
+      " et",
+      " or",
+      " và",
+      ";"
+     ],
+     "rank": 42
+    },
+    {
+     "visit": 36,
+     "tokens": [
+      " guitar",
+      " artist",
+      " *",
+      " rock",
+      "Guitar",
+      " рок",
+      "�",
+      " r",
+      " bl",
+      " ছিলেন"
+     ],
+     "rank": 1
+    },
+    {
+     "visit": 37,
+     "tokens": [
+      ",",
+      "、",
+      " (",
+      " and",
+      "和",
+      " и",
+      "的",
+      " ",
+      " và",
+      "，"
+     ],
+     "rank": 21710
+    },
+    {
+     "visit": 38,
+     "tokens": [
+      ",",
+      " and",
+      "和",
+      "的",
+      " (",
+      " K",
+      " và",
+      "、",
+      " D",
+      "--"
+     ],
+     "rank": 5425
+    },
+    {
+     "visit": 39,
+     "tokens": [
+      ",",
+      " and",
+      " (",
+      "和",
+      ")",
+      ".",
+      " và",
+      "—",
+      " ",
+      "/"
+     ],
+     "rank": 1421
+    },
+    {
+     "visit": 40,
+     "tokens": [
+      ",",
+      " and",
+      ")",
+      " (",
+      " H",
+      " D",
+      " K",
+      " cof",
+      " Roland",
+      " Thomas"
+     ],
+     "rank": 38
+    },
+    {
+     "visit": 41,
+     "tokens": [
+      ")",
+      "​",
+      " *",
+      " :",
+      " **",
+      " and",
+      " प्रसिद्ध",
+      " R",
+      " K",
+      "\n\n"
+     ],
+     "rank": 125
+    },
+    {
+     "visit": 42,
+     "tokens": [
+      "➙",
+      " مشہور",
+      "ఆర్థ",
+      " کاروبار",
+      " مشهور",
+      "�",
+      "Gobiern",
+      "抝",
+      "蝢",
+      " ünlü"
+     ],
+     "rank": 3595
+    },
+    {
+     "visit": 43,
+     "tokens": [
+      " guitar",
+      "🎸",
+      " drum",
+      "Guitar",
+      "guitar",
+      " pian",
+      " music",
+      " bass",
+      " piano",
+      " instrument"
+     ],
+     "rank": 1
+    },
+    {
+     "visit": 44,
+     "tokens": [
+      " guitar",
+      "🎸",
+      "Guitar",
+      " drum",
+      "guitar",
+      " rock",
+      " metal",
+      " band",
+      " instrumental",
+      " bass"
+     ],
+     "rank": 1
+    },
+    {
+     "visit": 45,
+     "tokens": [
+      " guitar",
+      "Guitar",
+      "guitar",
+      "Eddie",
+      " metal",
+      " Van",
+      " wh",
+      "🎸",
+      " instrumental",
+      " back"
+     ],
+     "rank": 1
+    },
+    {
+     "visit": 46,
+     "tokens": [
+      " guitar",
+      "Eddie",
+      "⎼",
+      " Van",
+      " Ax",
+      " bass",
+      " electr",
+      " divers",
+      " electric",
+      "Ев"
+     ],
+     "rank": 1
+    },
+    {
+     "visit": 47,
+     "tokens": [
+      "<|content_thinking|>",
+      "ยุ",
+      "뤛",
+      "다만",
+      "สำนัก",
+      "俶",
+      "نُ",
+      "dizz",
+      "느끼",
+      "اٹھنا"
+     ],
+     "rank": 72227
+    }
+   ]
+  },
+  {
+   "id": "arith-10",
+   "readouts": [
+    {
+     "visit": 0,
+     "tokens": [
+      "<|content_thinking|>",
+      "मानना",
+      "瓩",
+      "সোমবার",
+      "kw",
+      "<|content_text|>",
+      "䗚",
+      "పంపు",
+      "犉",
+      "klær"
+     ],
+     "rank": 189154
+    },
+    {
+     "visit": 1,
+     "tokens": [
+      " и",
+      ",",
+      " BRA",
+      " +",
+      " and",
+      "/",
+      "𬊈",
+      " ",
+      " -",
+      " PRI"
+     ],
+     "rank": 114
+    },
+    {
+     "visit": 2,
+     "tokens": [
+      ",",
+      " and",
+      " or",
+      " и",
+      "/",
+      " ",
+      " (",
+      ":",
+      " -",
+      " /"
+     ],
+     "rank": 37
+    },
+    {
+     "visit": 3,
+     "tokens": [
+      " and",
+      " or",
+      ",",
+      " и",
+      "/",
+      " ",
+      " (",
+      " /",
+      ":",
+      " -"
+     ],
+     "rank": 41
+    },
+    {
+     "visit": 4,
+     "tokens": [
+      ",",
+      " and",
+      " и",
+      " or",
+      "/",
+      " ",
+      " (",
+      ":",
+      " -",
+      " /"
+     ],
+     "rank": 46
+    },
+    {
+     "visit": 5,
+     "tokens": [
+      ",",
+      " and",
+      " и",
+      " or",
+      "/",
+      " -",
+      " ",
+      " (",
+      ":",
+      " /"
+     ],
+     "rank": 34
+    },
+    {
+     "visit": 6,
+     "tokens": [
+      ",",
+      ":",
+      " -",
+      " ",
+      "?",
+      "-",
+      " и",
+      "\n",
+      "/",
+      " and"
+     ],
+     "rank": 68
+    },
+    {
+     "visit": 7,
+     "tokens": [
+      ",",
+      " and",
+      " и",
+      " or",
+      "/",
+      ";",
+      ".",
+      " (",
+      "-",
+      "、"
+     ],
+     "rank": 40
+    },
+    {
+     "visit": 8,
+     "tokens": [
+      ",",
+      " and",
+      " и",
+      " or",
+      "/",
+      " (",
+      "、",
+      ".",
+      ";",
+      " و"
+     ],
+     "rank": 33
+    },
+    {
+     "visit": 9,
+     "tokens": [
+      ",",
+      " and",
+      " и",
+      " or",
+      "/",
+      " (",
+      ".",
+      " và",
+      ";",
+      "、"
+     ],
+     "rank": 40
+    },
+    {
+     "visit": 10,
+     "tokens": [
+      ",",
+      " и",
+      " and",
+      " or",
+      " (",
+      "/",
+      " -",
+      " или",
+      ".",
+      "-"
+     ],
+     "rank": 48
+    },
+    {
+     "visit": 11,
+     "tokens": [
+      " и",
+      ",",
+      " and",
+      " -",
+      "/",
+      " or",
+      "-",
+      " (",
+      ".",
+      " và"
+     ],
+     "rank": 138
+    },
+    {
+     "visit": 12,
+     "tokens": [
+      ",",
+      " и",
+      " and",
+      " -",
+      " (",
+      "\n\n",
+      " or",
+      "/",
+      ".",
+      " ,"
+     ],
+     "rank": 145
+    },
+    {
+     "visit": 13,
+     "tokens": [
+      ",",
+      " Sof",
+      "鼋",
+      "的",
+      "愝",
+      "wise",
+      "yog",
+      "рованного",
+      "ument",
+      "、"
+     ],
+     "rank": 21253
+    },
+    {
+     "visit": 14,
+     "tokens": [
+      ",",
+      " Sof",
+      ".",
+      "urst",
+      " INF",
+      " Lo",
+      " ",
+      "ieren",
+      "'",
+      " D"
+     ],
+     "rank": 49237
+    },
+    {
+     "visit": 15,
+     "tokens": [
+      ".",
+      ",",
+      " ",
+      " do",
+      " simple",
+      " e",
+      " D",
+      " Sof",
+      " and",
+      " ("
+     ],
+     "rank": 9937
+    },
+    {
+     "visit": 16,
+     "tokens": [
+      " simple",
+      "կատու",
+      " pizza",
+      " prost",
+      " CIA",
+      " computation",
+      " trivial",
+      "பூனை",
+      " прост",
+      " straightforward"
+     ],
+     "rank": 10432
+    },
+    {
+     "visit": 17,
+     "tokens": [
+      " simple",
+      "-",
+      ".",
+      " ",
+      ",",
+      " sex",
+      " straightforward",
+      " trivial",
+      " and",
+      " Tower"
+     ],
+     "rank": 3104
+    },
+    {
+     "visit": 18,
+     "tokens": [
+      ",",
+      ":",
+      " -",
+      " ",
+      "?",
+      "-",
+      " и",
+      "\n",
+      "/",
+      " and"
+     ],
+     "rank": 68
+    },
+    {
+     "visit": 19,
+     "tokens": [
+      ",",
+      " and",
+      " и",
+      "/",
+      "、",
+      " (",
+      ".",
+      ";",
+      " or",
+      ":"
+     ],
+     "rank": 53
+    },
+    {
+     "visit": 20,
+     "tokens": [
+      ",",
+      " and",
+      " и",
+      "、",
+      " (",
+      "/",
+      ";",
+      " ",
+      " or",
+      ":"
+     ],
+     "rank": 53
+    },
+    {
+     "visit": 21,
+     "tokens": [
+      ",",
+      " and",
+      " и",
+      " ",
+      "/",
+      " (",
+      ".",
+      "、",
+      " [",
+      " or"
+     ],
+     "rank": 31
+    },
+    {
+     "visit": 22,
+     "tokens": [
+      ",",
+      " and",
+      " ",
+      ".",
+      "/",
+      " и",
+      " (",
+      " or",
+      "\n\n",
+      " -"
+     ],
+     "rank": 16
+    },
+    {
+     "visit": 23,
+     "tokens": [
+      ",",
+      " and",
+      " и",
+      " (",
+      ".",
+      " ",
+      "/",
+      "\n\n",
+      " -",
+      "뺄"
+     ],
+     "rank": 88
+    },
+    {
+     "visit": 24,
+     "tokens": [
+      "뺄",
+      " subtraction",
+      " subtra",
+      " wynik",
+      "斳",
+      " арифмет",
+      "anj",
+      "吘",
+      "畍",
+      " numeral"
+     ],
+     "rank": 1178
+    },
+    {
+     "visit": 25,
+     "tokens": [
+      "�",
+      " Sof",
+      " B",
+      "ÿ",
+      "쿄",
+      "哃",
+      "�",
+      " SUM",
+      "和",
+      "的"
+     ],
+     "rank": 10131
+    },
+    {
+     "visit": 26,
+     "tokens": [
+      "�",
+      "뚯",
+      "쿄",
+      "wszys",
+      "�",
+      "զգեստ",
+      "蹔",
+      "Ŏ",
+      "símbo",
+      "�"
+     ],
+     "rank": 22485
+    },
+    {
+     "visit": 27,
+     "tokens": [
+      "�",
+      "�",
+      "عاهرة",
+      "�",
+      "�",
+      "�",
+      "wszys",
+      "�",
+      "kahde",
+      "菥"
+     ],
+     "rank": 10046
+    },
+    {
+     "visit": 28,
+     "tokens": [
+      "�",
+      "kahde",
+      "կատու",
+      "horrí",
+      "�",
+      "wszys",
+      "茠",
+      "�",
+      "鞜",
+      " computation"
+     ],
+     "rank": 10828
+    },
+    {
+     "visit": 29,
+     "tokens": [
+      "wszys",
+      " Sim",
+      "菥",
+      " Windows",
+      " linguist",
+      "磄",
+      " computation",
+      "horrí",
+      "�",
+      "詴"
+     ],
+     "rank": 4374
+    },
+    {
+     "visit": 30,
+     "tokens": [
+      ",",
+      ":",
+      " -",
+      " ",
+      "?",
+      "-",
+      " и",
+      "\n",
+      "/",
+      " and"
+     ],
+     "rank": 68
+    },
+    {
+     "visit": 31,
+     "tokens": [
+      ",",
+      " and",
+      " и",
+      ";",
+      " και",
+      " (",
+      "\n\n",
+      "、",
+      ":",
+      "."
+     ],
+     "rank": 97
+    },
+    {
+     "visit": 32,
+     "tokens": [
+      ",",
+      " and",
+      " и",
+      "、",
+      " và",
+      " και",
+      ";",
+      " or",
+      "/",
+      ":"
+     ],
+     "rank": 66
+    },
+    {
+     "visit": 33,
+     "tokens": [
+      ",",
+      " and",
+      " и",
+      "/",
+      ".",
+      ";",
+      "、",
+      " or",
+      " (",
+      ":"
+     ],
+     "rank": 81
+    },
+    {
+     "visit": 34,
+     "tokens": [
+      ",",
+      " and",
+      ".",
+      " и",
+      "/",
+      ":",
+      ";",
+      " or",
+      " ",
+      " ("
+     ],
+     "rank": 83
+    },
+    {
+     "visit": 35,
+     "tokens": [
+      ",",
+      " and",
+      ".",
+      " ",
+      ":",
+      ";",
+      " ...",
+      " (",
+      " и",
+      "/"
+     ],
+     "rank": 564
+    },
+    {
+     "visit": 36,
+     "tokens": [
+      " arithmetic",
+      "뺄",
+      "运算",
+      " арифмет",
+      "吘",
+      "�",
+      " subtraction",
+      ",",
+      " operation",
+      " numeral"
+     ],
+     "rank": 3750
+    },
+    {
+     "visit": 37,
+     "tokens": [
+      ",",
+      "晑",
+      "的",
+      " B",
+      " Franz",
+      "俴",
+      "�",
+      "和",
+      " Bab",
+      "B"
+     ],
+     "rank": 26181
+    },
+    {
+     "visit": 38,
+     "tokens": [
+      ",",
+      "횐",
+      "dobř",
+      "的",
+      "�",
+      "�",
+      "IWd",
+      "蹔",
+      "和",
+      "蔃"
+     ],
+     "rank": 15685
+    },
+    {
+     "visit": 39,
+     "tokens": [
+      ",",
+      "dobř",
+      "�",
+      "będzi",
+      "�",
+      "訹",
+      "�",
+      "عاهرة",
+      "oposi",
+      "blieft"
+     ],
+     "rank": 14671
+    },
+    {
+     "visit": 40,
+     "tokens": [
+      " arithmetic",
+      " subtraction",
+      " simple",
+      " арифмет",
+      " basic",
+      " physics",
+      " algebra",
+      " math",
+      " phép",
+      " математика"
+     ],
+     "rank": 20481
+    },
+    {
+     "visit": 41,
+     "tokens": [
+      " arithmetic",
+      " simple",
+      " subtraction",
+      " metal",
+      " algebra",
+      " dental",
+      " algebraic",
+      " গণিত",
+      "磄",
+      "运算"
+     ],
+     "rank": 8490
+    },
+    {
+     "visit": 42,
+     "tokens": [
+      " tschüss",
+      "磄",
+      "鐰",
+      "錇",
+      " զգացմունք",
+      " תפוח",
+      "jednoduch",
+      "侺",
+      " կոշիկ",
+      "�"
+     ],
+     "rank": 53605
+    },
+    {
+     "visit": 43,
+     "tokens": [
+      " arithmetic",
+      " simple",
+      " basic",
+      " calculation",
+      " math",
+      " subtraction",
+      "算",
+      " multiplication",
+      " algebra",
+      " numbers"
+     ],
+     "rank": 6423
+    },
+    {
+     "visit": 44,
+     "tokens": [
+      " arithmetic",
+      " math",
+      " subtraction",
+      " subtract",
+      " mathematics",
+      " mathematical",
+      " maths",
+      "数学",
+      "math",
+      " basic"
+     ],
+     "rank": 3259
+    },
+    {
+     "visit": 45,
+     "tokens": [
+      " arithmetic",
+      " simple",
+      " basic",
+      "算",
+      "Arithmetic",
+      "arithmetic",
+      "simple",
+      " sub",
+      " Simple",
+      "简单"
+     ],
+     "rank": 2365
+    },
+    {
+     "visit": 46,
+     "tokens": [
+      " arithmetic",
+      " simple",
+      "Arithmetic",
+      "算",
+      "arithmetic",
+      "ари",
+      " basic",
+      " arit",
+      " ari",
+      " aritm"
+     ],
+     "rank": 3122
+    },
+    {
+     "visit": 47,
+     "tokens": [
+      "<|content_thinking|>",
+      " simple",
+      "simple",
+      " Ari",
+      " arithmetic",
+      "Ari",
+      "ໍ",
+      "简单",
+      " Sim",
+      "থে"
+     ],
+     "rank": 19485
+    }
+   ]
+  },
+  {
+   "id": "dayafter-01",
+   "readouts": [
+    {
+     "visit": 0,
+     "tokens": [
+      "<|content_thinking|>",
+      "मानना",
+      "瓩",
+      "সোমবার",
+      "kw",
+      "<|content_text|>",
+      "䗚",
+      "పంపు",
+      "犉",
+      "klær"
+     ],
+     "rank": 128891
+    },
+    {
+     "visit": 1,
+     "tokens": [
+      " и",
+      " BRA",
+      ",",
+      "𬊈",
+      " +",
+      " GO",
+      " PRI",
+      "20",
+      "/",
+      " -"
+     ],
+     "rank": 143627
+    },
+    {
+     "visit": 2,
+     "tokens": [
+      ",",
+      " and",
+      " or",
+      " и",
+      "/",
+      " ",
+      ":",
+      " (",
+      "-",
+      " -"
+     ],
+     "rank": 71253
+    },
+    {
+     "visit": 3,
+     "tokens": [
+      " and",
+      " or",
+      ",",
+      " и",
+      "/",
+      " ",
+      " (",
+      " /",
+      ":",
+      " -"
+     ],
+     "rank": 75056
+    },
+    {
+     "visit": 4,
+     "tokens": [
+      ",",
+      " and",
+      " or",
+      " и",
+      "/",
+      " ",
+      ":",
+      " (",
+      " -",
+      " /"
+     ],
+     "rank": 70237
+    },
+    {
+     "visit": 5,
+     "tokens": [
+      ",",
+      " and",
+      " or",
+      "/",
+      " и",
+      " -",
+      " ",
+      ":",
+      " (",
+      " /"
+     ],
+     "rank": 81292
+    },
+    {
+     "visit": 6,
+     "tokens": [
+      ",",
+      ":",
+      " ",
+      "?",
+      "/",
+      " -",
+      " and",
+      " и",
+      "-",
+      " or"
+     ],
+     "rank": 95415
+    },
+    {
+     "visit": 7,
+     "tokens": [
+      ",",
+      " and",
+      " и",
+      " or",
+      "/",
+      ";",
+      " (",
+      ".",
+      "-",
+      " /"
+     ],
+     "rank": 101635
+    },
+    {
+     "visit": 8,
+     "tokens": [
+      ",",
+      " and",
+      " и",
+      " or",
+      "/",
+      " (",
+      ";",
+      ".",
+      " و",
+      " или"
+     ],
+     "rank": 41986
+    },
+    {
+     "visit": 9,
+     "tokens": [
+      ",",
+      " and",
+      " и",
+      " or",
+      "/",
+      " (",
+      " và",
+      ";",
+      " или",
+      "."
+     ],
+     "rank": 18276
+    },
+    {
+     "visit": 10,
+     "tokens": [
+      ",",
+      " and",
+      " и",
+      "/",
+      " or",
+      " -",
+      " và",
+      " (",
+      ".",
+      " или"
+     ],
+     "rank": 10264
+    },
+    {
+     "visit": 11,
+     "tokens": [
+      ",",
+      " и",
+      " and",
+      "/",
+      " và",
+      " -",
+      " or",
+      ";",
+      " /",
+      "."
+     ],
+     "rank": 22951
+    },
+    {
+     "visit": 12,
+     "tokens": [
+      ",",
+      " and",
+      " и",
+      " -",
+      "/",
+      " và",
+      "\n\n",
+      " or",
+      " (",
+      ";"
+     ],
+     "rank": 14181
+    },
+    {
+     "visit": 13,
+     "tokens": [
+      ",",
+      " and",
+      "носно",
+      "ರು",
+      "gass",
+      " Zhou",
+      " Y",
+      "isser",
+      "ument",
+      "的"
+     ],
+     "rank": 31844
+    },
+    {
+     "visit": 14,
+     "tokens": [
+      ",",
+      " PG",
+      " ",
+      "Perr",
+      " and",
+      " -",
+      " K",
+      " Lo",
+      " Flat",
+      " concept"
+     ],
+     "rank": 50572
+    },
+    {
+     "visit": 15,
+     "tokens": [
+      ",",
+      " ",
+      " Lun",
+      " PS",
+      " sex",
+      " (",
+      " and",
+      " e",
+      ".",
+      " -"
+     ],
+     "rank": 20666
+    },
+    {
+     "visit": 16,
+     "tokens": [
+      " sex",
+      ",",
+      " closed",
+      " IF",
+      " Lun",
+      " \"",
+      " ",
+      " Christian",
+      " dato",
+      " and"
+     ],
+     "rank": 3673
+    },
+    {
+     "visit": 17,
+     "tokens": [
+      ",",
+      " sex",
+      "\n",
+      ".",
+      "\r\n",
+      " ",
+      " dato",
+      " \"",
+      " and",
+      "闭"
+     ],
+     "rank": 6109
+    },
+    {
+     "visit": 18,
+     "tokens": [
+      ",",
+      ":",
+      " ",
+      "?",
+      "/",
+      " -",
+      " and",
+      " и",
+      "-",
+      " or"
+     ],
+     "rank": 95415
+    },
+    {
+     "visit": 19,
+     "tokens": [
+      ",",
+      " and",
+      " и",
+      "/",
+      " (",
+      "、",
+      ";",
+      ".",
+      " or",
+      ":"
+     ],
+     "rank": 133296
+    },
+    {
+     "visit": 20,
+     "tokens": [
+      ",",
+      " and",
+      " и",
+      "、",
+      " (",
+      "/",
+      " ",
+      ";",
+      " και",
+      "."
+     ],
+     "rank": 20884
+    },
+    {
+     "visit": 21,
+     "tokens": [
+      ",",
+      " and",
+      "、",
+      "/",
+      " и",
+      " και",
+      " ",
+      " (",
+      "\n\n",
+      "."
+     ],
+     "rank": 3594
+    },
+    {
+     "visit": 22,
+     "tokens": [
+      ",",
+      " and",
+      "、",
+      "/",
+      " и",
+      " και",
+      " (",
+      " ",
+      "\n\n",
+      "."
+     ],
+     "rank": 466
+    },
+    {
+     "visit": 23,
+     "tokens": [
+      ",",
+      " and",
+      "/",
+      "、",
+      "\n\n",
+      " и",
+      " (",
+      " și",
+      " пятница",
+      " →"
+     ],
+     "rank": 74
+    },
+    {
+     "visit": 24,
+     "tokens": [
+      " सप्ताह",
+      " সপ্তাহ",
+      " пятница",
+      "요일",
+      " week",
+      " दिन",
+      " Six",
+      " शा",
+      "\n\n",
+      ","
+     ],
+     "rank": 15
+    },
+    {
+     "visit": 25,
+     "tokens": [
+      " kamer",
+      "üm",
+      " FIS",
+      " LAN",
+      "�",
+      "�",
+      " cade",
+      " SP",
+      "ظر",
+      " Zero"
+     ],
+     "rank": 29135
+    },
+    {
+     "visit": 26,
+     "tokens": [
+      "�",
+      " lan",
+      "쿄",
+      "똠",
+      "�",
+      "�",
+      " Franz",
+      "�",
+      "�",
+      "苭"
+     ],
+     "rank": 66532
+    },
+    {
+     "visit": 27,
+     "tokens": [
+      " nächsten",
+      " next",
+      " अग",
+      "똠",
+      "다음",
+      " अगला",
+      "next",
+      " nächste",
+      "順",
+      " Satur"
+     ],
+     "rank": 14618
+    },
+    {
+     "visit": 28,
+     "tokens": [
+      " sequence",
+      " next",
+      "똠",
+      " последовательно",
+      " progression",
+      " Ter",
+      " Next",
+      " followed",
+      " After",
+      " अगला"
+     ],
+     "rank": 2914
+    },
+    {
+     "visit": 29,
+     "tokens": [
+      " sequence",
+      " next",
+      " Pl",
+      " progression",
+      " cycle",
+      " clock",
+      " последовательно",
+      " Round",
+      " road",
+      " Next"
+     ],
+     "rank": 3085
+    },
+    {
+     "visit": 30,
+     "tokens": [
+      ",",
+      ":",
+      " ",
+      "?",
+      "/",
+      " -",
+      " and",
+      " и",
+      "-",
+      " or"
+     ],
+     "rank": 95415
+    },
+    {
+     "visit": 31,
+     "tokens": [
+      ",",
+      " и",
+      " and",
+      "/",
+      "、",
+      " (",
+      " ",
+      ";",
+      ":",
+      " or"
+     ],
+     "rank": 137010
+    },
+    {
+     "visit": 32,
+     "tokens": [
+      ",",
+      " and",
+      " и",
+      " (",
+      " ",
+      ";",
+      "/",
+      " or",
+      "、",
+      "."
+     ],
+     "rank": 67300
+    },
+    {
+     "visit": 33,
+     "tokens": [
+      ",",
+      " and",
+      " и",
+      " ",
+      ";",
+      " (",
+      ".",
+      "/",
+      ":",
+      " or"
+     ],
+     "rank": 27552
+    },
+    {
+     "visit": 34,
+     "tokens": [
+      ",",
+      " and",
+      " и",
+      "/",
+      " ",
+      " (",
+      ";",
+      ".",
+      " or",
+      ":"
+     ],
+     "rank": 17739
+    },
+    {
+     "visit": 35,
+     "tokens": [
+      ",",
+      " and",
+      "/",
+      " (",
+      " и",
+      " ",
+      " ...",
+      ";",
+      " e",
+      "{"
+     ],
+     "rank": 1444
+    },
+    {
+     "visit": 36,
+     "tokens": [
+      " week",
+      " calendar",
+      " cycle",
+      " सप्ताह",
+      " Week",
+      "�",
+      " day",
+      " Seven",
+      " Six",
+      " \""
+     ],
+     "rank": 479
+    },
+    {
+     "visit": 37,
+     "tokens": [
+      " Oh",
+      "�",
+      "�",
+      " ET",
+      " efect",
+      " Gä",
+      " Ga",
+      " Tr",
+      " Dal",
+      " Ah"
+     ],
+     "rank": 64326
+    },
+    {
+     "visit": 38,
+     "tokens": [
+      "�",
+      "좆",
+      "晑",
+      "�",
+      "珨",
+      "�",
+      "긷",
+      "酘",
+      "�",
+      " è"
+     ],
+     "rank": 60815
+    },
+    {
+     "visit": 39,
+     "tokens": [
+      "�",
+      "�",
+      "좆",
+      "�",
+      ",",
+      "긷",
+      " Oh",
+      "郋",
+      "呇",
+      "晑"
+     ],
+     "rank": 36711
+    },
+    {
+     "visit": 40,
+     "tokens": [
+      " calendar",
+      " cycle",
+      " standard",
+      "�",
+      "偅",
+      " week",
+      " month",
+      "چرخ",
+      "�",
+      "�"
+     ],
+     "rank": 24836
+    },
+    {
+     "visit": 41,
+     "tokens": [
+      " cycle",
+      " calendar",
+      " day",
+      " week",
+      "�",
+      "偅",
+      "�",
+      " Day",
+      "䪸",
+      "朎"
+     ],
+     "rank": 24240
+    },
+    {
+     "visit": 42,
+     "tokens": [
+      " सण",
+      "máš",
+      "졔",
+      "�",
+      "câin",
+      "풇",
+      "箵",
+      "kontinu",
+      "blieft",
+      "�"
+     ],
+     "rank": 114393
+    },
+    {
+     "visit": 43,
+     "tokens": [
+      " week",
+      " days",
+      "요일",
+      " Week",
+      " calendar",
+      "星期",
+      " সপ্তাহ",
+      " weekly",
+      "曜日",
+      " weekend"
+     ],
+     "rank": 28
+    },
+    {
+     "visit": 44,
+     "tokens": [
+      " week",
+      " weekly",
+      " days",
+      " Week",
+      " weekend",
+      "週",
+      "Week",
+      " seven",
+      "曜日",
+      " সপ্তাহ"
+     ],
+     "rank": 137
+    },
+    {
+     "visit": 45,
+     "tokens": [
+      " week",
+      " weekly",
+      " days",
+      " seven",
+      " Week",
+      "week",
+      " weekend",
+      " order",
+      "7",
+      "Week"
+     ],
+     "rank": 3020
+    },
+    {
+     "visit": 46,
+     "tokens": [
+      " days",
+      " week",
+      " seven",
+      "7",
+      " weekly",
+      " order",
+      " هفته",
+      " недели",
+      "�",
+      "Days"
+     ],
+     "rank": 4058
+    },
+    {
+     "visit": 47,
+     "tokens": [
+      "<|content_thinking|>",
+      "expr",
+      "<|content_text|>",
+      "遆",
+      "protobuf",
+      "poet",
+      "撰",
+      "𨪚",
+      "℃",
+      "lednop"
+     ],
+     "rank": 95715
+    }
+   ]
+  },
+  {
+   "id": "daybefore-04",
+   "readouts": [
+    {
+     "visit": 0,
+     "tokens": [
+      "<|content_thinking|>",
+      "मानना",
+      "瓩",
+      "সোমবার",
+      "kw",
+      "<|content_text|>",
+      "䗚",
+      "పంపు",
+      "犉",
+      "klær"
+     ],
+     "rank": 128891
+    },
+    {
+     "visit": 1,
+     "tokens": [
+      " и",
+      " BRA",
+      ",",
+      "𬊈",
+      " +",
+      " PRI",
+      " GO",
+      " and",
+      "/",
+      " -"
+     ],
+     "rank": 144202
+    },
+    {
+     "visit": 2,
+     "tokens": [
+      ",",
+      " and",
+      " or",
+      " и",
+      "/",
+      " ",
+      " (",
+      ":",
+      "-",
+      " -"
+     ],
+     "rank": 78580
+    },
+    {
+     "visit": 3,
+     "tokens": [
+      " and",
+      " or",
+      ",",
+      " и",
+      "/",
+      " ",
+      " (",
+      " /",
+      ":",
+      "、"
+     ],
+     "rank": 79805
+    },
+    {
+     "visit": 4,
+     "tokens": [
+      ",",
+      " and",
+      " or",
+      " и",
+      "/",
+      " ",
+      ":",
+      " (",
+      " -",
+      " /"
+     ],
+     "rank": 72014
+    },
+    {
+     "visit": 5,
+     "tokens": [
+      ",",
+      " and",
+      " or",
+      "/",
+      " и",
+      " ",
+      " -",
+      ":",
+      " (",
+      " /"
+     ],
+     "rank": 80998
+    },
+    {
+     "visit": 6,
+     "tokens": [
+      ",",
+      ":",
+      " ",
+      " -",
+      "?",
+      "/",
+      " and",
+      " answer",
+      " и",
+      "-"
+     ],
+     "rank": 98212
+    },
+    {
+     "visit": 7,
+     "tokens": [
+      ",",
+      " and",
+      " и",
+      " or",
+      "/",
+      ";",
+      " (",
+      ".",
+      "-",
+      " /"
+     ],
+     "rank": 101782
+    },
+    {
+     "visit": 8,
+     "tokens": [
+      ",",
+      " and",
+      " и",
+      " or",
+      "/",
+      " (",
+      ";",
+      ".",
+      "、",
+      " و"
+     ],
+     "rank": 44655
+    },
+    {
+     "visit": 9,
+     "tokens": [
+      ",",
+      " and",
+      " и",
+      " or",
+      "/",
+      " (",
+      " và",
+      ";",
+      " или",
+      "."
+     ],
+     "rank": 14552
+    },
+    {
+     "visit": 10,
+     "tokens": [
+      ",",
+      " and",
+      " и",
+      "/",
+      " or",
+      " -",
+      " và",
+      " (",
+      ".",
+      " или"
+     ],
+     "rank": 8716
+    },
+    {
+     "visit": 11,
+     "tokens": [
+      ",",
+      " и",
+      " and",
+      "/",
+      " và",
+      " -",
+      " or",
+      ".",
+      ";",
+      "-"
+     ],
+     "rank": 25626
+    },
+    {
+     "visit": 12,
+     "tokens": [
+      ",",
+      " and",
+      " и",
+      " và",
+      "\n\n",
+      "/",
+      " -",
+      " or",
+      " (",
+      ";"
+     ],
+     "rank": 19616
+    },
+    {
+     "visit": 13,
+     "tokens": [
+      ",",
+      " and",
+      " (",
+      " Lun",
+      "?",
+      " Zhou",
+      " Y",
+      " ",
+      "的",
+      "gass"
+     ],
+     "rank": 45602
+    },
+    {
+     "visit": 14,
+     "tokens": [
+      ",",
+      " and",
+      " Lo",
+      " ",
+      " PG",
+      " under",
+      " Lun",
+      "Perr",
+      " (",
+      " P"
+     ],
+     "rank": 66868
+    },
+    {
+     "visit": 15,
+     "tokens": [
+      ",",
+      " Lun",
+      " ",
+      " and",
+      " (",
+      " Gregor",
+      " Lo",
+      " figur",
+      " [",
+      "."
+     ],
+     "rank": 23551
+    },
+    {
+     "visit": 16,
+     "tokens": [
+      " Lun",
+      ",",
+      " and",
+      " sex",
+      " April",
+      " February",
+      " schedule",
+      " Mars",
+      " calcol",
+      " "
+     ],
+     "rank": 2749
+    },
+    {
+     "visit": 17,
+     "tokens": [
+      ",",
+      " sex",
+      " and",
+      ".",
+      " ",
+      "\r\n",
+      " i",
+      "\n",
+      " dato",
+      " birthday"
+     ],
+     "rank": 5951
+    },
+    {
+     "visit": 18,
+     "tokens": [
+      ",",
+      ":",
+      " ",
+      " -",
+      "?",
+      "/",
+      " and",
+      " answer",
+      " и",
+      "-"
+     ],
+     "rank": 98212
+    },
+    {
+     "visit": 19,
+     "tokens": [
+      ",",
+      " и",
+      " and",
+      "/",
+      " (",
+      ";",
+      "、",
+      ".",
+      ":",
+      " και"
+     ],
+     "rank": 124442
+    },
+    {
+     "visit": 20,
+     "tokens": [
+      ",",
+      " and",
+      " и",
+      "、",
+      "/",
+      " (",
+      ";",
+      ".",
+      " και",
+      ":"
+     ],
+     "rank": 40735
+    },
+    {
+     "visit": 21,
+     "tokens": [
+      ",",
+      " and",
+      "/",
+      "、",
+      " (",
+      " και",
+      " и",
+      ".",
+      " ",
+      "\n\n"
+     ],
+     "rank": 17518
+    },
+    {
+     "visit": 22,
+     "tokens": [
+      ",",
+      "/",
+      " and",
+      "、",
+      " (",
+      " και",
+      " и",
+      ".",
+      "\n\n",
+      " "
+     ],
+     "rank": 3601
+    },
+    {
+     "visit": 23,
+     "tokens": [
+      ",",
+      "/",
+      " and",
+      "\n\n",
+      " e",
+      " (",
+      "、",
+      " και",
+      " Früh",
+      " и"
+     ],
+     "rank": 156
+    },
+    {
+     "visit": 24,
+     "tokens": [
+      "요일",
+      " Sunday",
+      " week",
+      " వారం",
+      " সপ্তাহ",
+      " सप्ताह",
+      " Six",
+      ",",
+      " sexta",
+      " пятница"
+     ],
+     "rank": 31
+    },
+    {
+     "visit": 25,
+     "tokens": [
+      "�",
+      " kamer",
+      "�",
+      "ظر",
+      " Fran",
+      "ühle",
+      "üm",
+      "bea",
+      " cade",
+      " Franz"
+     ],
+     "rank": 78790
+    },
+    {
+     "visit": 26,
+     "tokens": [
+      "�",
+      "쿄",
+      "㲋",
+      "�",
+      " خرگوش",
+      " Franz",
+      "崏",
+      "ից",
+      "�",
+      "�"
+     ],
+     "rank": 144682
+    },
+    {
+     "visit": 27,
+     "tokens": [
+      "㲋",
+      "காலணி",
+      "까맣다",
+      "INT",
+      "sı",
+      "엊",
+      " Lun",
+      "碄",
+      "畍",
+      " adjacent"
+     ],
+     "rank": 35460
+    },
+    {
+     "visit": 28,
+     "tokens": [
+      " sequence",
+      "까맣다",
+      "понедельник",
+      " forward",
+      " Bush",
+      "碄",
+      " Ter",
+      "노랗다",
+      " Round",
+      "順"
+     ],
+     "rank": 2998
+    },
+    {
+     "visit": 29,
+     "tokens": [
+      "詴",
+      " Pl",
+      " sequence",
+      " ruler",
+      " spr",
+      " Round",
+      " Franc",
+      " Sof",
+      " Bush",
+      " Road"
+     ],
+     "rank": 2365
+    },
+    {
+     "visit": 30,
+     "tokens": [
+      ",",
+      ":",
+      " ",
+      " -",
+      "?",
+      "/",
+      " and",
+      " answer",
+      " и",
+      "-"
+     ],
+     "rank": 98212
+    },
+    {
+     "visit": 31,
+     "tokens": [
+      ",",
+      " и",
+      " and",
+      "、",
+      "/",
+      " (",
+      " ",
+      ";",
+      " or",
+      " και"
+     ],
+     "rank": 126352
+    },
+    {
+     "visit": 32,
+     "tokens": [
+      ",",
+      " and",
+      " и",
+      " (",
+      " ",
+      "、",
+      "/",
+      ".",
+      ";",
+      " or"
+     ],
+     "rank": 63865
+    },
+    {
+     "visit": 33,
+     "tokens": [
+      ",",
+      " and",
+      " и",
+      " ",
+      ".",
+      " (",
+      " και",
+      "/",
+      ";",
+      " và"
+     ],
+     "rank": 34849
+    },
+    {
+     "visit": 34,
+     "tokens": [
+      ",",
+      " and",
+      " и",
+      "/",
+      ".",
+      " (",
+      " ",
+      "、",
+      " και",
+      " or"
+     ],
+     "rank": 20591
+    },
+    {
+     "visit": 35,
+     "tokens": [
+      ",",
+      " and",
+      "/",
+      " (",
+      " и",
+      ".",
+      " ",
+      " …",
+      " e",
+      "{"
+     ],
+     "rank": 1966
+    },
+    {
+     "visit": 36,
+     "tokens": [
+      " week",
+      " calendar",
+      " cycle",
+      " Six",
+      " सप्ताह",
+      " Seven",
+      " суббота",
+      " cycl",
+      " day",
+      " יום"
+     ],
+     "rank": 890
+    },
+    {
+     "visit": 37,
+     "tokens": [
+      ",",
+      " BAL",
+      "和",
+      "的",
+      " Final",
+      " Oh",
+      " Bab",
+      "勑",
+      " S",
+      " Ga"
+     ],
+     "rank": 53414
+    },
+    {
+     "visit": 38,
+     "tokens": [
+      "珨",
+      "�",
+      "횐",
+      ",",
+      "símbo",
+      " Dok",
+      " è",
+      " Gig",
+      "върв",
+      " Med"
+     ],
+     "rank": 96207
+    },
+    {
+     "visit": 39,
+     "tokens": [
+      "蔃",
+      "呇",
+      "郋",
+      ",",
+      " ranking",
+      " ron",
+      "�",
+      " round",
+      " Oh",
+      "㛃"
+     ],
+     "rank": 68837
+    },
+    {
+     "visit": 40,
+     "tokens": [
+      " cycle",
+      " ترتیب",
+      " sequence",
+      " क्रम",
+      " calendar",
+      "순",
+      "ترتيب",
+      "偅",
+      " порядок",
+      "چرخ"
+     ],
+     "rank": 89823
+    },
+    {
+     "visit": 41,
+     "tokens": [
+      " cycle",
+      " क्रम",
+      "偅",
+      "趍",
+      "朎",
+      "循环",
+      " spr",
+      "顺",
+      "䪸",
+      "�"
+     ],
+     "rank": 57550
+    },
+    {
+     "visit": 42,
+     "tokens": [
+      "máš",
+      " सण",
+      "졔",
+      "kontinu",
+      "풇",
+      "câin",
+      "箵",
+      "믜",
+      "덯",
+      "䪸"
+     ],
+     "rank": 135763
+    },
+    {
+     "visit": 43,
+     "tokens": [
+      " week",
+      " days",
+      " Week",
+      "요일",
+      " weekly",
+      " সপ্তাহ",
+      " calendar",
+      "週",
+      " Sunday",
+      " day"
+     ],
+     "rank": 51
+    },
+    {
+     "visit": 44,
+     "tokens": [
+      " week",
+      " weekly",
+      " Week",
+      "週",
+      "Week",
+      " days",
+      " weekend",
+      " seven",
+      " সপ্তাহ",
+      "week"
+     ],
+     "rank": 136
+    },
+    {
+     "visit": 45,
+     "tokens": [
+      " week",
+      " weekly",
+      " Week",
+      "Week",
+      "week",
+      " weekend",
+      "שבוע",
+      " days",
+      " weeks",
+      "週"
+     ],
+     "rank": 3679
+    },
+    {
+     "visit": 46,
+     "tokens": [
+      " week",
+      " days",
+      " weekly",
+      " هفته",
+      " Week",
+      " недели",
+      "Week",
+      "week",
+      " seven",
+      " order"
+     ],
+     "rank": 8358
+    },
+    {
+     "visit": 47,
+     "tokens": [
+      "<|content_thinking|>",
+      "expr",
+      "<|content_text|>",
+      "遆",
+      "protobuf",
+      "撰",
+      "lednop",
+      "℃",
+      "poet",
+      " pian"
+     ],
+     "rank": 78716
+    }
+   ]
+  },
+  {
+   "id": "monthafter-07",
+   "readouts": [
+    {
+     "visit": 0,
+     "tokens": [
+      "<|content_thinking|>",
+      "मानना",
+      "瓩",
+      "সোমবার",
+      "kw",
+      "<|content_text|>",
+      "䗚",
+      "పంపు",
+      "犉",
+      "klær"
+     ],
+     "rank": 69505
+    },
+    {
+     "visit": 1,
+     "tokens": [
+      " и",
+      " BRA",
+      ",",
+      " +",
+      "𬊈",
+      " PRI",
+      "/",
+      " GO",
+      "20",
+      " :"
+     ],
+     "rank": 39435
+    },
+    {
+     "visit": 2,
+     "tokens": [
+      ",",
+      " and",
+      " or",
+      " и",
+      "/",
+      " ",
+      " (",
+      ":",
+      " -",
+      "-"
+     ],
+     "rank": 23091
+    },
+    {
+     "visit": 3,
+     "tokens": [
+      " and",
+      " or",
+      ",",
+      " и",
+      "/",
+      " ",
+      " (",
+      " /",
+      ":",
+      " -"
+     ],
+     "rank": 45558
+    },
+    {
+     "visit": 4,
+     "tokens": [
+      ",",
+      " and",
+      " or",
+      " и",
+      "/",
+      " ",
+      ":",
+      " (",
+      " -",
+      " /"
+     ],
+     "rank": 15167
+    },
+    {
+     "visit": 5,
+     "tokens": [
+      ",",
+      " and",
+      " or",
+      "/",
+      " -",
+      " и",
+      " ",
+      " (",
+      ":",
+      "-"
+     ],
+     "rank": 11998
+    },
+    {
+     "visit": 6,
+     "tokens": [
+      ",",
+      ":",
+      " ",
+      "?",
+      "/",
+      " -",
+      " and",
+      "-",
+      " и",
+      " answer"
+     ],
+     "rank": 9024
+    },
+    {
+     "visit": 7,
+     "tokens": [
+      ",",
+      " and",
+      " и",
+      " or",
+      "/",
+      ";",
+      " (",
+      ".",
+      "-",
+      " /"
+     ],
+     "rank": 123298
+    },
+    {
+     "visit": 8,
+     "tokens": [
+      ",",
+      " and",
+      " и",
+      " or",
+      "/",
+      " (",
+      ";",
+      "、",
+      ".",
+      " или"
+     ],
+     "rank": 76170
+    },
+    {
+     "visit": 9,
+     "tokens": [
+      ",",
+      " and",
+      " и",
+      " or",
+      "/",
+      " và",
+      ";",
+      " (",
+      " или",
+      "、"
+     ],
+     "rank": 77028
+    },
+    {
+     "visit": 10,
+     "tokens": [
+      ",",
+      " и",
+      " and",
+      "/",
+      " or",
+      " -",
+      " và",
+      " (",
+      ";",
+      " или"
+     ],
+     "rank": 12948
+    },
+    {
+     "visit": 11,
+     "tokens": [
+      " и",
+      ",",
+      " and",
+      "/",
+      " và",
+      " -",
+      " or",
+      ";",
+      "-",
+      "\n\n"
+     ],
+     "rank": 11301
+    },
+    {
+     "visit": 12,
+     "tokens": [
+      ",",
+      " и",
+      " and",
+      " -",
+      "\n\n",
+      "/",
+      " và",
+      " or",
+      " (",
+      ";"
+     ],
+     "rank": 9750
+    },
+    {
+     "visit": 13,
+     "tokens": [
+      " Y",
+      ",",
+      "愝",
+      " Lun",
+      "isser",
+      "䥅",
+      "낃",
+      " Tank",
+      "ument",
+      "ರು"
+     ],
+     "rank": 36246
+    },
+    {
+     "visit": 14,
+     "tokens": [
+      ",",
+      " Sof",
+      " ",
+      " Lo",
+      " and",
+      " Flat",
+      " P",
+      "lore",
+      "Perr",
+      "䔶"
+     ],
+     "rank": 12705
+    },
+    {
+     "visit": 15,
+     "tokens": [
+      " Sof",
+      ",",
+      " ",
+      " anatom",
+      "ing",
+      " e",
+      "գեղեցիկ",
+      " (",
+      " Lun",
+      " Lo"
+     ],
+     "rank": 17270
+    },
+    {
+     "visit": 16,
+     "tokens": [
+      " Sof",
+      " Post",
+      "巹",
+      " sex",
+      " Schreib",
+      " Ste",
+      "�",
+      "قشنگ",
+      " He",
+      " Bas"
+     ],
+     "rank": 3320
+    },
+    {
+     "visit": 17,
+     "tokens": [
+      "巹",
+      " sex",
+      "\r\n",
+      " ",
+      " Sof",
+      ",",
+      " trivial",
+      " Bed",
+      "ing",
+      " Y"
+     ],
+     "rank": 8786
+    },
+    {
+     "visit": 18,
+     "tokens": [
+      ",",
+      ":",
+      " ",
+      "?",
+      "/",
+      " -",
+      " and",
+      "-",
+      " и",
+      " answer"
+     ],
+     "rank": 9024
+    },
+    {
+     "visit": 19,
+     "tokens": [
+      ",",
+      " and",
+      " и",
+      "/",
+      " (",
+      ";",
+      "、",
+      ".",
+      " or",
+      ":"
+     ],
+     "rank": 95766
+    },
+    {
+     "visit": 20,
+     "tokens": [
+      ",",
+      " и",
+      " and",
+      "、",
+      " (",
+      "/",
+      " ",
+      ";",
+      " και",
+      " or"
+     ],
+     "rank": 30912
+    },
+    {
+     "visit": 21,
+     "tokens": [
+      ",",
+      " and",
+      " и",
+      "、",
+      " ",
+      "\n\n",
+      "/",
+      " και",
+      " (",
+      "."
+     ],
+     "rank": 9120
+    },
+    {
+     "visit": 22,
+     "tokens": [
+      ",",
+      " and",
+      "、",
+      " и",
+      " και",
+      "\n\n",
+      " (",
+      "/",
+      " ",
+      ";"
+     ],
+     "rank": 6994
+    },
+    {
+     "visit": 23,
+     "tokens": [
+      ",",
+      " and",
+      "\n\n",
+      ".",
+      " dan",
+      " и",
+      " (",
+      " ",
+      "、",
+      ";"
+     ],
+     "rank": 6146
+    },
+    {
+     "visit": 24,
+     "tokens": [
+      ",",
+      " names",
+      " calendar",
+      " e",
+      "\n\n",
+      "Calend",
+      " Six",
+      " longest",
+      " calend",
+      " పండుగ"
+     ],
+     "rank": 7275
+    },
+    {
+     "visit": 25,
+     "tokens": [
+      " DE",
+      " Te",
+      "�",
+      "üm",
+      "頧",
+      "和",
+      " Bas",
+      "uno",
+      "苼",
+      "的"
+     ],
+     "rank": 68185
+    },
+    {
+     "visit": 26,
+     "tokens": [
+      "�",
+      " DE",
+      " linguist",
+      "뿡",
+      "�",
+      " finale",
+      "놀라다",
+      "�",
+      "똠",
+      " Bas"
+     ],
+     "rank": 17636
+    },
+    {
+     "visit": 27,
+     "tokens": [
+      "똠",
+      " adjacent",
+      "쯕",
+      " next",
+      "畍",
+      "隣",
+      "adjacent",
+      " תפוח",
+      "nächst",
+      "next"
+     ],
+     "rank": 44914
+    },
+    {
+     "visit": 28,
+     "tokens": [
+      " next",
+      " adjacent",
+      "next",
+      " followed",
+      "隣",
+      "다음",
+      " अगला",
+      "�",
+      "똠",
+      "adjacent"
+     ],
+     "rank": 3593
+    },
+    {
+     "visit": 29,
+     "tokens": [
+      " next",
+      "next",
+      " adjacent",
+      " Next",
+      "詴",
+      " Span",
+      " After",
+      "菥",
+      " Pl",
+      " अगला"
+     ],
+     "rank": 988
+    },
+    {
+     "visit": 30,
+     "tokens": [
+      ",",
+      ":",
+      " ",
+      "?",
+      "/",
+      " -",
+      " and",
+      "-",
+      " и",
+      " answer"
+     ],
+     "rank": 9024
+    },
+    {
+     "visit": 31,
+     "tokens": [
+      ",",
+      " and",
+      " и",
+      "/",
+      "、",
+      " ",
+      " (",
+      ";",
+      " or",
+      "\n\n"
+     ],
+     "rank": 81840
+    },
+    {
+     "visit": 32,
+     "tokens": [
+      ",",
+      " and",
+      " и",
+      "、",
+      " ",
+      "/",
+      " or",
+      " (",
+      ";",
+      "."
+     ],
+     "rank": 61159
+    },
+    {
+     "visit": 33,
+     "tokens": [
+      ",",
+      " and",
+      " и",
+      " ",
+      ".",
+      "/",
+      "、",
+      ";",
+      " or",
+      " ("
+     ],
+     "rank": 33589
+    },
+    {
+     "visit": 34,
+     "tokens": [
+      ",",
+      " and",
+      " и",
+      ".",
+      "、",
+      " ",
+      "/",
+      " (",
+      ";",
+      " or"
+     ],
+     "rank": 11687
+    },
+    {
+     "visit": 35,
+     "tokens": [
+      ",",
+      " and",
+      " ",
+      ".",
+      " e",
+      " (",
+      ";",
+      " и",
+      " calendar",
+      " ..."
+     ],
+     "rank": 5436
+    },
+    {
+     "visit": 36,
+     "tokens": [
+      " calendar",
+      " Calendar",
+      ",",
+      " e",
+      " calend",
+      " वर्ष",
+      " longest",
+      "кален",
+      " months",
+      " Six"
+     ],
+     "rank": 2898
+    },
+    {
+     "visit": 37,
+     "tokens": [
+      "�",
+      " DE",
+      "逹",
+      " Oh",
+      "晑",
+      "的",
+      " Sant",
+      " pik",
+      "刍",
+      " BAS"
+     ],
+     "rank": 57656
+    },
+    {
+     "visit": 38,
+     "tokens": [
+      "�",
+      "晑",
+      "�",
+      "símbo",
+      "�",
+      "珨",
+      "�",
+      "荿",
+      "garaan",
+      "�"
+     ],
+     "rank": 45260
+    },
+    {
+     "visit": 39,
+     "tokens": [
+      " progression",
+      ",",
+      "蔃",
+      "�",
+      " list",
+      "晑",
+      "�",
+      "ORDER",
+      " RF",
+      " Canon"
+     ],
+     "rank": 62627
+    },
+    {
+     "visit": 40,
+     "tokens": [
+      "순",
+      " calendar",
+      " order",
+      " sequence",
+      " поряд",
+      " क्रम",
+      " cycle",
+      " порядок",
+      "ลำ",
+      " sequential"
+     ],
+     "rank": 9264
+    },
+    {
+     "visit": 41,
+     "tokens": [
+      " calendar",
+      " क्रम",
+      "순",
+      " day",
+      " cycle",
+      "䪸",
+      "rok",
+      "顺",
+      "朎",
+      " sequence"
+     ],
+     "rank": 15153
+    },
+    {
+     "visit": 42,
+     "tokens": [
+      " सण",
+      "䪸",
+      "máš",
+      "yıl",
+      "浞",
+      "杕",
+      "萿",
+      "昤",
+      "�",
+      "�"
+     ],
+     "rank": 93759
+    },
+    {
+     "visit": 43,
+     "tokens": [
+      " calendar",
+      " Gregor",
+      "Gregor",
+      " Calendar",
+      "calendar",
+      " months",
+      "Calendar",
+      "кален",
+      "gregor",
+      "暦"
+     ],
+     "rank": 1831
+    },
+    {
+     "visit": 44,
+     "tokens": [
+      " calendar",
+      " Gregor",
+      " months",
+      " year",
+      "Gregor",
+      "calendar",
+      " Calendar",
+      "Calendar",
+      " month",
+      " annual"
+     ],
+     "rank": 250
+    },
+    {
+     "visit": 45,
+     "tokens": [
+      " calendar",
+      " Gregor",
+      "calendar",
+      "Calendar",
+      " Calendar",
+      " year",
+      " cal",
+      " calend",
+      " kal",
+      " Kal"
+     ],
+     "rank": 257
+    },
+    {
+     "visit": 46,
+     "tokens": [
+      " calendar",
+      "Calendar",
+      " Calendar",
+      "calendar",
+      " cal",
+      " calend",
+      " year",
+      " Gregor",
+      " months",
+      " Kal"
+     ],
+     "rank": 149
+    },
+    {
+     "visit": 47,
+     "tokens": [
+      "<|content_thinking|>",
+      "cag",
+      "Bash",
+      "meli",
+      "坚",
+      "适",
+      "monast",
+      " Weise",
+      "вш",
+      "硥"
+     ],
+     "rank": 14634
+    }
+   ]
+  }
+ ]
+}
