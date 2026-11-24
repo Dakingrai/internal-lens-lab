@@ -37,11 +37,14 @@
       if (shape === 'multilingual') {
         var c = mc.concept_native || {};
         q.intermediate = c.gold;
+        q.forms = [c.gold];
+        (it.units || []).forEach(function (u) { if (u.role === 'concept_native') q.forms = q.forms.concat(u.match || []); });
         q.options = options(id, c.gold, c.distractors);
         q.kind = LANGS[it.lang] || it.lang || 'other';
         q.note = 'The passage is in ' + ((mc.language || {}).gold || q.kind) + '; the intermediate is its answer\u2019s concept, in English.';
       } else {
         q.intermediate = mc.gold;
+        q.forms = [mc.gold].concat(mc.aliases || []);   // the other forms of the intermediate the bank lists
         q.options = options(id, mc.gold, mc.distractors);
         q.kind = shape === 'multihop' ? (mc.bridge_type || 'other') : (KINDS[it.slice] || it.slice || 'other');
         if (it.task_context) q.task_type = it.task_context;
@@ -96,5 +99,5 @@
     show(bank.files[0]);
   }
 
-  window.BankViewer = { mount: mount };
+  window.BankViewer = { mount: mount, normalise: normalise };
 })();

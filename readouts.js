@@ -1,5 +1,8 @@
-/* The readout grid in an experiment's Results (design rules 64-68). The page holds
-   <div class="rg" data-file data-questions data-page data-label>, which this mounts on load. data-file is a
+/* The readout grid in an experiment's Results (design rules 64-71, 73). The page holds
+   <div class="rg" data-file data-questions data-page data-label>, which this mounts on load. With data-shape the
+   questions are a file of a question bank (bank.js puts them into shape; load it first) and data-host names where
+   it is published. A <div class="rg-sets" data-sets='[{name, file, questions, shape}]'> with the same other
+   attributes shows several result files in one grid, a line of text buttons choosing between them. data-file is a
    JSON file in data/ that the project's own code exported: for each question id, what one lens read at every layer
    visit (its top tokens, best first, and the rank of the intermediate). It holds no question text; the questions,
    options and intermediates are loaded live from data-questions, the public JSONL (never a copy in the repo), and
@@ -30,11 +33,17 @@
   function shown(tok) { return tok.replace(/ /g, '␣').replace(/\n/g, '↵').replace(/\t/g, '⇥'); }
   // exact matching, as a local run scores: the token is the word itself, in any case
   function names(tok, word) { return tok.trim().toLowerCase() === String(word).trim().toLowerCase(); }
+  // the intermediate, or one of the other forms of it a question lists
+  function namesAny(tok, q) { return (q.forms || [q.intermediate]).some(function (w) { return names(tok, w); }); }
+  // the grid the arrow keys move: the last one the reader pointed at or pressed in (the first on the page until then)
+  var active = null;
 
   function mount(box) {
     var file = box.getAttribute('data-file'), qfile = box.getAttribute('data-questions');
     var page = box.getAttribute('data-page'), label = box.getAttribute('data-label');
     var gfile = box.getAttribute('data-glosses');
+    var shape = box.getAttribute('data-shape'), host = box.getAttribute('data-host') || 'Hugging Face';
+    box.textContent = '';
     box.appendChild(el('p', 'count', 'Loading the readouts…'));
     Promise.all([
       // a host that answers a missing file with its home page gives text that is not JSON: that too is "not published"
@@ -44,14 +53,15 @@
       gfile ? fetch(gfile).then(function (r) { return r.json(); }).then(function (g) { return g.glosses || {}; }).catch(function () { return {}; }) : {}
     ]).then(function (got) {
       var byId = {};
-      got[1].split('\n').forEach(function (l) { if (l.trim()) { var q = JSON.parse(l); byId[q.id] = q; } });
-      var rows = got[0].questions.filter(function (r) { return byId[r.id]; }).map(function (r) { return { q: byId[r.id], readouts: r.readouts }; });
+      if (shape) window.BankViewer.normalise(JSON.parse(got[1]).items, shape).forEach(function (q) { byId[q.id] = q; });
+      else got[1].split('\n').forEach(function (l) { if (l.trim()) { var q = JSON.parse(l); byId[q.id] = q; } });
+      var rows = got[0].questions.filter(function (r) { return byId[r.id]; }).map(function (r) { return { q: byId[r.id], readouts: r.readouts, readToken: r.read_token }; });
       if (!rows.length) throw new Error('questions');
-      render(box, got[0], rows, page, label, got[2]);
+      render(box, got[0], rows, page, label, got[2], host);
     }).catch(function (e) {
       box.textContent = '';
       if (e && e.message === 'readouts') { box.appendChild(el('p', 'count', 'The readouts are not published yet.')); return; }
-      var p = el('p', 'count', 'The practice questions could not be loaded from Hugging Face. ');
+      var p = el('p', 'count', 'The questions could not be loaded from ' + host + '. ');
       p.appendChild(link('Open the dataset', page));
       box.appendChild(p);
     });
@@ -68,7 +78,7 @@
     return 'Layers ' + lp.start + ' to ' + (lp.end - 1) + ', ' + (RUN_NAMES[v.run] || ('run ' + (v.run + 1))) + ' run';
   }
 
-  function render(box, data, all, page, label, glosses) {
+  function render(box, data, all, page, label, glosses, host) {
     var hasGloss = Object.keys(glosses).length > 0;
     box.textContent = '';
     var kinds = [];
@@ -76,13 +86,13 @@
     var top = data.top || 10;
 
     box.appendChild(el('p', 'meta rg-comp', 'The ' + data.lens + ' on ' + data.model.split('/').pop().replace(/-/g, ' ') +
-      ', read at the last token of ' + all.length + ' practice questions, at each of ' + data.visits.length +
-      ' layer visits. Run ' + day(data.generated) + '.'));
+      (data.read ? ', on ' + all.length + ' questions put to the model ' + data.read : ', read at the last token of ' + all.length + ' practice questions') +
+      ', at each of ' + data.visits.length + ' layer visits. Run ' + day(data.generated) + '.'));
 
     var line = el('div', 'countline pv-line rg-top');
     var bar = el('div', 'filter');
     bar.setAttribute('role', 'group');
-    bar.setAttribute('aria-label', 'Filter practice questions by kind');
+    bar.setAttribute('aria-label', 'Filter the questions by kind');
     var count = el('p', 'count');
     // Previous and Next sit beside the count, and the line stays at the top of the window while the table scrolls,
     // so the next question is always in reach and opens at the same rows
@@ -104,7 +114,9 @@
 
     var src = el('p', 'meta pv-src', 'Questions loaded live from ');
     src.appendChild(link(label, page));
-    src.appendChild(document.createTextNode(' on Hugging Face. A token counts as the intermediate when it is that word exactly, in any case; ' +
+    var listed = all.some(function (r) { return r.q.forms && r.q.forms.length > 1; });
+    src.appendChild(document.createTextNode(' on ' + host + '. A token counts as the intermediate when it is that word' +
+      (listed ? ', or another form of it the bank lists,' : '') + ' exactly, in any case; ' +
       'the leaderboard’s judge also accepts inflections and translations. ␣ is a space and ↵ a line break. ' +
       'The bar at the left marks the looped layers, ' + data.loop.start + ' to ' + (data.loop.end - 1) + ', one stretch for each run of the loop. ' +
       (hasGloss ? 'A token with a dotted underline is not English: hover over it for a gloss, written by an AI model and not checked by a speaker. ' : '') +
@@ -128,6 +140,8 @@
 
     // one sentence on where this lens finds the intermediate, counted from the rows below
     function verdict(r) {
+      if (r.readouts[0].rank == null) return 'No single token of the model writes “' + r.q.intermediate + '”' +
+        ((r.q.forms || []).length > 1 ? ' or a listed form of it' : '') + ', so it has no rank and nothing below is marked.';
       var inTop = r.readouts.filter(function (x) { return x.rank <= top; });
       var first = r.readouts.filter(function (x) { return x.rank === 1; });
       var word = '“' + r.q.intermediate + '”';
@@ -147,6 +161,11 @@
       item.textContent = '';
       item.appendChild(el('p', 'meta', kindName(kindOf(q)) + ' · ' + q.id));
       item.appendChild(el('p', 'pv-prompt', q.prompt));
+      if (r.readToken) {
+        var rt = el('p', 'pv-k', 'Read at the token ');
+        rt.appendChild(el('span', 'rg-readtok', shown(r.readToken)));
+        item.appendChild(rt);
+      }
 
       item.appendChild(el('p', 'pv-k', 'The options the judge is shown, the intermediate marked'));
       var opts = el('ul', 'pv-options shown');
@@ -176,10 +195,10 @@
         var tr = el('tr', looped ? 'rg-loop' : null);
         tr.appendChild(el('td', 'num', String(x.visit)));
         tr.appendChild(el('td', 'num', String(data.visits[i].layer)));
-        tr.appendChild(el('td', 'num' + (x.rank <= top ? ' rg-in' : ''), num(x.rank)));
+        tr.appendChild(el('td', 'num' + (x.rank != null && x.rank <= top ? ' rg-in' : ''), x.rank == null ? '–' : num(x.rank)));
         var td = el('td', 'rg-toks');
         x.tokens.forEach(function (t) {
-          var hit = names(t, q.intermediate);
+          var hit = namesAny(t, q);
           var sp = el(hit ? 'mark' : 'span', hit ? 'pv-read' : null, shown(t));
           var gloss = glosses[t.trim()];
           if (gloss) { sp.title = gloss; sp.classList.add('rg-gloss'); }
@@ -198,15 +217,52 @@
     function go(by) { var i = state.i + by; if (i >= 0 && i < list().length) { state.i = i; draw(); } }
     [prev, prevT].forEach(function (b) { b.addEventListener('click', function () { go(-1); }); });
     [next, nextT].forEach(function (b) { b.addEventListener('click', function () { go(1); }); });
-    document.addEventListener('keydown', function (e) {
+    // one grid answers the arrow keys at a time, and a grid drawn again (another file) replaces its own listener
+    if (box._rgKeys) document.removeEventListener('keydown', box._rgKeys);
+    box._rgKeys = function (e) {
       if (e.target.closest && e.target.closest('input, textarea, select, [contenteditable]')) return;
+      if ((active || document.querySelector('.rg')) !== box) return;
       if (e.key === 'ArrowLeft') prev.click();
       else if (e.key === 'ArrowRight') next.click();
-    });
+    };
+    document.addEventListener('keydown', box._rgKeys);
+    if (!box._rgPoint) {
+      box._rgPoint = true;
+      ['pointerenter', 'pointerdown', 'focusin'].forEach(function (ev) { box.addEventListener(ev, function () { active = box; }); });
+    }
     draw();
+  }
+
+  // several result files in one grid: a line of text buttons picks the file, and the grid below is drawn again
+  function mountSets(wrap) {
+    var sets = JSON.parse(wrap.getAttribute('data-sets'));
+    var bar = el('div', 'filter bank-files');
+    bar.setAttribute('role', 'group');
+    bar.setAttribute('aria-label', 'Choose a set of questions');
+    var box = el('div', 'rg');
+    ['data-glosses', 'data-page', 'data-label', 'data-host'].forEach(function (a) { if (wrap.hasAttribute(a)) box.setAttribute(a, wrap.getAttribute(a)); });
+    wrap.appendChild(bar); wrap.appendChild(box);
+    sets.forEach(function (st, i) {
+      var b = el('button', null, st.name);
+      b.type = 'button';
+      b.setAttribute('aria-pressed', i === 0 ? 'true' : 'false');
+      b.addEventListener('click', function () {
+        Array.prototype.forEach.call(bar.children, function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+        show(st);
+      });
+      bar.appendChild(b);
+    });
+    function show(st) {
+      box.setAttribute('data-file', st.file);
+      box.setAttribute('data-questions', st.questions);
+      if (st.shape) box.setAttribute('data-shape', st.shape); else box.removeAttribute('data-shape');
+      mount(box);
+    }
+    show(sets[0]);
   }
 
   window.ReadoutGrid = { mount: mount };
   // a grid written into a page by hand (an experiment's Results) mounts itself; one made by a script is mounted by it
   Array.prototype.forEach.call(document.querySelectorAll('.rg[data-file]'), mount);
+  Array.prototype.forEach.call(document.querySelectorAll('.rg-sets[data-sets]'), mountSets);
 })();

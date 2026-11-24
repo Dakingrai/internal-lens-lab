@@ -95,6 +95,7 @@
 <section id="results">
 <h2>Results</h2>
 <div class="prose">
+<h3>Practice questions</h3>
 <p>The lens finds the intermediate on the six questions about a fact and on none of the four about a sequence or a sum.</p>
 <table class="tbl">
 <thead><tr><th>Question</th><th>Intermediate</th><th class="num">Visits in the top 10</th><th class="num">Best rank</th><th class="num">At visit</th></tr></thead>
@@ -116,12 +117,37 @@
 <p>The readouts themselves, a question at a time:</p>
 </div>
 <div class="rg" data-file="../data/phase-one-readouts/logit-lens-practice.json" data-glosses="../data/phase-one-readouts/token-glosses.json" data-questions="https://huggingface.co/datasets/NDIF/looped-lens-challenge-test/resolve/main/practice/private/questions.jsonl" data-page="https://huggingface.co/datasets/NDIF/looped-lens-challenge-test" data-label="NDIF/looped-lens-challenge-test"></div>
+<div class="prose">
+<h3>WorkspaceBench single-token questions</h3>
+<p>Run on 24 Nov 2026, after the predictions above were written. Unreviewed.</p>
+<p>Not every intermediate can be scored by exact matching: for 22 of the 238 questions no single token of this model writes the word (<i>boxing</i> and <i>gymnastics</i> are two), so they have no rank. The lens does read their pieces, <i>box</i> and <i>gymnast</i>, which the judge may credit and this count does not.</p>
+<table class="tbl">
+<thead><tr><th>File</th><th class="num">Questions</th><th class="num">With a single-token intermediate</th><th class="num">Found</th><th class="num">Top token at some visit</th></tr></thead>
+<tbody>
+<tr><td>Basic readout</td><td class="num">53</td><td class="num">49</td><td class="num">27</td><td class="num">16</td></tr>
+<tr><td>Multihop</td><td class="num">97</td><td class="num">79</td><td class="num">60</td><td class="num">29</td></tr>
+<tr><td>Multilingual</td><td class="num">88</td><td class="num">88</td><td class="num">87</td><td class="num">70</td></tr>
+</tbody>
+</table>
+<p>Against what we expected:</p>
+<ul>
+<li><b>Basic readout: as expected.</b> The intermediate is found on 22 of the 27 questions about an athlete, a landmark or a musician (22 of the 23 that can be scored), and on 4 of the 25 about arithmetic, a day or a month. By kind: athlete 9 of 9 scoreable, landmark 8 of 8, musician 5 of 6, arithmetic 3 of 6, day before 1 of 6, day after 0 of 5, month after 0 of 8. The practice split was not an accident of ten questions.</li>
+<li><b>Which visits: as expected for two files, just short for the third.</b> The practice run's ten visits hold 96% of the question-and-visit pairs in the top 10 for basic readout, 95% for multihop and 89% for multilingual, against a threshold of 90%. In all three, visits 43 to 46 hold most of them and visit 36 is the best of the looped ones. On multilingual, visits 40 and 42 also find some.</li>
+<li><b>Multihop: not as expected.</b> We expected the bridge to be found on fewer than half; it is found on 60 of the 79 that can be scored. We expected it at visits 24 and 33 to 36 more than at 43 to 47; it is found at the late visits on 56 questions and at the middle ones on 21. One reading is that the lens sees more than the next token. Another, which this run cannot rule out, is that on a plain-text prompt the bridge is itself a likely next word, as <i>iron</i> is after "the element with atomic number 26 is".</li>
+<li><b>Multilingual: found as expected, but not where.</b> The English concept is found on 87 of the 88. We expected it mostly at the middle visits with the late ones reading the prompt's language; instead it is found at visits 43 to 47 on 85 questions and at 24 or 33 to 36 on 40.</li>
+</ul>
+<p>The basic file is the one put to the model as the challenge does. On it the lens's limit is the same as on the practice questions: it reads a fact the model is about to state, and almost never the result of a step in a sequence.</p>
+<p>The readouts, a file at a time:</p>
+</div>
+<div class="rg-sets" data-glosses="../data/phase-one-readouts/token-glosses.json" data-page="https://github.com/camila-blank/workspace-bench/tree/main/adapted/inkling-2-mini" data-label="camila-blank/workspace-bench" data-host="GitHub, as of 23 Nov 2026" data-sets='[{"name":"Basic readout","shape":"basic","file":"../data/phase-one-readouts/logit-lens-wsb-basic.json","questions":"https://raw.githubusercontent.com/camila-blank/workspace-bench/401e7bda781881279f2d540447b1f2bbf19495db/adapted/inkling-2-mini/basic_readout_st.json"},{"name":"Multihop","shape":"multihop","file":"../data/phase-one-readouts/logit-lens-wsb-multihop.json","questions":"https://raw.githubusercontent.com/camila-blank/workspace-bench/401e7bda781881279f2d540447b1f2bbf19495db/adapted/inkling-2-mini/multihop_st.json"},{"name":"Multilingual","shape":"multilingual","file":"../data/phase-one-readouts/logit-lens-wsb-multilingual.json","questions":"https://raw.githubusercontent.com/camila-blank/workspace-bench/401e7bda781881279f2d540447b1f2bbf19495db/adapted/inkling-2-mini/multilingual_st.json"}]'></div>
 </section>
 </main>
 
 </div>
 <script src="../resources.js"></script>
 <script src="../programs.js"></script>
+<script src="../practice.js"></script>
+<script src="../bank.js"></script>
 <script src="../readouts.js"></script>
 <script src="../app.js"></script>
 <script src="../toc.js"></script>

@@ -85,7 +85,7 @@ window.PROGRAMS = [
             date: "2026-11-24",
             tags: ["preliminary", "AI-run", "unreviewed"],
             href: "experiments/logit-lens-all-visits.html",
-            summary: "Reads the starter's logit lens at every one of the 48 layer visits, at the last token of the 10 practice questions, and keeps its top 10 tokens and the intermediate's rank at each. It finds the intermediate on the six questions about a fact and on none of the four about a sequence or a sum, and only at 10 of the 48 visits.",
+            summary: "Reads the starter's logit lens at every one of the 48 layer visits, at the last token of the 10 practice questions, and keeps its top 10 tokens and the intermediate's rank at each. It finds the intermediate on the six questions about a fact and on none of the four about a sequence or a sum, and only at 10 of the 48 visits. A second part runs the same lens on WorkspaceBench's 238 single-token questions, where the split repeats on the basic file (22 of 27 facts, 4 of 25 sequences and sums).",
           },
         ],
         details: [

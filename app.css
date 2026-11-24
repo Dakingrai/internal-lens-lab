@@ -274,3 +274,6 @@ main h2[id],main h3[id]{scroll-margin-top:var(--s-6)}
 .rg-gloss{text-decoration:underline dotted var(--ink-3);text-underline-offset:3px;cursor:help}
 /* a question bank's files (rule 72): one line of text buttons above the practice viewer */
 .bank-files{margin:0 0 var(--s-3)}
+/* the token a question was read at, when the grid's file says */
+.rg-readtok{font:var(--fs-code)/var(--lh-ui) var(--mono);color:var(--ink)}
+.rg-sets{margin-top:var(--s-4)}
