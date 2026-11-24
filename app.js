@@ -332,7 +332,7 @@
       ds.sets.forEach(function (st) {
         var tr = el('tr');
         tr.appendChild(el('td', null, st.name));
-        tr.appendChild(el('td', 'num', String(st.count)));
+        tr.appendChild(el('td', 'num', String(st.count).replace(/\B(?=(\d{3})+(?!\d))/g, ',')));
         tr.appendChild(el('td', null, st.note));
         tbody.appendChild(tr);
       });
@@ -346,6 +346,16 @@
       prose.appendChild(src);
     }
     frag.appendChild(prose);
+    // a question bank published elsewhere, a file at a time (bank.js, rule 72)
+    if (ds.bank) {
+      var bsec = el('section', 'group');
+      bsec.id = 'questions';
+      bsec.appendChild(el('h2', null, 'Questions'));
+      var bbox = el('div', 'bank');
+      bsec.appendChild(bbox);
+      frag.appendChild(bsec);
+      if (window.BankViewer) window.BankViewer.mount(bbox, ds.bank);
+    }
     if (ds.practice) {
       var sec = el('section', 'group');
       sec.id = 'practice';

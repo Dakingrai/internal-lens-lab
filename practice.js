@@ -54,8 +54,12 @@
     });
   }
 
-  function render(box, all, page, label) {
+  // opts.host names where the file is published, when it is not Hugging Face (bank.js shows other banks through this)
+  function render(box, all, page, label, opts) {
     box.textContent = '';
+    var host = (opts && opts.host) || 'Hugging Face';
+    // one viewer answers the arrow keys at a time: a box drawn again (another file of a bank) replaces the last
+    if (box._pvKeys) document.removeEventListener('keydown', box._pvKeys);
     var kinds = [];
     all.forEach(function (q) { if (kinds.indexOf(kindOf(q)) === -1) kinds.push(kindOf(q)); });
 
@@ -86,7 +90,7 @@
 
     var src = el('p', 'meta pv-src', 'Loaded live from ');
     src.appendChild(link(label, page));
-    src.appendChild(document.createTextNode(' on Hugging Face. The arrow keys move between questions.'));
+    src.appendChild(document.createTextNode(' on ' + host + '. The arrow keys move between questions.'));
     box.appendChild(src);
 
     var state = { kind: 'all', i: 0, shown: false };
@@ -113,8 +117,10 @@
       item.appendChild(el('p', 'meta', kindName(kindOf(q)) + ' · ' + q.id));
       item.appendChild(el('p', 'pv-prompt', q.prompt));
 
-      item.appendChild(el('p', 'pv-k', 'Model input, read at token ' + q.read_position + ', the last'));
-      item.appendChild(modelInput(q));
+      if (q.model_input) {
+        item.appendChild(el('p', 'pv-k', 'Model input, read at token ' + q.read_position + ', the last'));
+        item.appendChild(modelInput(q));
+      }
 
       item.appendChild(el('p', 'pv-k', 'The options the judge is shown'));
       var opts = el('ul', 'pv-options' + (state.shown ? ' shown' : ''));
@@ -138,17 +144,19 @@
       item.appendChild(ctl);
 
       if (q.task_type) item.appendChild(el('p', 'meta pv-task', 'The judge is told: ' + q.task_type + '.'));
+      if (q.note) item.appendChild(el('p', 'meta pv-task', q.note));
     }
 
     prev.addEventListener('click', function () { if (state.i > 0) { state.i--; state.shown = false; draw(); } });
     next.addEventListener('click', function () { if (state.i < list().length - 1) { state.i++; state.shown = false; draw(); } });
-    document.addEventListener('keydown', function (e) {
+    box._pvKeys = function (e) {
       if (e.target.closest && e.target.closest('input, textarea, select, [contenteditable]')) return;
       if (e.key === 'ArrowLeft') prev.click();
       else if (e.key === 'ArrowRight') next.click();
-    });
+    };
+    document.addEventListener('keydown', box._pvKeys);
     draw();
   }
 
-  window.PracticeViewer = { mount: mount };
+  window.PracticeViewer = { mount: mount, render: render };
 })();

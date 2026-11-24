@@ -272,3 +272,5 @@ main h2[id],main h3[id]{scroll-margin-top:var(--s-6)}
 .rg-tbl .rg-stretch th:first-child{padding-left:0}
 /* a token with an English gloss on hover */
 .rg-gloss{text-decoration:underline dotted var(--ink-3);text-underline-offset:3px;cursor:help}
+/* a question bank's files (rule 72): one line of text buttons above the practice viewer */
+.bank-files{margin:0 0 var(--s-3)}

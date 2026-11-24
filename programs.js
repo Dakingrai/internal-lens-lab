@@ -13,7 +13,9 @@
    lede), and optionally dataset: about as paragraphs (a link is written [text](address); an address inside the site is relative to
    detail.html), sets as {name, count, note} for the composition table, source
    as {label, url} for where the facts come from, practice as {label, page, file} for a public JSONL of questions
-   that practice.js shows one at a time, loading file live; never copy it into the repo. A detail with no content
+   that practice.js shows one at a time, loading file live; never copy it into the repo. Or bank as {label, page, host, files}
+   for a question bank published elsewhere, each file {name, file, shape} a public JSON file that bank.js loads live
+   and shows through the practice viewer; shape is basic | multihop | multilingual, WorkspaceBench's layouts. A detail with no content
    reads "Not written yet.").
    Experiment fields: title, status (planned | running | done | abandoned), date (when planned, else when run;
    YYYY-MM-DD, YYYY-MM or YYYY), tags (plain words, one from each set: stage preliminary | main | replication; who
@@ -105,6 +107,35 @@ window.PROGRAMS = [
                 label: "NDIF/looped-lens-challenge-test",
                 page: "https://huggingface.co/datasets/NDIF/looped-lens-challenge-test",
                 file: "https://huggingface.co/datasets/NDIF/looped-lens-challenge-test/resolve/main/practice/private/questions.jsonl",
+              },
+            },
+          },
+          {
+            slug: "dataset",
+            title: "Dataset",
+            blurb: "WorkspaceBench as adapted to Inkling 2 Mini: 2,700 questions in 28 files, and a proposal to evaluate on its 238 single-token questions.",
+            dataset: {
+              about: [
+                "[WorkspaceBench](papers/workspacebench.html) was built for Qwen-3.6-27B. Its repository also holds versions adapted to other models, and one of them is for Inkling 2 Mini: 2,700 questions in 28 files, one file per family, each question checked again against this model's own answers. A question carries its prompt, the intermediate the model is expected to work out, and in most families four distractors, which is what the challenge's judge needs.",
+                "Proposed: use the three single-token files, 238 questions, as this project's evaluation set. Their intermediates are single tokens, as phase one's are. The basic file has the practice set's seven kinds in the same wording, and three of the ten practice prompts appear in it word for word, so it is the closest public material to what the leaderboard scores.",
+                "Two cautions. The scored questions may be drawn from this same material, so we evaluate on it and do not train a lens on it until the organisers say that is allowed. And only the basic file is put to the model in its chat format and read at the last token, as the challenge does: the multihop and multilingual files are written to be fed as plain text, and the multihop file to be read at the prompt's last word.",
+              ],
+              sets: [
+                { name: "Basic readout, single token", count: 53, note: "Athlete 12, landmark 8, musician 7, arithmetic 6, day after 5, day before 6, month after 8, implicit 1. Proposed." },
+                { name: "Multihop, single token", count: 97, note: "Two-step facts whose bridge is the intermediate, such as the element with atomic number 26 on the way to its symbol. Proposed." },
+                { name: "Multilingual, single token", count: 88, note: "A short prompt in another language, mostly French, Spanish, German and Portuguese; the intermediate is the answer's concept in English. Proposed." },
+                { name: "The other 25 files", count: 2462, note: "Arithmetic intermediates 451, chains, associations, typos, user modelling, safety families and more. Mostly not single-token; for later phases." },
+              ],
+              source: { label: "WorkspaceBench repository, adapted/inkling-2-mini", url: "https://github.com/camila-blank/workspace-bench/tree/main/adapted/inkling-2-mini" },
+              bank: {
+                label: "camila-blank/workspace-bench",
+                page: "https://github.com/camila-blank/workspace-bench/tree/main/adapted/inkling-2-mini",
+                host: "GitHub, as of 23 Nov 2026",
+                files: [
+                  { name: "Basic readout", shape: "basic", file: "https://raw.githubusercontent.com/camila-blank/workspace-bench/401e7bda781881279f2d540447b1f2bbf19495db/adapted/inkling-2-mini/basic_readout_st.json" },
+                  { name: "Multihop", shape: "multihop", file: "https://raw.githubusercontent.com/camila-blank/workspace-bench/401e7bda781881279f2d540447b1f2bbf19495db/adapted/inkling-2-mini/multihop_st.json" },
+                  { name: "Multilingual", shape: "multilingual", file: "https://raw.githubusercontent.com/camila-blank/workspace-bench/401e7bda781881279f2d540447b1f2bbf19495db/adapted/inkling-2-mini/multilingual_st.json" },
+                ],
               },
             },
           },
