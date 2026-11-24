@@ -36,7 +36,8 @@
     var page = box.getAttribute('data-page'), label = box.getAttribute('data-label');
     box.appendChild(el('p', 'count', 'Loading the readouts…'));
     Promise.all([
-      fetch(file).then(function (r) { if (!r.ok) throw new Error('readouts'); return r.json(); }),
+      // a host that answers a missing file with its home page gives text that is not JSON: that too is "not published"
+      fetch(file).then(function (r) { if (!r.ok) throw new Error('readouts'); return r.text(); }).then(function (t) { try { return JSON.parse(t); } catch (e) { throw new Error('readouts'); } }),
       fetch(qfile).then(function (r) { if (!r.ok) throw new Error('questions'); return r.text(); })
     ]).then(function (got) {
       var byId = {};
