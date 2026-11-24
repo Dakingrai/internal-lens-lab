@@ -361,27 +361,6 @@
     return frag;
   }
 
-  // A detail page's readouts: prose on what was run, then the readout grid (readouts.js), which shows what one lens
-  // read at every layer visit of each practice question (rules 64-68).
-  function readoutsContent(ro) {
-    var frag = el('div', 'dataset');
-    var prose = el('div', 'prose');
-    (ro.about || []).forEach(function (t) { prose.appendChild(withLinks(t)); });
-    frag.appendChild(prose);
-    var sec = el('section', 'group');
-    sec.id = 'readouts';
-    sec.appendChild(el('h2', null, 'Readouts'));
-    var box = el('div', 'rg');
-    box.setAttribute('data-file', ro.file);
-    box.setAttribute('data-questions', ro.questions.file);
-    box.setAttribute('data-page', ro.questions.page);
-    box.setAttribute('data-label', ro.questions.label);
-    sec.appendChild(box);
-    frag.appendChild(sec);
-    if (window.ReadoutGrid) window.ReadoutGrid.mount(box);
-    return frag;
-  }
-
   // a project's detail page (detail.html?p=<project>&d=<detail>): kicker back to the project, the title, its
   // blurb as the lede, then its content, or "Not written yet." while it has none
   function renderDetail(root) {
@@ -400,7 +379,6 @@
     document.getElementById('title').textContent = d.title;
     document.getElementById('lede').textContent = d.blurb || '';
     if (d.dataset) root.appendChild(datasetContent(d.dataset));
-    else if (d.readouts) root.appendChild(readoutsContent(d.readouts));
     else root.appendChild(el('p', 'count', 'Not written yet.'));
   }
 

@@ -1,11 +1,11 @@
-/* The readout grid on a project's detail page (design rules 64-68). app.js makes a
-   <div class="rg" data-file data-questions data-page data-label> and calls ReadoutGrid.mount on it. data-file is a
+/* The readout grid in an experiment's Results (design rules 64-68). The page holds
+   <div class="rg" data-file data-questions data-page data-label>, which this mounts on load. data-file is a
    JSON file in data/ that the project's own code exported: for each question id, what one lens read at every layer
    visit (its top tokens, best first, and the rank of the intermediate). It holds no question text; the questions,
    options and intermediates are loaded live from data-questions, the public JSONL (never a copy in the repo), and
    joined on the id. One question at a time, as the practice viewer: a filter by kind, the prompt, the options with
    the intermediate marked, one sentence saying where the lens finds it, then one row per layer visit.
-   Load it before app.js. */
+   Load it at the end of the page, after the grid's element. */
 (function () {
   var KIND_NAMES = { arith: 'Arithmetic', dayafter: 'Day after', daybefore: 'Day before', monthafter: 'Month after' };
   var RUN_NAMES = ['first', 'second', 'third', 'fourth', 'fifth'];
@@ -190,4 +190,6 @@
   }
 
   window.ReadoutGrid = { mount: mount };
+  // a grid written into a page by hand (an experiment's Results) mounts itself; one made by a script is mounted by it
+  Array.prototype.forEach.call(document.querySelectorAll('.rg[data-file]'), mount);
 })();

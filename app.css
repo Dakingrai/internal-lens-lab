@@ -170,6 +170,7 @@ main h2[id],main h3[id]{scroll-margin-top:var(--s-6)}
 .prose .tbl{border-collapse:collapse;width:100%;margin:var(--s-4) 0 var(--s-5);font:var(--fs-meta)/var(--lh-ui) var(--sans);color:var(--ink)}
 .prose .tbl th{font-weight:500;color:var(--ink-3);text-align:left}
 .prose .tbl th,.prose .tbl td{padding:var(--s-2) var(--s-3) var(--s-2) 0;border-bottom:var(--border);vertical-align:top}
+.prose .tbl .num{text-align:right;font-variant-numeric:tabular-nums}
 .prose .example{margin:var(--s-3) 0 var(--s-5);padding-left:var(--s-4);border-left:2px solid var(--rule)}
 .prose .example dt{font:var(--fs-meta)/var(--lh-ui) var(--sans);color:var(--ink-3)}
 .prose .example dd{margin:0 0 var(--s-3)}
@@ -239,8 +240,9 @@ main h2[id],main h3[id]{scroll-margin-top:var(--s-6)}
 /* useful links at the bottom of a project page (rule 63): reading rows whose title leaves the site; the ↗ is ink-3 */
 .r-title .out{color:var(--ink-3);font-family:var(--sans);font-size:var(--fs-meta)}
 
-/* the readout grid on a detail page (rules 64-68): the practice viewer's frame around one hairline table, a row per
+/* the readout grid in an experiment's Results (rules 64-68): the practice viewer's frame around one hairline table, a row per
    layer visit. Tokens in mono; the intermediate is the one thing marked (look here), as the read token is in rule 60. */
+.rg{margin-top:var(--s-4)}
 .rg-comp{margin:0 0 var(--s-4)}
 .rg-item .pv-options{margin-bottom:var(--s-3)}
 .rg-verdict{font:var(--fs-body)/var(--lh-body) var(--sans);color:var(--ink);margin:0 0 var(--s-3)}

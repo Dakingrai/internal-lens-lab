@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Where the logit lens finds the intermediate — Internal lens lab</title>
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="stylesheet" href="../tokens.css">
+<link rel="stylesheet" href="../app.css">
+<script src="../theme.js"></script>
+</head>
+<body>
+<div class="wrap">
+
+<header class="site">
+  <a class="name" href="../home.html">Internal lens lab</a>
+  <nav aria-label="Tabs"><ul class="tabs">
+    <li><a href="../home.html">Home</a></li>
+    <li><a href="../index.html">Readings</a></li>
+    <li><a href="../programs.html" aria-current="page">Research programs</a></li>
+  </ul></nav>
+</header>
+
+<main class="note" id="experiment" data-href="experiments/logit-lens-all-visits.html">
+<p class="kicker" id="kicker"><a href="../programs.html">Research programs</a></p>
+<h1 id="title">Where the logit lens finds the intermediate: all 48 layer visits on the practice questions</h1>
+<p class="meta" id="meta">Done</p>
+<div class="progress-block" id="progress" hidden></div>
+
+<section>
+<h2>In short</h2>
+<div class="prose">
+<p>The starter entry reads the logit lens at 10 layer visits that its authors chose and passes 6 of the 10 practice questions. This run reads the same lens at all 48 visits, to see at which of them the intermediate is among the top tokens, and what the lens says in its place where it is not.</p>
+<p>It is a first look, not a test. It was run before this page was written, so nothing below was predicted in advance, and the sections that would hold predictions say so.</p>
+</div>
+</section>
+
+<section>
+<h2>What we do</h2>
+<div class="prose">
+<p>The model is Inkling 2 Mini, run on NDIF. Each of the 10 public practice questions is put to it as the challenge does: the exact model input, one forward pass, read at the input's last token. At each of the 48 layer visits we take the state entering the visit and apply the model's own final norm and unembedding to it. That is the starter's logit lens, unchanged, with no trained weights.</p>
+<p>Two things are kept for each question and visit:</p>
+<ul>
+<li>the lens's 10 highest-scoring tokens, best first, which is what an entry would hand to the judge;</li>
+<li>the rank of the intermediate in the whole vocabulary: the rank of the best token that writes the intermediate exactly, in any case, with or without a leading space.</li>
+</ul>
+<p>Exact matching is stricter than the leaderboard's judge, which also accepts inflections and translations, so a rank here can understate what the judge would credit.</p>
+<p>The three runs of layers 6 to 17 do not follow on from one another. In the model's code each run starts again from the state that left layer 5, and the second and third also receive messages from the run before. The row for layer 6 is therefore the same in all three runs.</p>
+</div>
+</section>
+
+<section>
+<h2>Competing explanations</h2>
+<div class="prose">
+<p>None were set out before the run. Where the lens fails, the readouts alone cannot separate two readings: the model has not formed the intermediate at that visit, or it has and the final unembedding cannot read it there. Telling these apart needs a second lens or an intervention on the same visits.</p>
+</div>
+</section>
+
+<section>
+<h2>What we expect</h2>
+<div class="prose">
+<p>Nothing was written down before the run. The one prior was Goodfire's report that the logit lens works on this model only at the end of each loop.</p>
+</div>
+</section>
+
+<section>
+<h2>What would make us distrust a result</h2>
+<div class="prose">
+<p>Written after the run, as the limits of what it shows:</p>
+<ul>
+<li>10 questions, one or two of each kind, one forward pass each. Any count below is out of 10, and a kind's behaviour rests on one or two prompts.</li>
+<li>The layer 6 rows being identical across the three runs looked like a mistake in the read. It was checked against the model's code and is how the loop is built.</li>
+<li>The ranks use exact matching, not the judge.</li>
+<li>Nobody but the agent that ran it has read these readouts yet.</li>
+</ul>
+</div>
+</section>
+
+<section id="results">
+<h2>Results</h2>
+<div class="prose">
+<p>The lens finds the intermediate on the six questions about a fact and on none of the four about a sequence or a sum.</p>
+<table class="tbl">
+<thead><tr><th>Question</th><th>Intermediate</th><th class="num">Visits in the top 10</th><th class="num">Best rank</th><th class="num">At visit</th></tr></thead>
+<tbody>
+<tr><td>athlete-05</td><td>hockey</td><td class="num">8</td><td class="num">1</td><td class="num">43</td></tr>
+<tr><td>athlete-15</td><td>golf</td><td class="num">8</td><td class="num">1</td><td class="num">34</td></tr>
+<tr><td>landmark-19</td><td>Australia</td><td class="num">7</td><td class="num">1</td><td class="num">44</td></tr>
+<tr><td>landmark-13</td><td>Poland</td><td class="num">2</td><td class="num">5</td><td class="num">43</td></tr>
+<tr><td>musician-05</td><td>banjo</td><td class="num">3</td><td class="num">1</td><td class="num">44</td></tr>
+<tr><td>musician-16</td><td>guitar</td><td class="num">6</td><td class="num">1</td><td class="num">24</td></tr>
+<tr><td>arith-10</td><td>7</td><td class="num">0</td><td class="num">16</td><td class="num">22</td></tr>
+<tr><td>dayafter-01</td><td>Saturday</td><td class="num">0</td><td class="num">15</td><td class="num">24</td></tr>
+<tr><td>daybefore-04</td><td>Saturday</td><td class="num">0</td><td class="num">31</td><td class="num">24</td></tr>
+<tr><td>monthafter-07</td><td>July</td><td class="num">0</td><td class="num">149</td><td class="num">46</td></tr>
+</tbody>
+</table>
+<p>What it reads in place of the intermediate differs by kind. On the sequence and arithmetic questions the late visits name the topic: <i>week</i>, <i>days</i>, <i>calendar</i>, <i>arithmetic</i>, <i>subtraction</i>. On Wawel Castle they name a clue, <i>Krakow</i>, ahead of <i>Poland</i>. At visit 47, the last, the top token is the chat format's next token on every question.</p>
+<p>Only 10 of the 48 visits ever have an intermediate in the top 10: visit 24 (layer 12, second run), visits 33 to 36 (layers 9 to 12, third run) and visits 43 to 47 (layers 19 to 23). Visits 43 and 44 do so on six questions each, the most of any. In every run the rank worsens sharply at the visit after layer 12.</p>
+<p>The readouts themselves, a question at a time:</p>
+</div>
+<div class="rg" data-file="../data/phase-one-readouts/logit-lens-practice.json" data-questions="https://huggingface.co/datasets/NDIF/looped-lens-challenge-test/resolve/main/practice/private/questions.jsonl" data-page="https://huggingface.co/datasets/NDIF/looped-lens-challenge-test" data-label="NDIF/looped-lens-challenge-test"></div>
+</section>
+</main>
+
+</div>
+<script src="../resources.js"></script>
+<script src="../programs.js"></script>
+<script src="../readouts.js"></script>
+<script src="../app.js"></script>
+<script src="../toc.js"></script>
+<script src="../cite.js"></script>
+</body>
+</html>

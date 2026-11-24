@@ -14,9 +14,7 @@
    detail.html), sets as {name, count, note} for the composition table, source
    as {label, url} for where the facts come from, practice as {label, page, file} for a public JSONL of questions
    that practice.js shows one at a time, loading file live; never copy it into the repo. A detail with no content
-   reads "Not written yet."; or readouts: about as paragraphs, file as a JSON file in data/ exported by the project's
-   own code (one lens's top tokens and the intermediate's rank at every layer visit, per question id, with no question
-   text), and questions as {label, page, file} for the public JSONL the grid joins it to, loaded live by readouts.js).
+   reads "Not written yet.").
    Experiment fields: title, status (planned | running | done | abandoned), date (when planned, else when run;
    YYYY-MM-DD, YYYY-MM or YYYY), tags (plain words, one from each set: stage preliminary | main | replication; who
    ran it AI-run | AI-assisted | hand-run; checking unreviewed | reviewed), code (optional link to the code),
@@ -78,6 +76,16 @@ window.PROGRAMS = [
             note: "How Inkling 2 Mini's loop is laid out and how to read its layer visits with nnsight on NDIF, as the challenge page describes it.",
           },
         ],
+        experiments: [
+          {
+            title: "Where the logit lens finds the intermediate: all 48 layer visits on the practice questions",
+            status: "done",
+            date: "2026-11-24",
+            tags: ["preliminary", "AI-run", "unreviewed"],
+            href: "experiments/logit-lens-all-visits.html",
+            summary: "Reads the starter's logit lens at every one of the 48 layer visits, at the last token of the 10 practice questions, and keeps its top 10 tokens and the intermediate's rank at each. It finds the intermediate on the six questions about a fact and on none of the four about a sequence or a sum, and only at 10 of the 48 visits.",
+          },
+        ],
         details: [
           {
             slug: "benchmark",
@@ -94,24 +102,6 @@ window.PROGRAMS = [
               ],
               source: { label: "Looped Lens Challenge README", url: "https://github.com/ndif-team/looped-lens-challenge#the-questions" },
               practice: {
-                label: "NDIF/looped-lens-challenge-test",
-                page: "https://huggingface.co/datasets/NDIF/looped-lens-challenge-test",
-                file: "https://huggingface.co/datasets/NDIF/looped-lens-challenge-test/resolve/main/practice/private/questions.jsonl",
-              },
-            },
-          },
-          {
-            slug: "logit-lens-readouts",
-            title: "Logit lens readouts",
-            blurb: "What the logit lens reads at each of the 48 layer visits on the 10 practice questions, and where the intermediate ranks when it is not there.",
-            readouts: {
-              about: [
-                "The logit lens applies the model's own final norm and unembedding to the state entering a layer visit, with no trained weights. An entry may read 10 visits; this reads all 48, at the last token of the input, so that each row shows what the lens says there in place of the intermediate.",
-                "The three runs of layers 6 to 17 do not follow on from one another. Each run starts again from the state that left layer 5, and the second and third also receive messages from the run before, so the row for layer 6 is the same in all three runs.",
-                "Unreviewed: one run of the starter's lens, exported on 24 Nov 2026, scored here by exact matching.",
-              ],
-              file: "data/phase-one-readouts/logit-lens-practice.json",
-              questions: {
                 label: "NDIF/looped-lens-challenge-test",
                 page: "https://huggingface.co/datasets/NDIF/looped-lens-challenge-test",
                 file: "https://huggingface.co/datasets/NDIF/looped-lens-challenge-test/resolve/main/practice/private/questions.jsonl",
