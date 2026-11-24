@@ -1,7 +1,8 @@
 /* Renders whichever page this is: the Readings tab (#groups) and a paper's notes page (#paper, papers/<slug>.html)
    from resources.js; the Research programs tab (#programs), a program's page (#program, program.html?p=<slug>) and a
    project's page (#project, project.html?p=<slug>), the Home tab (#home: experiments running or awaiting review) and an
-   experiment's own page (#experiment, experiments/<slug>.html) from programs.js. Readings: grouped by section in order of first use, rows in file order. The tab has one
+   experiment's own page (#experiment, experiments/<slug>.html) and a project's detail page (#detail,
+   detail.html?p=<project>&d=<detail>) from programs.js. Readings: grouped by section in order of first use, rows in file order. The tab has one
    control, a filter by reading status (#filter); no sorting or other controls. Every page also gets the footer. */
 (function () {
   // the footer (rule 45): what this is, and where its source lives. A fork changes REPO to its own.
@@ -282,6 +283,127 @@
   }
 
   // a project's page: kicker, title, status line, the question, the summary as prose, then Reading
+  // The tiles on a project's page: one per detail page, title and one sentence, the whole tile a link that opens
+  // the page in a new tab (rules 55-56). No border, box or background.
+  function detailTiles(p) {
+    var ul = el('ul', 'detail-tiles');
+    p.details.forEach(function (d) {
+      var li = el('li', 'detail-tile');
+      var a = el('a');
+      a.href = 'detail.html?p=' + encodeURIComponent(p.slug) + '&d=' + encodeURIComponent(d.slug);
+      a.target = '_blank';
+      a.rel = 'noopener';
+      var t = el('span', 't', d.title);
+      t.appendChild(el('span', 'arrow', ' \u2197'));
+      a.appendChild(t);
+      if (d.blurb) a.appendChild(el('span', 'd', d.blurb));
+      li.appendChild(a);
+      ul.appendChild(li);
+    });
+    return ul;
+  }
+
+  // a paragraph whose text may hold links written [text](address): a page of this site opens in place, any other
+  // address in a new tab (H12). Prose links are ink with a faint underline (rule 27).
+  function withLinks(text) {
+    var p = el('p'), re = /\[([^\]]+)\]\(([^)\s]+)\)/g, last = 0, m;
+    while ((m = re.exec(text))) {
+      if (m.index > last) p.appendChild(document.createTextNode(text.slice(last, m.index)));
+      if (/^https?:/.test(m[2])) p.appendChild(newTabLink(m[1], m[2]));
+      else { var a = el('a', null, m[1]); a.href = m[2]; p.appendChild(a); }
+      last = re.lastIndex;
+    }
+    if (last < text.length) p.appendChild(document.createTextNode(text.slice(last)));
+    return p;
+  }
+
+  // A detail page's dataset: prose on how the questions are built, a hairline table of the sets and the source,
+  // then the practice viewer (practice.js), which loads the public questions live and counts them by kind (rules 57-62).
+  function datasetContent(ds) {
+    var frag = el('div', 'dataset');
+    var prose = el('div', 'prose');
+    (ds.about || []).forEach(function (t) { prose.appendChild(withLinks(t)); });
+    if (ds.sets && ds.sets.length) {
+      var tbl = el('table', 'tbl');
+      var head = el('tr');
+      ['Set', 'Questions', 'What it holds'].forEach(function (t, i) { head.appendChild(el('th', i === 1 ? 'num' : null, t)); });
+      var thead = el('thead'); thead.appendChild(head); tbl.appendChild(thead);
+      var tbody = el('tbody');
+      ds.sets.forEach(function (st) {
+        var tr = el('tr');
+        tr.appendChild(el('td', null, st.name));
+        tr.appendChild(el('td', 'num', String(st.count)));
+        tr.appendChild(el('td', null, st.note));
+        tbody.appendChild(tr);
+      });
+      tbl.appendChild(tbody);
+      prose.appendChild(tbl);
+    }
+    if (ds.source) {
+      var src = el('p', 'meta dataset-src', 'From the ');
+      src.appendChild(newTabLink(ds.source.label, ds.source.url));
+      src.appendChild(document.createTextNode('.'));
+      prose.appendChild(src);
+    }
+    frag.appendChild(prose);
+    if (ds.practice) {
+      var sec = el('section', 'group');
+      sec.id = 'practice';
+      sec.appendChild(el('h2', null, 'Practice questions'));
+      var box = el('div', 'pv');
+      box.setAttribute('data-file', ds.practice.file);
+      box.setAttribute('data-page', ds.practice.page);
+      box.setAttribute('data-label', ds.practice.label);
+      sec.appendChild(box);
+      frag.appendChild(sec);
+      if (window.PracticeViewer) window.PracticeViewer.mount(box);
+    }
+    return frag;
+  }
+
+  // A detail page's readouts: prose on what was run, then the readout grid (readouts.js), which shows what one lens
+  // read at every layer visit of each practice question (rules 64-68).
+  function readoutsContent(ro) {
+    var frag = el('div', 'dataset');
+    var prose = el('div', 'prose');
+    (ro.about || []).forEach(function (t) { prose.appendChild(withLinks(t)); });
+    frag.appendChild(prose);
+    var sec = el('section', 'group');
+    sec.id = 'readouts';
+    sec.appendChild(el('h2', null, 'Readouts'));
+    var box = el('div', 'rg');
+    box.setAttribute('data-file', ro.file);
+    box.setAttribute('data-questions', ro.questions.file);
+    box.setAttribute('data-page', ro.questions.page);
+    box.setAttribute('data-label', ro.questions.label);
+    sec.appendChild(box);
+    frag.appendChild(sec);
+    if (window.ReadoutGrid) window.ReadoutGrid.mount(box);
+    return frag;
+  }
+
+  // a project's detail page (detail.html?p=<project>&d=<detail>): kicker back to the project, the title, its
+  // blurb as the lede, then its content, or "Not written yet." while it has none
+  function renderDetail(root) {
+    var m = /[?&]d=([^&#]+)/.exec(location.search), dslug = m ? decodeURIComponent(m[1]) : '';
+    var hit = projectBySlug(slugParam());
+    var d = hit && (hit.project.details || []).filter(function (x) { return x.slug === dslug; })[0];
+    if (!d) { root.appendChild(el('p', 'count', 'No such page.')); return; }
+    var pg = hit.program, p = hit.project;
+    document.title = d.title + ' — Internal lens lab';
+    setKicker(pg);
+    var k = document.getElementById('kicker');
+    k.appendChild(document.createTextNode(' \u00b7 '));
+    var up = el('a', null, p.title);
+    up.href = 'project.html?p=' + encodeURIComponent(p.slug);
+    k.appendChild(up);
+    document.getElementById('title').textContent = d.title;
+    document.getElementById('lede').textContent = d.blurb || '';
+    if (d.dataset) root.appendChild(datasetContent(d.dataset));
+    else if (d.readouts) root.appendChild(readoutsContent(d.readouts));
+    else root.appendChild(el('p', 'count', 'Not written yet.'));
+  }
+
   function renderProject(root) {
     var hit = projectBySlug(slugParam());
     if (!hit) { root.appendChild(el('p', 'count', 'No such project.')); return; }
@@ -296,6 +418,8 @@
       d.appendChild(el('p', null, p.summary));
       root.appendChild(d);
     }
+    // its detail pages as borderless tiles, each opening in a new tab (rules 55-56)
+    if (p.details && p.details.length) root.appendChild(detailTiles(p));
     // experiments: one row each, in the data's order, above the reading list (rule 48)
     var exps = p.experiments || [];
     if (exps.length) {
@@ -318,6 +442,31 @@
       papers.forEach(function (r) { ul.appendChild(resourceRow(r)); });
       sec.appendChild(ul);
       root.appendChild(sec);
+    }
+    // useful links, last: rows like a reading, each leaving the site in a new tab (rule 63)
+    var links = p.links || [];
+    if (links.length) {
+      var ls = el('section', 'group');
+      ls.id = 'links';
+      var lh = el('h2', null, 'Useful links');
+      lh.appendChild(el('span', 'n', String(links.length)));
+      ls.appendChild(lh);
+      var lu = el('ul', 'resources');
+      links.forEach(function (x) {
+        var li = el('li');
+        var t = el('div', 'r-title');
+        var a = newTabLink(x.title, x.url);
+        a.appendChild(el('span', 'out', ' \u2197'));
+        t.appendChild(a);
+        li.appendChild(t);
+        var host = '';
+        try { host = new URL(x.url).hostname.replace(/^www\./, ''); } catch (e) {}
+        li.appendChild(el('div', 'meta', [x.by, host].filter(Boolean).join(' \u00b7 ')));
+        if (x.note) li.appendChild(el('div', 'summary', x.note));
+        lu.appendChild(li);
+      });
+      ls.appendChild(lu);
+      root.appendChild(ls);
     }
   }
 
@@ -490,6 +639,8 @@
   if (project) renderProject(project);
   var home = document.getElementById('home');
   if (home) renderHome(home);
+  var detail = document.getElementById('detail');
+  if (detail) renderDetail(detail);
   var experiment = document.getElementById('experiment');
   if (experiment) renderExperiment(experiment);
   renderFooter();

@@ -5,3 +5,7 @@
 
 # OS clutter
 .DS_Store
+
+# Result files a project's own code exports for the site's readout grids. Ignored so that an
+# unreviewed run stays on the machine that made it; add one with `git add -f` once it is reviewed.
+data/

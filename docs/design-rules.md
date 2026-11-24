@@ -60,7 +60,7 @@ Read this before adding or changing anything visual in this app, whether you are
 41. The Reading section opens with `Reading` (`--fs-h2` serif) and its count, then the project's papers as full Readings rows in the data's order. Omitted when the project lists none.
 42. A program may have one mark: its own illustration (`image` and `imageAlt` in `programs.js`, a file in `images/`, SVG where there is one). It appears in the left column of its row on `programs.html` and of its page's title block (rules 34–35), square, shown whole and never cropped. No caption, credit, border, shadow, radius, filter or overlay, and it does not animate. A program without one shows nothing there. Project pages carry no image.
 43. Status is always a plain word, never a coloured tag, badge or icon. Nothing on these pages is coloured.
-44. Nothing else on a program or project page (notes, submissions, deadlines) apart from experiments (rules 47–54) unless it is needed; anything new should follow the patterns above (rows, plain-word states, ink links).
+44. Nothing else on a program or project page (notes, submissions, deadlines) apart from experiments (rules 47–54) detail tiles (rules 55–56) and useful links (rule 63) unless it is needed; anything new should follow the patterns above (rows, plain-word states, ink links).
 
 ## The glyph
 
@@ -81,6 +81,25 @@ Read this before adding or changing anything visual in this app, whether you are
 53. An experiment leaves Home when its checking tag becomes `reviewed`, or when it is planned or abandoned. Only the person who owns the project changes a tag to `reviewed`.
 54. Nothing else on Home (summaries of projects, art, totals, charts) unless it is asked for.
 
+## A project's detail pages
+
+55. A project with `details` in `programs.js` shows them on its page as borderless tiles, after the summary and before Experiments and Reading, `--s-6` above: two across, one on a phone, `--s-5` / `--s-6` apart. A tile is its title in `--serif` `--fs-h2` weight 400 followed by ` ↗` in `--ink-3`, then its blurb in `--sans` `--fs-body` `--ink-2`; the whole tile is one link, with the title's 1px `--rule` underline on hover. No border, box, background, image or colour.
+56. A tile opens its page in a new tab, at the author's request (a departure from house rule H12, which keeps the app's own pages in the same tab); the ↗ says so. The page is `detail.html?p=<project>&d=<detail>`: header with Research programs active, kicker `Research programs · <program> · <project>` (rule 38), the title as `h1`, the blurb as the lede, then its content, or "Not written yet." in `--fs-meta` `--ink-3` while it has none.
+57. A detail with a `dataset` shows how its questions are built as prose (rule 40), the sets as one hairline table (Set, Questions, What it holds; counts right-aligned in tabular figures) and one `--fs-meta` sans line naming the source as a new-tab link; then a `Practice questions` section (`--fs-h2` serif) holding the viewer.
+58. The viewer loads the public question file live from `practice.file` and never keeps a copy in the repository; if it cannot, it says so in one `--fs-meta` `--ink-3` line with a link to `practice.page`. It opens with one metadata line counting the questions by kind, computed from the file.
+59. Below that, on one line as rule 13: a filter by kind at the left (All, then each kind in the file's order, as rule 22) and `N of M` at the right (`N of M · T in all` while a kind is chosen).
+60. One question at a time: a metadata line (kind · id), the prompt in `--serif` `--fs-prose`, then the model input in `--mono` `--fs-code` behind a 2px `--rule` line, its chat-format tokens in `--ink-3`. The token the lens reads at is the one thing marked: `--highlight-wash` behind it, `--highlight-ink` text, a 2px `--highlight` underline (look here).
+61. The options the judge is shown follow as plain words in `--ink-2`, one line, `--s-5` apart. "Show the intermediate" is a bordered button in `--interact` (`--interact-wash` behind it when pressed). Revealed, the intermediate is `--ink` weight 500 with a leading ✓ and the other options turn `--ink-3`; one sentence beside the button says whether it is also the answer. The judge's task line follows in the metadata style. Moving to another question hides the intermediate again.
+62. Previous and Next are text buttons between two `--hairline`s, styled as kicker links (rule 38), `--ink-3` and not underlined when there is nowhere to go; the left and right arrow keys do the same. A last metadata line names the source with a link. No progress bar, score, timer or colour beyond rules 60 and 61.
+
+63. A project's `links` are listed last on its page, after Reading, under `Useful links` (`--fs-h2` serif, with its count). Each is a Readings row (rules 16–21): the title is a link that opens in a new tab (H12) and ends with ` ↗` in `--ink-3` `--fs-meta` sans; the metadata line is who made it ` · ` the bare host; the summary is one sentence on what it is and why it helps. Only things outside the site, never papers (those go in Readings).
+
+64. A detail with `readouts` shows what one lens read on the practice questions (proposed): prose on what was run (rule 40), ending with a sentence that says whether the run has been reviewed, then a `Readouts` section (`--fs-h2` serif) holding the readout grid, drawn by `readouts.js`.
+65. The grid's readouts are a JSON file in `data/` that the project's own code exported; it holds question ids, tokens and ranks, never question text. The questions, options and intermediates load live from `questions.file` as in rule 58 and are joined on the id. If the readouts are missing it reads "The readouts are not published yet."; the repository ignores `data/`, so a result file is added on purpose once its run is reviewed
+66. It keeps the practice viewer's frame: one metadata line naming the lens, the model, the number of questions and visits and the date of the run; the filter by kind and `N of M` (rule 59); one question at a time with its metadata line and prompt (rule 60); Previous, Next and the arrow keys (rule 62). The options follow as in rule 61 with the intermediate already marked, since the page is about where it is found; then one sentence in `--fs-body` `--ink` counting the visits at which it is in the top tokens.
+67. Below that, one hairline table with a row per layer visit: Visit, Layer, Rank of the intermediate (right-aligned, tabular figures; `--ink` weight 500 when it is within the tokens shown, else `--ink-2`), and the top tokens best first in `--mono` `--fs-code`, a space drawn as `␣` and a line break as `↵`. A row in `--ink-2` with no rule of its own opens each stretch of visits (the layers before the loop, each run of the loop, the layers after).
+68. A token that is the intermediate is the one thing marked, as the read token is in rule 60 (look here). No heat map, shading by rank, colour for wrong options, or chart; a second lens gets its own detail until a comparison is asked for.
+
 ## Motion and focus
 
 30. Motion is `--dur` with `--ease`. Nothing animates on load.
@@ -99,3 +118,5 @@ Read this before adding or changing anything visual in this app, whether you are
 - [ ] Tabs: active tab underlined in ink, not coloured. Headings not bold.
 - [ ] Home lists exactly the experiments that are running, or done and tagged unreviewed; its count line matches; no progress bar anywhere.
 - [ ] Every experiment with an `href` has its page, and the page's `data-href` matches.
+- [ ] Every detail tile opens its page in a new tab, and every detail page has a kicker back to its project. A practice viewer loads its questions live, filters by kind, reveals and hides the intermediate, and moves with the buttons and the arrow keys; the questions are not copied into the repository.
+- [ ] A readout grid's file in `data/` holds no question text; its page says whether the run is reviewed; only the intermediate is marked.
