@@ -46,6 +46,13 @@
 </ul>
 <p>Exact matching is stricter than the leaderboard's judge, which also accepts inflections and translations, so a rank here can understate what the judge would credit.</p>
 <p>The three runs of layers 6 to 17 do not follow on from one another. In the model's code each run starts again from the state that left layer 5, and the second and third also receive messages from the run before. The row for layer 6 is therefore the same in all three runs.</p>
+<h3>Second part: the WorkspaceBench single-token questions</h3>
+<p>Added on 24 Nov 2026, after the practice run. The same lens, read the same way, on the 238 single-token questions of WorkspaceBench as adapted to this model (the project's <a href="../detail.html?p=phase-one-readouts&amp;d=dataset">Dataset</a> page): basic readout 53, multihop 97, multilingual 88.</p>
+<ul>
+<li>The basic questions are put to the model as the challenge puts the practice ones: in its chat format with thinking off, read at the last token.</li>
+<li>The multihop and multilingual questions are fed as plain text, as the bank says they are meant to be. Multihop is read at the prompt's last word, multilingual at its last token.</li>
+<li>A token counts as the intermediate when it is the bank's word for it or one of the other forms the bank lists, exactly, in any case. A question is <i>found</i> when that holds for one of the top 10 tokens at one or more of the 48 visits. With 48 chances this is a generous measure, so the count per visit is reported beside it.</li>
+</ul>
 </div>
 </section>
 
@@ -59,7 +66,16 @@
 <section>
 <h2>What we expect</h2>
 <div class="prose">
-<p>Nothing was written down before the run. The one prior was Goodfire's report that the logit lens works on this model only at the end of each loop.</p>
+<p>Nothing was written down before the practice run. The one prior was Goodfire's report that the logit lens works on this model only at the end of each loop.</p>
+<h3>Second part</h3>
+<p>Written on 24 Nov 2026 by the agent running it, after the practice run and before the second part ran. The project's owner has not reviewed these.</p>
+<ul>
+<li><b>Basic readout.</b> The practice split repeats. Of the 27 questions about an athlete, a landmark or a musician, the intermediate is found on 22 or more. Of the 25 about arithmetic, a day or a month, it is found on 5 or fewer.</li>
+<li><b>Which visits.</b> The visits that found anything on the practice questions (24, 33 to 36, 43 to 47) account for 90% or more of every question-and-visit pair where the intermediate is in the top 10.</li>
+<li><b>Multihop.</b> The intermediate is the bridge, which the model never writes, so the lens finds it less often than a basic fact: on fewer than half of the 97. Where it is found, it is more often at visits 24 or 33 to 36 than at 43 to 47, where the lens should be reading the answer.</li>
+<li><b>Multilingual.</b> The English concept is found on more than half of the 88, mostly at visits 24 and 33 to 36, with the late visits reading the word in the prompt's language.</li>
+</ul>
+<p>If the basic split does not repeat, the practice result was an accident of ten questions. If the multihop bridge is found as often as a basic fact, the lens reads more than the next token.</p>
 </div>
 </section>
 
