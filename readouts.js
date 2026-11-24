@@ -34,17 +34,20 @@
   function mount(box) {
     var file = box.getAttribute('data-file'), qfile = box.getAttribute('data-questions');
     var page = box.getAttribute('data-page'), label = box.getAttribute('data-label');
+    var gfile = box.getAttribute('data-glosses');
     box.appendChild(el('p', 'count', 'Loading the readouts…'));
     Promise.all([
       // a host that answers a missing file with its home page gives text that is not JSON: that too is "not published"
       fetch(file).then(function (r) { if (!r.ok) throw new Error('readouts'); return r.text(); }).then(function (t) { try { return JSON.parse(t); } catch (e) { throw new Error('readouts'); } }),
-      fetch(qfile).then(function (r) { if (!r.ok) throw new Error('questions'); return r.text(); })
+      fetch(qfile).then(function (r) { if (!r.ok) throw new Error('questions'); return r.text(); }),
+      // English glosses for the non-English tokens: optional, and the grid is whole without them
+      gfile ? fetch(gfile).then(function (r) { return r.json(); }).then(function (g) { return g.glosses || {}; }).catch(function () { return {}; }) : {}
     ]).then(function (got) {
       var byId = {};
       got[1].split('\n').forEach(function (l) { if (l.trim()) { var q = JSON.parse(l); byId[q.id] = q; } });
       var rows = got[0].questions.filter(function (r) { return byId[r.id]; }).map(function (r) { return { q: byId[r.id], readouts: r.readouts }; });
       if (!rows.length) throw new Error('questions');
-      render(box, got[0], rows, page, label);
+      render(box, got[0], rows, page, label, got[2]);
     }).catch(function (e) {
       box.textContent = '';
       if (e && e.message === 'readouts') { box.appendChild(el('p', 'count', 'The readouts are not published yet.')); return; }
@@ -65,7 +68,8 @@
     return 'Layers ' + lp.start + ' to ' + (lp.end - 1) + ', ' + (RUN_NAMES[v.run] || ('run ' + (v.run + 1))) + ' run';
   }
 
-  function render(box, data, all, page, label) {
+  function render(box, data, all, page, label, glosses) {
+    var hasGloss = Object.keys(glosses).length > 0;
     box.textContent = '';
     var kinds = [];
     all.forEach(function (r) { if (kinds.indexOf(kindOf(r.q)) === -1) kinds.push(kindOf(r.q)); });
@@ -75,12 +79,18 @@
       ', read at the last token of ' + all.length + ' practice questions, at each of ' + data.visits.length +
       ' layer visits. Run ' + day(data.generated) + '.'));
 
-    var line = el('div', 'countline pv-line');
+    var line = el('div', 'countline pv-line rg-top');
     var bar = el('div', 'filter');
     bar.setAttribute('role', 'group');
     bar.setAttribute('aria-label', 'Filter practice questions by kind');
     var count = el('p', 'count');
-    line.appendChild(bar); line.appendChild(count);
+    // Previous and Next sit beside the count, and the line stays at the top of the window while the table scrolls,
+    // so the next question is always in reach and opens at the same rows
+    var step = el('div', 'rg-step');
+    var prevT = el('button', null, '← Previous'), nextT = el('button', null, 'Next →');
+    prevT.type = nextT.type = 'button';
+    step.appendChild(prevT); step.appendChild(count); step.appendChild(nextT);
+    line.appendChild(bar); line.appendChild(step);
     box.appendChild(line);
 
     var item = el('div', 'pv-item rg-item');
@@ -95,7 +105,10 @@
     var src = el('p', 'meta pv-src', 'Questions loaded live from ');
     src.appendChild(link(label, page));
     src.appendChild(document.createTextNode(' on Hugging Face. A token counts as the intermediate when it is that word exactly, in any case; ' +
-      'the leaderboard’s judge also accepts inflections and translations. ␣ is a space and ↵ a line break. The arrow keys move between questions.'));
+      'the leaderboard’s judge also accepts inflections and translations. ␣ is a space and ↵ a line break. ' +
+      'The bar at the left marks the looped layers, ' + data.loop.start + ' to ' + (data.loop.end - 1) + ', one stretch for each run of the loop. ' +
+      (hasGloss ? 'A token with a dotted underline is not English: hover over it for a gloss, written by an AI model and not checked by a speaker. ' : '') +
+      'The arrow keys move between questions.'));
     box.appendChild(src);
 
     var state = { kind: 'all', i: 0 };
@@ -128,9 +141,9 @@
 
     function draw() {
       var rs = list(), r = rs[state.i], q = r.q;
-      count.textContent = (state.i + 1) + ' of ' + rs.length + (rs.length !== all.length ? ' · ' + all.length + ' in all' : '');
-      prev.disabled = state.i === 0;
-      next.disabled = state.i === rs.length - 1;
+      count.textContent = q.id + ' · ' + (state.i + 1) + ' of ' + rs.length + (rs.length !== all.length ? ' · ' + all.length + ' in all' : '');
+      prev.disabled = prevT.disabled = state.i === 0;
+      next.disabled = nextT.disabled = state.i === rs.length - 1;
       item.textContent = '';
       item.appendChild(el('p', 'meta', kindName(kindOf(q)) + ' · ' + q.id));
       item.appendChild(el('p', 'pv-prompt', q.prompt));
@@ -154,12 +167,13 @@
       var tbody = el('tbody');
       r.readouts.forEach(function (x, i) {
         var s = stretch(data, i);
+        var looped = data.visits[i].layer >= data.loop.start && data.visits[i].layer < data.loop.end;
         if (s) {
-          var sr = el('tr', 'rg-stretch'), th = el('th', null, s);
+          var sr = el('tr', 'rg-stretch' + (looped ? ' rg-run' : '')), th = el('th', null, s);
           th.colSpan = 4; th.scope = 'colgroup';
           sr.appendChild(th); tbody.appendChild(sr);
         }
-        var tr = el('tr');
+        var tr = el('tr', looped ? 'rg-loop' : null);
         tr.appendChild(el('td', 'num', String(x.visit)));
         tr.appendChild(el('td', 'num', String(data.visits[i].layer)));
         tr.appendChild(el('td', 'num' + (x.rank <= top ? ' rg-in' : ''), num(x.rank)));
@@ -167,6 +181,8 @@
         x.tokens.forEach(function (t) {
           var hit = names(t, q.intermediate);
           var sp = el(hit ? 'mark' : 'span', hit ? 'pv-read' : null, shown(t));
+          var gloss = glosses[t.trim()];
+          if (gloss) { sp.title = gloss; sp.classList.add('rg-gloss'); }
           td.appendChild(sp);
           td.appendChild(document.createTextNode(' '));
         });
@@ -179,8 +195,9 @@
       item.appendChild(scroll);
     }
 
-    prev.addEventListener('click', function () { if (state.i > 0) { state.i--; draw(); } });
-    next.addEventListener('click', function () { if (state.i < list().length - 1) { state.i++; draw(); } });
+    function go(by) { var i = state.i + by; if (i >= 0 && i < list().length) { state.i = i; draw(); } }
+    [prev, prevT].forEach(function (b) { b.addEventListener('click', function () { go(-1); }); });
+    [next, nextT].forEach(function (b) { b.addEventListener('click', function () { go(1); }); });
     document.addEventListener('keydown', function (e) {
       if (e.target.closest && e.target.closest('input, textarea, select, [contenteditable]')) return;
       if (e.key === 'ArrowLeft') prev.click();

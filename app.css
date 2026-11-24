@@ -258,3 +258,17 @@ main h2[id],main h3[id]{scroll-margin-top:var(--s-6)}
 .rg-tbl .rg-stretch th{padding-top:var(--s-4);color:var(--ink-2);font-weight:400}
 .rg-toks{font:var(--fs-code)/var(--lh-body) var(--mono);overflow-wrap:anywhere;padding-right:0}
 .rg-toks span,.rg-toks mark{margin-right:var(--s-2);white-space:nowrap}
+/* the line that stays in reach: the filter, and Previous / count / Next, pinned to the top of the window */
+.rg-top{position:sticky;top:0;z-index:1;background:var(--bg);padding-top:var(--s-3)}
+.rg-step{display:flex;align-items:baseline;gap:var(--s-4)}
+.rg-step button{appearance:none;background:none;border:0;padding:0;font:var(--fs-meta)/var(--lh-ui) var(--sans);color:var(--ink-2);cursor:pointer;text-decoration:underline;text-decoration-color:var(--rule);text-underline-offset:3px;text-decoration-thickness:1px;white-space:nowrap}
+.rg-step button:hover{color:var(--ink);text-decoration-color:var(--ink)}
+.rg-step button:disabled{color:var(--ink-3);cursor:default;text-decoration:none}
+/* the looped layers: one bar in --cat-3 down the left of each run's rows, broken by the run's own heading */
+.rg-tbl th:first-child,.rg-tbl td:first-child{padding-left:var(--s-3)}
+.rg-tbl tr.rg-loop td:first-child{box-shadow:inset 3px 0 0 var(--cat-3)}
+.rg-tbl .rg-run th{color:var(--ink);font-weight:500}
+.rg-tbl .rg-run th::before{content:"";display:inline-block;width:var(--s-2);height:var(--s-2);background:var(--cat-3);margin-right:var(--s-2)}
+.rg-tbl .rg-stretch th:first-child{padding-left:0}
+/* a token with an English gloss on hover */
+.rg-gloss{text-decoration:underline dotted var(--ink-3);text-underline-offset:3px;cursor:help}
