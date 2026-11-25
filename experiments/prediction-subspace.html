@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Experiment — Internal lens lab</title>
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="stylesheet" href="../tokens.css">
+<link rel="stylesheet" href="../app.css">
+<script src="../theme.js"></script>
+</head>
+<body>
+<div class="wrap">
+
+<header class="site">
+  <a class="name" href="../home.html">Internal lens lab</a>
+  <nav aria-label="Tabs"><ul class="tabs">
+    <li><a href="../home.html">Home</a></li>
+    <li><a href="../index.html">Readings</a></li>
+    <li><a href="../programs.html" aria-current="page">Research programs</a></li>
+  </ul></nav>
+</header>
+
+<main class="note" id="experiment" data-href="experiments/prediction-subspace.html">
+<p class="kicker" id="kicker"><a href="../programs.html">Research programs</a></p>
+<h1 id="title">Experiment title</h1>
+<p class="meta" id="meta">Planned</p>
+<div class="progress-block" id="progress" hidden></div>
+
+<section>
+<h2>In short</h2>
+<div class="prose">
+<p>Does the model perform next-token prediction through a substantially lower-dimensional subspace of its final activation space?</p>
+<p>The sentence this experiment should let us say: on Inkling 2 Mini, <i>k</i> directions of the final activation, out of <i>d</i>, keep the next-token distribution within 0.1 nats on held-out text, and the directions of largest variance need at least four times as many to do the same. Gurnee et al. report that the directions their Jacobian lens reads hold a small share of the variance, which makes a small <i>k</i> plausible.</p>
+<p>We learn the directions for several sizes of <i>k</i> with the model frozen, on our own GPU, and measure how far the output distribution moves when everything outside them is removed. No lens is built here. The lens this would feed, a Jacobian from an intermediate layer to these directions alone, is worth building only if the answer is yes.</p>
+<p>Nothing has been run.</p>
+</div>
+</section>
+
+<section>
+<h2>What we do</h2>
+<div class="prose">
+<figure class="fig">
+<svg viewBox="0 0 340 290" style="max-width:480px" role="img" aria-label="An intermediate activation passes through the remaining layers to the final activation. A learned projection P keeps a few of the final activation's directions, the prediction-relevant subspace, and the unembedding turns those into an output distribution that is preserved. A dashed arrow, the new Jacobian, runs from the intermediate activation straight to the prediction-relevant subspace.">
+  <defs><marker id="ps-a1" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto"><path class="arrowhead" d="M0 0 L6 3 L0 6"/></marker></defs>
+  <g text-anchor="middle">
+  <text class="t-strong" x="170" y="14">Intermediate activation</text>
+  <g style="fill:var(--cat-1)"><rect x="92" y="24" width="11" height="24" rx="2" fill-opacity="0.35"/><rect x="105" y="24" width="11" height="24" rx="2" fill-opacity="0.55"/><rect x="118" y="24" width="11" height="24" rx="2" fill-opacity="0.75"/><rect x="131" y="24" width="11" height="24" rx="2" fill-opacity="0.35"/><rect x="144" y="24" width="11" height="24" rx="2" fill-opacity="0.55"/><rect x="157" y="24" width="11" height="24" rx="2" fill-opacity="0.75"/><rect x="170" y="24" width="11" height="24" rx="2" fill-opacity="0.35"/><rect x="183" y="24" width="11" height="24" rx="2" fill-opacity="0.55"/><rect x="196" y="24" width="11" height="24" rx="2" fill-opacity="0.75"/><rect x="209" y="24" width="11" height="24" rx="2" fill-opacity="0.35"/><rect x="222" y="24" width="11" height="24" rx="2" fill-opacity="0.55"/><rect x="235" y="24" width="11" height="24" rx="2" fill-opacity="0.75"/></g>
+  <path class="arrow" d="M170 51 V83" marker-end="url(#ps-a1)"/>
+  <text x="228" y="70">Remaining layers</text>
+  <text class="t-strong" x="170" y="100">Final activation</text>
+  <g style="fill:var(--seq-3)" fill-opacity="0.35"><rect x="92" y="110" width="11" height="24" rx="2"/><rect x="118" y="110" width="11" height="24" rx="2"/><rect x="131" y="110" width="11" height="24" rx="2"/><rect x="157" y="110" width="11" height="24" rx="2"/><rect x="170" y="110" width="11" height="24" rx="2"/><rect x="196" y="110" width="11" height="24" rx="2"/><rect x="209" y="110" width="11" height="24" rx="2"/><rect x="235" y="110" width="11" height="24" rx="2"/></g>
+  <g style="fill:var(--cat-3)" fill-opacity="0.85"><rect x="105" y="110" width="11" height="24" rx="2"/><rect x="144" y="110" width="11" height="24" rx="2"/><rect x="183" y="110" width="11" height="24" rx="2"/><rect x="222" y="110" width="11" height="24" rx="2"/></g>
+  <path class="arrow" d="M170 139 V175" marker-end="url(#ps-a1)"/>
+  <text x="238" y="158">Learned projection P</text>
+  <text class="t-strong" x="170" y="191">Prediction-relevant subspace</text>
+  <g style="fill:var(--cat-3)" fill-opacity="0.8"><rect x="137" y="201" width="15" height="25" rx="2"/><rect x="154" y="201" width="15" height="25" rx="2"/><rect x="171" y="201" width="15" height="25" rx="2"/><rect x="188" y="201" width="15" height="25" rx="2"/></g>
+  <path class="arrow" d="M170 231 V260" marker-end="url(#ps-a1)"/>
+  <text x="220" y="246">Unembedding</text>
+  <text class="t-strong" x="170" y="278">Preserved output distribution</text>
+  <path d="M90 36 C12 36 12 214 130 214" style="stroke:var(--cat-1)" stroke-width="1.8" stroke-dasharray="5 3" fill="none" marker-end="url(#ps-a1)"/>
+  <text x="62" y="112">New</text><text x="62" y="126">Jacobian</text>
+  </g>
+</svg>
+<figcaption><span class="key" style="background:var(--cat-3)"></span>Retained information <span class="key" style="background:var(--seq-3)"></span>Discarded information. This experiment tests the two lower steps: whether a projection that keeps few directions preserves the output distribution. The dashed arrow, the new Jacobian, is not built here.</figcaption>
+</figure>
+<p>Instead of directly learning how an intermediate activation contributes to the final prediction in vocabulary space, you first identify a compact set of prediction-relevant directions and then study how the intermediate layers contribute to those directions.</p>
+<h3>What "matters for prediction" means</h3>
+<p>There are three ways to define prediction relevance:</p>
+<table class="tbl">
+<thead><tr><th>Definition</th><th>What we want to preserve</th></tr></thead>
+<tbody>
+<tr><td>Logit relevance</td><td>Every vocabulary token's logit</td></tr>
+<tr><td>Distribution relevance</td><td>The probability distribution over tokens</td></tr>
+<tr><td>Decision relevance</td><td>Which token the model ultimately predicts</td></tr>
+</tbody>
+</table>
+<p>These are increasingly weaker requirements. Because the unembedding matrix is generally full rank, almost every activation direction affects some logits. However, that does not mean every direction meaningfully affects the probability distribution or the predicted token.</p>
+<p>This experiment takes the second, distribution relevance, and measures only that.</p>
+<h3>The model</h3>
+<p>Inkling 2 Mini, downloaded from Hugging Face as <a href="https://huggingface.co/thinkingmachines/Inkling-2-Mini" target="_blank" rel="noopener">thinkingmachines/Inkling-2-Mini</a> and run on our own GPU with <code>transformers</code>. Nothing in this experiment goes through nnsight or NDIF. The weights stay frozen.</p>
+<ul>
+<li><b>It is the challenge's model.</b> The repository is the one the challenge names as its model, and we take the revision the organisers pin in their own local example (<code>b85c3cf</code>), with the same <code>transformers</code> release, 5.24.0.</li>
+<li><b>What is not confirmed</b> is that NDIF's server holds that same revision. The check is under "What would make us distrust a result".</li>
+<li><b>Size.</b> About 26B parameters. Loaded as bfloat16 that is roughly 52 GB of GPU memory, which fits the one A100 with 80 GB the run is planned on.</li>
+<li><b>The final activation</b> is 2,304 wide, so <i>d</i> = 2,304. The head writes 200,058 tokens, with no bias.</li>
+<li><b>From final activation to logits</b> there is one more step than a plain unembedding: the model caps its logits, 30 · tanh(<i>z</i> / 30). The projected distribution goes through the same cap.</li>
+</ul>
+<h3>The data</h3>
+<p>Finding the subspace needs no labels and no questions. It needs the final activation at many token positions of text the model predicts as it normally would, since the model's own next-token distribution at each position is the target. Three things decide whether a set of text is good enough:</p>
+<ul>
+<li><b>Variety.</b> A direction counts as needed only if the text makes it vary. Text of one kind, such as the challenge's questions alone, would give a small subspace that says more about the text than the model. So: ordinary, mixed prose.</li>
+<li><b>Amount.</b> At least 20 positions for every dimension, which is 46,080 for the learning set. With fewer, a small subspace fits the sample without saying anything about the model.</li>
+<li><b>Independence.</b> Positions in one passage resemble each other, so the split is by passage, never by position.</li>
+</ul>
+<p>Gurnee et al. fit their Jacobian lens on one thousand sequences of 128 tokens each, sampled from a pretraining-like distribution. They report that ten sequences already give a lens better than the logit and tuned lenses, and that leaving out the first tokens of a sequence, or the positions whose next token is not a letter or digit, made no real difference. Their corpus is not named, so the same text cannot be used; the same recipe can. Fitting a subspace needs the full thousand where their average did not.</p>
+<p>The plan: 1,000 passages of general web text. Each is its first 128 tokens, fed as plain text, and every position but the first is kept, the first having no context. That is 127,000 positions, about 600 MB of activations at half precision.</p>
+<table class="tbl">
+<thead><tr><th>Set</th><th class="num">Passages</th><th class="num">Positions</th><th>Used for</th></tr></thead>
+<tbody>
+<tr><td>Learning</td><td class="num">800</td><td class="num">101,600</td><td>The average <i>μ</i>, PCA, and learning <i>U</i></td></tr>
+<tr><td>Held-out</td><td class="num">200</td><td class="num">25,400</td><td>Every number reported</td></tr>
+</tbody>
+</table>
+<p>The source is the public sample of FineWeb (<code>HuggingFaceFW/fineweb</code>, <code>sample-10BT</code>), taking the first 1,000 documents that are long enough. If a Jacobian lens is built afterwards, the same passages serve for it.</p>
+<h3>Where the code lives</h3>
+<p>Apart from the challenge entry, so that nothing done here can change a submission:</p>
+<ul>
+<li>its own folder in the project's private repository, with its own Python environment (a GPU build of torch; the entry's environment is pinned to NDIF's server and stays as it is);</li>
+<li>nothing in it imports from the entry or is imported by it, and nothing is placed in <code>submission/</code>, the only folder that is uploaded;</li>
+<li>activations, weights and results stay in a folder git ignores;</li>
+<li>if directions learned here are later wanted in an entry, they are copied across by hand as a deliberate step.</li>
+</ul>
+<p>Two steps: one script runs the model once over the passages and saves the final activations and the unembedding; a second learns and scores the subspaces from those files without loading the model.</p>
+<h3>How long it should take</h3>
+<p>On one A100 with 80 GB. These are estimates from arithmetic, written on 24 Nov 2026 before any code has run on the model, and assume 3,000 steps for each fit.</p>
+<table class="tbl">
+<thead><tr><th>Step</th><th>Estimate</th></tr></thead>
+<tbody>
+<tr><td>Download the checkpoint</td><td>Minutes to an hour, by connection</td></tr>
+<tr><td>Load the model and run 128,000 tokens forward</td><td>10 to 15 minutes</td></tr>
+<tr><td>One fit: one size of <i>k</i>, one starting point</td><td>5 to 10 minutes</td></tr>
+<tr><td>All fits: 8 sizes, 2 starting points each</td><td>1.5 to 3 hours</td></tr>
+<tr><td>Scoring every subspace on all positions</td><td>About 15 minutes</td></tr>
+<tr><td>All of it</td><td>About 2 to 4 hours</td></tr>
+</tbody>
+</table>
+<p>The first run, <i>k</i> = 64 alone, should take 30 to 45 minutes with the collection. The number least certain is how many steps a fit needs: if the two starting points have not met after 3,000, the fitting time grows in proportion. Only the collection needs the whole model in memory; the fits need the saved activations and the unembedding, about 10 GB. Writing and debugging the code is not counted, and is likely half a day to a day.</p>
+<h3>Learning the directions</h3>
+<p>Suppose the final activation <i>h<sub>L</sub></i> ∈ ℝ<sup><i>d</i></sup> is taken after the final normalization. We want to learn <i>k</i> orthonormal directions, the columns of <i>U</i> ∈ ℝ<sup><i>d</i>×<i>k</i></sup>, such that removing all information outside their span minimally affects the output probability distribution. Only the subspace <i>U</i> is optimized. The model and unembedding matrix are frozen.</p>
+<p>The original distribution is:</p>
+<p class="eq">p = softmax(cap(W<sub>U</sub><sup>⊤</sup> h<sub>L</sub>))</p>
+<p>The projected distribution keeps the part of the activation inside the subspace and replaces the rest by its average over the learning set, <i>μ</i>:</p>
+<p class="eq">p̃ = softmax(cap(W<sub>U</sub><sup>⊤</sup> (μ + UU<sup>⊤</sup>(h<sub>L</sub> − μ))))</p>
+<p>The training objective is the mean of KL(<i>p</i> ∥ <i>p̃</i>) over token positions, subject to <i>U</i><sup>⊤</sup><i>U</i> = <i>I</i>. We can learn <i>U</i> using gradient descent, enforcing orthonormality through QR decomposition. <i>U</i> is learned twice, once starting from the PCA subspace of the same size and once from a random one, and the one that ends lower on the learning set is kept; if neither beats PCA there, PCA is kept.</p>
+<p>Learn <i>U</i> for different values of <i>k</i>, such as 16, 32, 64, 128, 256 and 512, and also for 576, 1,152 and 2,304, which are a quarter, a half and all of the width.</p>
+<h3>The one metric</h3>
+<p>For each <i>k</i>: the mean KL(<i>p</i> ∥ <i>p̃</i>) in nats over the held-out positions. It is reported for the learned subspace and, beside it, for the PCA subspace of the same dimensionality, centred on the same <i>μ</i>. Each curve is summarised by one number, <i>k</i>*: the smallest <i>k</i> tested at which the held-out KL is 0.1 nats or less.</p>
+<h3>Changed from the discussion</h3>
+<ul>
+<li><b>The removed directions are set to their average, not to zero.</b> A direction that hardly varies across inputs acts as a constant. Zeroing it changes every prediction for a reason that has nothing to do with what the direction carries, and would make the subspace look larger than it is.</li>
+<li><b>Next-token agreement is not measured.</b> It answers the third definition, not the second, and a second metric can disagree with the first.</li>
+<li><b>The projected distribution goes through the model's logit cap.</b> The discussion assumed a plain unembedding; this model has the cap.</li>
+<li><b>The fit has two starting points, and PCA is its floor.</b> A learned curve above PCA's would otherwise be read as a finding when it is the optimiser failing. PCA alone is a poor start: where the directions of largest variance say nothing about the prediction, a fit that starts on them has no gradient to leave by.</li>
+<li><b>Three larger sizes of <i>k</i> are added.</b> Without them the list cannot tell "needs half the dimensions" from "needs more than 512".</li>
+<li><b>The held-out split is by passage, and the learning set has a minimum size.</b></li>
+</ul>
+</div>
+</section>
+
+<section>
+<h2>Competing explanations</h2>
+<div class="prose">
+<ul>
+<li><b>A compact prediction subspace exists.</b> Gurnee et al. find that the token-indexed directions their lens reads hold a small share of the activation's variance. If the same holds at the final layer, the learned curve falls to 0.1 nats at a small <i>k</i>, and PCA, which keeps variance whether or not the unembedding reads it, needs several times more.</li>
+<li><b>Prediction information is distributed.</b> <a href="https://arxiv.org/abs/1711.03953" target="_blank" rel="noopener">Yang et al. (2018)</a> argue that the next-token distributions of natural language need a high rank, more than a model's width supplies. If so, the model uses all the width it has, the learned curve falls gradually, and it is little better than PCA.</li>
+</ul>
+<p>The two differ in kind: under the first the learned and PCA curves separate widely, under the second they run together.</p>
+<p>Other reasons each result could arise:</p>
+<ul>
+<li><b>A small <i>k</i>* because the text is narrow.</b> If the activations themselves fill few dimensions, any method finds a small subspace. PCA on the same activations would then fall as fast as the learned curve, so the gap between the two rules this out.</li>
+<li><b>A small <i>k</i>* because <i>U</i> fits the sample.</b> The score is on passages the directions never saw, and the learning set holds 44 positions per dimension.</li>
+<li><b>A large <i>k</i>* because constants were removed.</b> Designed away: removed directions are set to their average.</li>
+<li><b>A large <i>k</i>* because the optimiser failed.</b> PCA as the floor bounds the damage; the two starting points, compared below, cover the rest.</li>
+<li><b>A subspace that preserves predictions but not how they respond to change.</b> Preserving the prediction on naturally occurring activations is different from preserving how the prediction responds to perturbations of those activations. Nothing in this design rules that out. It does not bear on the claim here, and it does bear on any Jacobian built on the subspace afterwards.</li>
+</ul>
+</div>
+</section>
+
+<section>
+<h2>What we expect</h2>
+<div class="prose">
+<figure class="fig">
+<svg viewBox="0 0 330 220" style="max-width:480px" role="img" aria-label="A sketch, not data. KL divergence, from high to zero, against the percentage of dimensions retained, from 0 to 100. Under outcome A the curve drops to near zero by about a quarter of the dimensions. Under outcome B it falls slowly and reaches zero only at 100 percent. The PCA baseline lies between them.">
+  <g style="stroke:var(--rule)"><path d="M45 45 H310"/><path d="M45 80 H310"/><path d="M45 115 H310"/><path d="M45 150 H310"/><path d="M45 185 H310"/></g>
+  <path d="M45 20 V185 H310" fill="none" style="stroke:var(--ink-3)"/>
+  <path d="M45 28 C65 102 79 159 111 177 S240 184 310 185" fill="none" style="stroke:var(--cat-3)" stroke-width="2.5"/>
+  <path d="M45 28 C80 39 120 55 165 87 S260 154 310 185" fill="none" style="stroke:var(--cat-2)" stroke-width="2.5"/>
+  <path d="M45 28 C80 65 130 105 178 138 S260 170 310 185" fill="none" style="stroke:var(--seq-3)" stroke-width="2" stroke-dasharray="5 4"/>
+  <g text-anchor="middle"><text x="45" y="200">0%</text><text x="111.25" y="200">25%</text><text x="177.5" y="200">50%</text><text x="243.75" y="200">75%</text><text x="310" y="200">100%</text><text x="177" y="216">Percentage of dimensions retained</text><text transform="translate(14 105) rotate(-90)">KL divergence</text></g>
+  <g text-anchor="end"><text x="36" y="188">0</text><text x="36" y="29">High</text></g>
+</svg>
+<figcaption><b>Hypothetical experimental outcomes — not empirical results.</b> <span class="key" style="background:var(--cat-3)"></span>Outcome A: compact prediction subspace exists <span class="key" style="background:var(--cat-2)"></span>Outcome B: prediction information is distributed <span class="key" style="background:var(--seq-3)"></span>Baseline: PCA projection (dashed)</figcaption>
+</figure>
+<p>The sketch is kept as drawn. One thing in it will not happen as shown: the Outcome B curve lies above the PCA baseline, and the learned subspace is never one that does worse than PCA on the text it was learned on. Read Outcome B as the learned curve running along the baseline.</p>
+<p>The thresholds, written on 24 Nov 2026 by the agent that drafted this page. The project's owner has not reviewed them.</p>
+<ul>
+<li><b>Outcome A.</b> The learned subspace has <i>k</i>* of 256 or less, which is under an eighth of the width, and PCA's <i>k</i>* is at least four times the learned one.</li>
+<li><b>Outcome B.</b> The learned subspace has <i>k</i>* above 1,152, half the width, or PCA's <i>k</i>* is less than twice the learned one.</li>
+<li><b>Anything between</b> is reported as undecided, and nothing is built on it until the owner has read it.</li>
+</ul>
+<p>If we observe Outcome A, there is a compelling follow-up question: how do intermediate layers or successive loops construct the information in this compact prediction-relevant subspace? If we observe Outcome B, there is little motivation to build the proposed global low-rank lens.</p>
+<p>The agent's own guess is a result between the two, nearer B: the unembedding reads the whole space, and a threshold on the full distribution is strict.</p>
+</div>
+</section>
+
+<section>
+<h2>What would make us distrust a result</h2>
+<div class="prose">
+<ul>
+<li>The logits rebuilt from the saved final activation differ from the model's own. Then the read of the final activation is wrong; this is checked before anything is saved.</li>
+<li>The local model's logit lens on the ten practice questions does not give the top tokens already read from NDIF. Then the local weights are not the challenge's, and a subspace found here may not hold there.</li>
+<li>At <i>k</i> = 2,304 the KL is not zero to numerical precision. Then the projection is wrong.</li>
+<li>At any <i>k</i>, the held-out KL is more than twice the KL on the learning set. Then <i>U</i> has fitted the sample and more text is needed.</li>
+<li>At any <i>k</i>, the two starting points end more than 10% apart in KL. Then the number reflects the optimiser, not the model, and the fit needs more steps before it is read.</li>
+<li>A random subspace of the same size is not clearly worse than PCA. Then KL on this text does not separate good subspaces from bad ones.</li>
+</ul>
+<p>A limit that holds whatever the result: the text is ordinary prose, not the challenge's chat-format questions read at their last token, so a subspace found here is not yet known to serve those.</p>
+<p>One size, <i>k</i> = 64, is run first and read by the owner before the rest.</p>
+</div>
+</section>
+
+<section id="results">
+<h2>Results</h2>
+<div class="prose">
+<p>Empty until the experiment has run.</p>
+</div>
+</section>
+</main>
+
+</div>
+<script src="../resources.js"></script>
+<script src="../programs.js"></script>
+<script src="../app.js"></script>
+<script src="../toc.js"></script>
+<script src="../cite.js"></script>
+</body>
+</html>

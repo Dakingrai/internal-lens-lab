@@ -87,6 +87,14 @@ window.PROGRAMS = [
             href: "experiments/logit-lens-all-visits.html",
             summary: "Reads the starter's logit lens at every one of the 48 layer visits, at the last token of the 10 practice questions, and keeps its top 10 tokens and the intermediate's rank at each. It finds the intermediate on the six questions about a fact and on none of the four about a sequence or a sum, and only at 10 of the 48 visits. A second part runs the same lens on WorkspaceBench's 238 single-token questions, where the split repeats on the basic file (22 of 27 facts, 4 of 25 sequences and sums).",
           },
+          {
+            title: "Does next-token prediction use a small subspace of the final activation?",
+            status: "planned",
+            date: "2026-11-24",
+            tags: ["preliminary", "AI-assisted", "unreviewed"],
+            href: "experiments/prediction-subspace.html",
+            summary: "Learns, on our own GPU with the model frozen, the k directions of the final activation that best keep the next-token distribution when everything outside them is set to its average, for k from 16 up to the full width of 2,304, on 1,000 passages of general text. It reports the held-out KL at each k beside PCA's, and the smallest k that holds it to 0.1 nats. A small k, several times below PCA's, would justify building a Jacobian lens that targets only those directions; a k near PCA's would not.",
+          },
         ],
         details: [
           {
