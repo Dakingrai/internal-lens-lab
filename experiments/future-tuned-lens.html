@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Experiment — Internal lens lab</title>
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="stylesheet" href="../tokens.css">
+<link rel="stylesheet" href="../app.css">
+<script src="../theme.js"></script>
+</head>
+<body>
+<div class="wrap">
+
+<header class="site">
+  <a class="name" href="../home.html">Internal lens lab</a>
+  <nav aria-label="Tabs"><ul class="tabs">
+    <li><a href="../home.html">Home</a></li>
+    <li><a href="../index.html">Readings</a></li>
+    <li><a href="../programs.html" aria-current="page">Research programs</a></li>
+  </ul></nav>
+</header>
+
+<main class="note" id="experiment" data-href="experiments/future-tuned-lens.html">
+<p class="kicker" id="kicker"><a href="../programs.html">Research programs</a></p>
+<h1 id="title">Experiment title</h1>
+<p class="meta" id="meta">Planned</p>
+<div class="progress-block" id="progress" hidden></div>
+
+<section>
+<h2>In short</h2>
+<div class="prose">
+<p>The sentence this experiment should let us say: on Inkling 2 Mini, a tuned lens trained to predict what the model writes over the next few positions, not only at the next one, wins the challenge's vote for the intermediate on more questions than the logit lens read at the same visits.</p>
+<p>The tuned lens is from Belrose et al.; aiming a lens at later positions is the Future Lens of Pal et al. The reason to combine them here is in the challenge's own questions: they are read at the last token of the prompt, where the model's next token is a piece of chat format, and the word it is about to give comes a token or two later.</p>
+<p>We train three sets of per-visit translators that differ only in what they are trained to predict, score each on WorkspaceBench's 238 single-token questions by the challenge's voting rule, and take the best to a submission. It is the quick one of two; the Jacobian lens follows.</p>
+<p>Nothing has been run.</p>
+</div>
+</section>
+
+<section>
+<h2>What we do</h2>
+<div class="prose">
+<h3>The lens</h3>
+<p>For each layer visit, one affine map, a matrix and an offset, applied to the state entering that visit. The result goes through the model's own final norm and unembedding. Each map starts as the identity, so before training the lens is exactly the logit lens. The model is frozen.</p>
+<h3>Three conditions, one difference</h3>
+<table class="tbl">
+<thead><tr><th>Lens</th><th>Trained to match, from the state at position <i>t</i></th></tr></thead>
+<tbody>
+<tr><td>Logit lens</td><td>Nothing; the baseline</td></tr>
+<tr><td>Tuned lens</td><td>The model's output distribution at <i>t</i></td></tr>
+<tr><td>Future-tuned lens</td><td>The average of the model's output distributions at <i>t</i> + 1 to <i>t</i> + 4</td></tr>
+</tbody>
+</table>
+<p>The loss is the KL divergence from the target to the lens's distribution. Everything else is the same across the two trained lenses: data, visits, steps.</p>
+<h3>Training text</h3>
+<p>Two sources, pooled, and the same for both trained lenses:</p>
+<ul>
+<li><b>Ordinary text.</b> The 1,000 FineWeb passages of 128 tokens already used for the <a href="prediction-subspace.html">prediction-subspace experiment</a>, every position that has four positions after it.</li>
+<li><b>Questions in the chat format.</b> Short questions from a public set, put to the model as the challenge puts its own, with thinking off, and continued with the model's own answer. The state is read at the prompt's last token, and the targets are the model's distributions as it writes its answer. This is the position the challenge reads, which ordinary text never shows the lens.</li>
+</ul>
+<p>No WorkspaceBench or practice question is in the training text, and a training question that names the subject of a test question is dropped.</p>
+<h3>The one metric</h3>
+<p>The pass rate under the challenge's rule, on WorkspaceBench's 238 single-token questions, each with its five options:</p>
+<ul>
+<li>a readout votes for the option named by its highest-ranked token that names one;</li>
+<li>a question passes if the intermediate has more votes than every other option; a tie fails.</li>
+</ul>
+<p>A token names an option when it is the option or one of the other forms the bank lists, exactly, in any case. That is stricter than the leaderboard's judge.</p>
+<p>It is reported two ways, each for all three lenses side by side:</p>
+<ul>
+<li><b>One visit at a time</b>, for each of the 48 visits: the share of questions where that single readout votes for the intermediate.</li>
+<li><b>As an entry of ten visits.</b> The questions of each file are split in half by a fixed seed. The ten visits are chosen on one half and the pass rate is reported on the other, so the visits are not chosen on the questions they are scored on.</li>
+</ul>
+<h3>Where it runs</h3>
+<p>Training and scoring run on our own GPU from the model's downloaded weights, in the same separate folder and environment as the prediction-subspace experiment. A submission is a later step: the chosen translators are published to the Hugging Face Hub and the entry applies them on NDIF.</p>
+</div>
+</section>
+
+<section>
+<h2>Competing explanations</h2>
+<div class="prose">
+<ul>
+<li><b>The intermediate is what the model says a few tokens on.</b> Pal et al. find a single state already encodes tokens two or more positions ahead. If so, the future-tuned lens gains most on the basic questions, where the intermediate is the answer, and the plain tuned lens does not, because at the read position it is trained to say the chat format's next token.</li>
+<li><b>Any trained translator helps.</b> Belrose et al. show the tuned lens corrects the mismatch between a middle layer's states and the final layer's. If that mismatch is the whole problem, both trained lenses gain about equally over the logit lens, at the visits where the logit lens fails.</li>
+<li><b>A trained lens reads the answer and loses the intermediate.</b> Gurnee et al. report that a trained predictor did clearly worse than their averaged Jacobian at surfacing intermediates. If so, on the multihop questions, where the intermediate is a bridge the model never writes, both trained lenses do worse than the logit lens, voting for the answer when it is among the options.</li>
+</ul>
+<p>The three predict different patterns across the files: a gain for the future-tuned lens alone, an equal gain for both, or a loss on multihop.</p>
+<p>Other reasons a result could arise:</p>
+<ul>
+<li><b>A gain because the training questions resemble the test ones.</b> Reduced, not removed: test questions and their subjects are kept out of training, but both are short factual questions.</li>
+<li><b>A gain from choosing visits on the test questions.</b> Designed away by choosing on one half and scoring on the other.</li>
+<li><b>A gain that is local only.</b> Readouts inside the loop changed with rounding at 5 to 10% of visits between our GPU and NDIF. Nothing here rules it out; the check before submitting is below.</li>
+<li><b>A difference that is exact matching, not the lens.</b> The leaderboard's judge accepts inflections and translations. Nothing here rules it out.</li>
+</ul>
+</div>
+</section>
+
+<section>
+<h2>What we expect</h2>
+<div class="prose">
+<p>Written on 25 Nov 2026 by the agent that drafted this page. The project's owner has not reviewed these.</p>
+<ul>
+<li><b>Basic readout.</b> The future-tuned lens's ten-visit pass rate is at least 15 points above the logit lens's. The plain tuned lens is within 5 points of the logit lens.</li>
+<li><b>Multihop.</b> Neither trained lens beats the logit lens by more than 5 points, and the future-tuned lens may fall below it.</li>
+<li><b>One visit at a time.</b> The future-tuned lens votes for the intermediate at visits inside the loop where the logit lens never does.</li>
+</ul>
+<p>If the two trained lenses gain equally, the future target adds nothing and the plain tuned lens is the simpler entry. If neither gains on any file, the translators are not worth a submission and the Jacobian lens is next.</p>
+</div>
+</section>
+
+<section>
+<h2>What would make us distrust a result</h2>
+<div class="prose">
+<ul>
+<li>Before training, a translator does not give the logit lens's readouts exactly. Then the lens is wired wrongly.</li>
+<li>After training, a lens's KL to its own target on held-out text is not below the untrained lens's at that visit. Then it has not trained.</li>
+<li>The held-out KL is more than twice the training KL. Then the translators have fitted the sample; each has over five million weights.</li>
+<li>The logit lens's pass rate here does not agree with what its readouts in the first experiment imply. Then the scoring is wrong.</li>
+<li>Run on NDIF on the ten practice questions, the chosen lens passes fewer than it does locally by two or more. Then the gain may not survive the leaderboard.</li>
+</ul>
+<p>One visit of the future-tuned lens is trained and scored first and read by the owner before the rest.</p>
+</div>
+</section>
+
+<section id="results">
+<h2>Results</h2>
+<div class="prose">
+<p>Empty until the experiment has run.</p>
+</div>
+</section>
+</main>
+
+</div>
+<script src="../resources.js"></script>
+<script src="../programs.js"></script>
+<script src="../app.js"></script>
+<script src="../toc.js"></script>
+<script src="../cite.js"></script>
+</body>
+</html>
