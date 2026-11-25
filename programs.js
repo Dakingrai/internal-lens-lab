@@ -89,8 +89,9 @@ window.PROGRAMS = [
           },
           {
             title: "Does next-token prediction use a small subspace of the final activation?",
-            status: "planned",
-            date: "2026-11-24",
+            status: "running",
+            date: "2026-11-25",
+            progress: { percent: 5, updated: "2026-11-25", now: "The fitting code has passed its test on made-up data; the model is now being run over the 1,000 passages to collect its final activation." },
             tags: ["preliminary", "AI-assisted", "unreviewed"],
             href: "experiments/prediction-subspace.html",
             summary: "Learns, on our own GPU with the model frozen, the k directions of the final activation that best keep the next-token distribution when everything outside them is set to its average, for k from 16 up to the full width of 2,304, on 1,000 passages of general text. It reports the held-out KL at each k beside PCA's, and the smallest k that holds it to 0.1 nats. A small k, several times below PCA's, would justify building a Jacobian lens that targets only those directions; a k near PCA's would not.",
