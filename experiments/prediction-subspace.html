@@ -65,6 +65,26 @@
 <figcaption><span class="key" style="background:var(--cat-3)"></span>Retained information <span class="key" style="background:var(--seq-3)"></span>Discarded information. This experiment tests the two lower steps: whether a projection that keeps few directions preserves the output distribution. The dashed arrow, the new Jacobian, is not built here.</figcaption>
 </figure>
 <p>Instead of directly learning how an intermediate activation contributes to the final prediction in vocabulary space, you first identify a compact set of prediction-relevant directions and then study how the intermediate layers contribute to those directions.</p>
+<figure class="fig wide">
+<svg viewBox="0 0 560 262" style="--fig-min:520px" role="img" aria-label="Two columns. The original Jacobian lens: an intermediate activation of 2,304 dimensions passes through a Jacobian of 2,304 by 2,304 to the final activation space of 2,304 dimensions, then through the original unembedding to V logits over the vocabulary. The proposed lens: the same intermediate activation passes through a Jacobian of 64 by 2,304 to a prediction subspace of 64 dimensions, then through the projected unembedding to V logits.">
+  <defs><marker id="ps-a2" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path class="arrowhead" d="M0 0 L8 4 L0 8 Z"/></marker></defs>
+  <text class="t-strong" x="10" y="16">Original Jacobian lens</text>
+  <text class="t-strong" x="290" y="16">The proposed lens</text>
+  <g text-anchor="middle">
+  <rect class="box" x="10" y="28" width="260" height="44" rx="4"/><text class="t-strong" x="140" y="47">Intermediate activation</text><text x="140" y="63">2,304</text>
+  <path class="arrow" d="M140 74 V86" marker-end="url(#ps-a2)"/><text x="140" y="102">Jacobian (2,304 × 2,304)</text><path class="arrow" d="M140 108 V120" marker-end="url(#ps-a2)"/>
+  <rect class="box" x="10" y="122" width="260" height="44" rx="4"/><text class="t-strong" x="140" y="141">Final activation space</text><text x="140" y="157">2,304</text>
+  <path class="arrow" d="M140 168 V180" marker-end="url(#ps-a2)"/><text x="140" y="196">Original unembedding</text><path class="arrow" d="M140 202 V214" marker-end="url(#ps-a2)"/>
+  <rect class="box" x="10" y="216" width="260" height="44" rx="4"/><text class="t-strong" x="140" y="235">Vocabulary</text><text x="140" y="251">V logits</text>
+  <rect class="box" x="290" y="28" width="260" height="44" rx="4"/><text class="t-strong" x="420" y="47">Intermediate activation</text><text x="420" y="63">2,304</text>
+  <path class="arrow" d="M420 74 V86" marker-end="url(#ps-a2)"/><text x="420" y="102">Jacobian (64 × 2,304)</text><path class="arrow" d="M420 108 V120" marker-end="url(#ps-a2)"/>
+  <rect class="box-hi" x="290" y="122" width="260" height="44" rx="4"/><text class="t-strong" x="420" y="141">Prediction subspace</text><text x="420" y="157">64</text>
+  <path class="arrow" d="M420 168 V180" marker-end="url(#ps-a2)"/><text x="420" y="196">Projected unembedding</text><path class="arrow" d="M420 202 V214" marker-end="url(#ps-a2)"/>
+  <rect class="box" x="290" y="216" width="260" height="44" rx="4"/><text class="t-strong" x="420" y="235">Vocabulary</text><text x="420" y="251">V logits</text>
+  </g>
+</svg>
+<figcaption>The lens the subspace would feed, drawn for this model's width and <i>k</i> = 64. Its map to the vocabulary is W<sub>U</sub><sup>⊤</sup>U (<i>V</i> × <i>k</i>) times U<sup>⊤</sup>J (<i>k</i> × <i>d</i>): this measures vocabulary-level sensitivity through only the retained prediction-relevant subspace. Only the highlighted box is learned in this experiment; neither Jacobian is built.</figcaption>
+</figure>
 <h3>What "matters for prediction" means</h3>
 <p>There are three ways to define prediction relevance:</p>
 <table class="tbl">
@@ -128,6 +148,24 @@
 <p>The first run, <i>k</i> = 64 alone, should take 30 to 45 minutes with the collection. The number least certain is how many steps a fit needs: if the two starting points have not met after 3,000, the fitting time grows in proportion. Only the collection needs the whole model in memory; the fits need the saved activations and the unembedding, about 10 GB. Writing and debugging the code is not counted, and is likely half a day to a day.</p>
 <h3>Learning the directions</h3>
 <p>Suppose the final activation <i>h<sub>L</sub></i> ∈ ℝ<sup><i>d</i></sup> is taken after the final normalization. We want to learn <i>k</i> orthonormal directions, the columns of <i>U</i> ∈ ℝ<sup><i>d</i>×<i>k</i></sup>, such that removing all information outside their span minimally affects the output probability distribution. Only the subspace <i>U</i> is optimized. The model and unembedding matrix are frozen.</p>
+<figure class="fig">
+<svg viewBox="0 0 440 304" style="max-width:480px" role="img" aria-label="The final activation, 2,304 dimensions, goes two ways. On the left, through the original unembedding to the original distribution. On the right, through a learnable projection U U-transpose, then the original unembedding, to the projected distribution. The two distributions meet at one objective: minimize KL divergence.">
+  <defs><marker id="ps-a3" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path class="arrowhead" d="M0 0 L8 4 L0 8 Z"/></marker></defs>
+  <g text-anchor="middle">
+  <rect class="box" x="130" y="6" width="180" height="44" rx="4"/><text class="t-strong" x="220" y="25">Final activation h<tspan dy="3" style="font-size:75%">L</tspan></text><text x="220" y="41">2,304 dimensions</text>
+  <path class="arrow" d="M220 50 V68 H110 V88" marker-end="url(#ps-a3)"/><path class="arrow" d="M220 68 H330 V88" marker-end="url(#ps-a3)"/>
+  <rect class="box" x="20" y="90" width="180" height="44" rx="4"/><text x="110" y="109">Original unembedding</text><text x="110" y="125">W<tspan dy="3" style="font-size:75%">U</tspan><tspan dy="-3">⊤h</tspan><tspan dy="3" style="font-size:75%">L</tspan></text>
+  <rect class="box-hi" x="240" y="90" width="180" height="44" rx="4"/><text class="t-strong" x="330" y="109">Learnable projection</text><text x="330" y="125">UU⊤h<tspan dy="3" style="font-size:75%">L</tspan></text>
+  <path class="arrow" d="M330 134 V152" marker-end="url(#ps-a3)"/>
+  <rect class="box" x="240" y="154" width="180" height="32" rx="4"/><text x="330" y="175">Original unembedding</text>
+  <path class="arrow" d="M330 186 V206" marker-end="url(#ps-a3)"/><path class="arrow" d="M110 134 V206" marker-end="url(#ps-a3)"/>
+  <text x="110" y="222">Original distribution</text><text x="330" y="222">Projected distribution</text>
+  <path class="arrow" d="M110 230 V246 H330 V230"/><path class="arrow" d="M220 246 V262" marker-end="url(#ps-a3)"/>
+  <rect class="box-hi" x="130" y="264" width="180" height="34" rx="4"/><text class="t-strong" x="220" y="286">Minimize KL divergence</text>
+  </g>
+</svg>
+<figcaption>Only the subspace U is optimized. The model and unembedding matrix are frozen. Two details the drawing leaves out: the part of the activation outside the subspace is set to its average, not removed, and both sides pass through the model's logit cap.</figcaption>
+</figure>
 <p>The original distribution is:</p>
 <p class="eq">p = softmax(cap(W<sub>U</sub><sup>⊤</sup> h<sub>L</sub>))</p>
 <p>The projected distribution keeps the part of the activation inside the subspace and replaces the rest by its average over the learning set, <i>μ</i>:</p>
