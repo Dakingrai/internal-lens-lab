@@ -32,7 +32,7 @@
 <div class="prose">
 <p>The sentence this experiment should let us say: on Inkling 2 Mini, a tuned lens trained on a window of three positions, the one before, the one read and the one after, wins the challenge's vote for the intermediate on more questions than the logit lens read at the same visits.</p>
 <p>The tuned lens is from Belrose et al.; aiming a lens at a later position is the Future Lens of Pal et al. The reason to combine them here is in the challenge's own questions: they are read at the last token of the prompt, where the model's next token is a piece of chat format, and the word it is about to give comes one position later. The window keeps the next-token prediction as its largest part and adds its two neighbours.</p>
-<p>We train three sets of per-visit translators that differ only in what they are trained to predict, score each on WorkspaceBench's 238 single-token questions by the challenge's voting rule, and take the best to a submission. It is the quick one of two; the Jacobian lens follows.</p>
+<p>We train per-visit translators that differ only in what they are trained to predict, and compare two ways of covering the window: one translator trained on the mixture, or three translators, one for each position, whose readouts are merged after unembedding. Each is scored on WorkspaceBench's 238 single-token questions by the challenge's voting rule, and the best goes to a submission. It is the quick one of two; the Jacobian lens follows.</p>
 <p>Nothing has been run.</p>
 </div>
 </section>
@@ -42,20 +42,35 @@
 <div class="prose">
 <h3>The lens</h3>
 <p>For each layer visit, one affine map, a matrix and an offset, applied to the state entering that visit. The result goes through the model's own final norm and unembedding. Each map starts as the identity, so before training the lens is exactly the logit lens. The model is frozen.</p>
-<h3>Three conditions, one difference</h3>
+<h3>The conditions</h3>
 <table class="tbl">
 <thead><tr><th>Lens</th><th>Trained to match, from the state at position <i>t</i></th></tr></thead>
 <tbody>
 <tr><td>Logit lens</td><td>Nothing; the baseline</td></tr>
 <tr><td>Tuned lens</td><td>The model's output distribution at <i>t</i></td></tr>
 <tr><td>Window-tuned lens</td><td>A weighted average of the model's output distributions at <i>t</i> − 1, <i>t</i> and <i>t</i> + 1, with weights 0.3, 0.4 and 0.3</td></tr>
+<tr><td>Three translators</td><td>Three separate translators, trained on the output at <i>t</i> − 1, at <i>t</i> and at <i>t</i> + 1; their readouts are merged after unembedding</td></tr>
 </tbody>
 </table>
+<p>The two window conditions cover the same three positions and differ in where the mixing happens. The window-tuned lens mixes the targets before training, so one map has to produce the mixture. The three translators each learn one target; each is unembedded separately, and the three sets of probabilities are merged into one top 10 for the visit. The translator for <i>t</i> is the plain tuned lens, so this condition adds two translators to it.</p>
 <p>The model's output at a position is its prediction of the token that follows. So the three parts of the window are its predictions of the token being read, of the next token, and of the one after that, with the next token weighted most.</p>
-<p>The loss is the KL divergence from the target to the lens's distribution. Everything else is the same across the two trained lenses: data, visits, steps.</p>
+<p>The loss is the KL divergence from the target to the lens's distribution. Everything else is the same for every trained translator: data, visits, steps.</p>
 <p>At the position the challenge reads, the first two parts are both chat format: the read token is the marker that opens the model's turn, and the next token is the marker that opens its text. Only the third part, 0.3 of the target, is the model's answer. A format token names no option, so the answer's tokens can still take the vote from lower in the list; whether they do is what the experiment measures.</p>
+<h3>Merging three readouts into one</h3>
+<p>The default rule is the average of the three translators' probabilities with the window's own weights, 0.3, 0.4 and 0.3, and the top 10 of that. With this rule the two window conditions differ only in mixing before or after training.</p>
+<p>Three other rules are tried: the plain average, the largest of the three probabilities for each token, and taking the three lists' tokens in turn by rank. The rule is chosen on one half of the questions and reported on the other, as the visits are. The default is always reported beside it. Each translator is also scored alone, which shows what each contributes.</p>
+<h3>Cleaning a readout</h3>
+<p>For every lens, the logit lens included, control tokens such as the chat format's markers are removed before the top 10 is taken, and so is a repeat of a token in another casing or spacing.</p>
+<h3>What the challenge's rules allow</h3>
+<p>Checked against the organisers' <a href="https://ndif.us/looped-lens-challenge/#rule-clarifications" target="_blank" rel="noopener">rule clarifications</a> of 24 Nov 2026:</p>
+<ul>
+<li><b>Allowed:</b> several lenses on the same visit and position combined into one readout, which is what the three translators are; their example averages the probabilities of a logit and a tuned lens.</li>
+<li><b>Allowed:</b> removing control tokens and casing repeats from a readout.</li>
+<li><b>Not allowed:</b> more than one readout from a visit. So the three translators are never submitted as three lists.</li>
+<li><b>Not settled:</b> the rules forbid readouts that combine token positions, and their examples are all of states read at several positions. Here one state is read; the other positions are only what two translators were trained to predict. We read that as allowed and will ask the organisers before submitting.</li>
+</ul>
 <h3>Training text</h3>
-<p>Two sources, pooled, and the same for both trained lenses:</p>
+<p>Two sources, pooled, and the same for every trained translator:</p>
 <ul>
 <li><b>Ordinary text.</b> The 1,000 FineWeb passages of 128 tokens already used for the <a href="prediction-subspace.html">prediction-subspace experiment</a>, every position that has one before it and one after it.</li>
 <li><b>Questions in the chat format.</b> Short questions from a public set, put to the model as the challenge puts its own, with thinking off, and continued with the model's own answer. The state is read at the prompt's last token, and the window's third part is the model's distribution over the first word of its answer. This is the position the challenge reads, which ordinary text never shows the lens.</li>
@@ -68,7 +83,7 @@
 <li>a question passes if the intermediate has more votes than every other option; a tie fails.</li>
 </ul>
 <p>A token names an option when it is the option or one of the other forms the bank lists, exactly, in any case. That is stricter than the leaderboard's judge.</p>
-<p>It is reported two ways, each for all three lenses side by side:</p>
+<p>It is reported two ways, each for all the lenses side by side:</p>
 <ul>
 <li><b>One visit at a time</b>, for each of the 48 visits: the share of questions where that single readout votes for the intermediate.</li>
 <li><b>As an entry of ten visits.</b> The questions of each file are split in half by a fixed seed. The ten visits are chosen on one half and the pass rate is reported on the other, so the visits are not chosen on the questions they are scored on.</li>
@@ -85,8 +100,9 @@
 <li><b>The intermediate is what the model says a few tokens on.</b> Pal et al. find a single state already encodes tokens two or more positions ahead. If so, the window-tuned lens gains most on the basic questions, where the intermediate is the answer, and the plain tuned lens does not, because at the read position it is trained to say the chat format's next token.</li>
 <li><b>Any trained translator helps.</b> Belrose et al. show the tuned lens corrects the mismatch between a middle layer's states and the final layer's. If that mismatch is the whole problem, both trained lenses gain about equally over the logit lens, at the visits where the logit lens fails.</li>
 <li><b>A trained lens reads the answer and loses the intermediate.</b> Gurnee et al. report that a trained predictor did clearly worse than their averaged Jacobian at surfacing intermediates. If so, on the multihop questions, where the intermediate is a bridge the model never writes, both trained lenses do worse than the logit lens, voting for the answer when it is among the options.</li>
+<li><b>One map cannot hold a mixture well.</b> No prior work that we know of compares the two. A translator trained on a mixture has to spread its probability over three different predictions from one affine map; three translators each fit one. If that matters, the three translators, merged with the same weights, pass more questions than the window-tuned lens. If it does not, the two agree and the single translator is the simpler entry, at a third of the weights.</li>
 </ul>
-<p>The three predict different patterns across the files: a gain for the window-tuned lens alone, an equal gain for both, or a loss on multihop.</p>
+<p>The first three predict different patterns across the files: a gain for the window lenses alone, an equal gain for every trained lens, or a loss on multihop. The fourth is read from the two window conditions against each other.</p>
 <p>Other reasons a result could arise:</p>
 <ul>
 <li><b>A gain because the training questions resemble the test ones.</b> Reduced, not removed: test questions and their subjects are kept out of training, but both are short factual questions.</li>
@@ -100,12 +116,14 @@
 <section>
 <h2>What we expect</h2>
 <div class="prose">
-<p>Written on 25 Nov 2026 by the agent that drafted this page, and rewritten the same day, before anything ran, when the owner changed the trained target from the average of the next four positions to the window. The owner has not reviewed the numbers.</p>
+<p>Written on 25 Nov 2026 by the agent that drafted this page, and rewritten the same day, before anything ran, when the owner changed the trained target from the average of the next four positions to the window, and again when the three-translator condition was added. The owner has not reviewed the numbers.</p>
 <ul>
 <li><b>Basic readout.</b> The window-tuned lens's ten-visit pass rate is at least 10 points above the logit lens's. The plain tuned lens is within 5 points of the logit lens.</li>
 <li><b>Multihop.</b> Neither trained lens beats the logit lens by more than 5 points, and the window-tuned lens may fall below it.</li>
 <li><b>One visit at a time.</b> The window-tuned lens votes for the intermediate at visits inside the loop where the logit lens never does.</li>
-<li><b>Its top tokens.</b> On the basic questions the window-tuned lens's first one or two tokens are chat-format markers, with the answer below them.</li>
+<li><b>Its top tokens.</b> On the basic questions, before cleaning, the window-tuned lens's first one or two tokens are chat-format markers, with the answer below them.</li>
+<li><b>Three translators against one.</b> Merged with the default rule, the three translators' ten-visit pass rate is within 5 points of the window-tuned lens's on every file.</li>
+<li><b>Each translator alone.</b> On the basic questions the translator for <i>t</i> + 1 votes for the intermediate far more often than the other two, and the one for <i>t</i> − 1 almost never does.</li>
 </ul>
 <p>If the two trained lenses gain equally, the window adds nothing and the plain tuned lens is the simpler entry. If neither gains on any file, the translators are not worth a submission and the Jacobian lens is next.</p>
 </div>
@@ -121,7 +139,7 @@
 <li>The logit lens's pass rate here does not agree with what its readouts in the first experiment imply. Then the scoring is wrong.</li>
 <li>Run on NDIF on the ten practice questions, the chosen lens passes fewer than it does locally by two or more. Then the gain may not survive the leaderboard.</li>
 </ul>
-<p>Seven visits of the window-tuned lens are trained and scored first and read by the owner before the rest: visit 36, inside the loop's third pass, and the six visits of the layers that run once at the end, 42 to 47.</p>
+<p>Seven visits of the window-tuned lens and of the three translators are trained and scored first and read by the owner before the rest: visit 36, inside the loop's third pass, and the six visits of the layers that run once at the end, 42 to 47.</p>
 </div>
 </section>
 

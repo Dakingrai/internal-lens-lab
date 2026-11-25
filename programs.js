@@ -102,7 +102,7 @@ window.PROGRAMS = [
             date: "2026-11-25",
             tags: ["preliminary", "AI-assisted", "unreviewed"],
             href: "experiments/future-tuned-lens.html",
-            summary: "Trains one affine translator per layer visit, twice: once to predict the model's next token, as a tuned lens does, and once to predict a weighted window of its outputs at the position before, the one read and the one after, the middle weighted most. Both are scored beside the logit lens on WorkspaceBench's 238 single-token questions by the challenge's voting rule, one visit at a time and as an entry of ten visits. The better one goes to a submission.",
+            summary: "Trains one affine translator per layer visit, twice: once to predict the model's next token, as a tuned lens does, and once to predict a weighted window of its outputs at the position before, the one read and the one after, the middle weighted most. A further condition trains three translators, one for each of those positions, and merges their readouts after unembedding. All are scored beside the logit lens on WorkspaceBench's 238 single-token questions by the challenge's voting rule, one visit at a time and as an entry of ten visits. The better one goes to a submission.",
           },
         ],
         details: [
