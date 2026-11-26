@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Experiment — Internal lens lab</title>
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="stylesheet" href="../tokens.css">
+<link rel="stylesheet" href="../app.css">
+<script src="../theme.js"></script>
+</head>
+<body>
+<div class="wrap">
+
+<header class="site">
+  <a class="name" href="../home.html">Internal lens lab</a>
+  <nav aria-label="Tabs"><ul class="tabs">
+    <li><a href="../home.html">Home</a></li>
+    <li><a href="../index.html">Readings</a></li>
+    <li><a href="../programs.html" aria-current="page">Research programs</a></li>
+  </ul></nav>
+</header>
+
+<main class="note" id="experiment" data-href="experiments/loop-twenty-passes.html">
+<p class="kicker" id="kicker"><a href="../programs.html">Research programs</a></p>
+<h1 id="title">Experiment title</h1>
+<p class="meta" id="meta">Planned</p>
+<div class="progress-block" id="progress" hidden></div>
+
+<section>
+<h2>In short</h2>
+<div class="prose">
+<p>The sentence this experiment should let us say: when Inkling 2 Mini's loop runs past the 3 passes it was trained with, the logit lens finds the intermediate at [more / the same / fewer] questions than after pass 3, and the model [keeps / changes / loses] the answer it gives at 3 passes.</p>
+<p>Two things make the question worth asking. Lee et al. found the logit lens reads well at the end of each pass of the loop, and that one coordinate of the state turns from a large positive value after passes 1 and 2 to a large negative one after pass 3, which they read as the model not expecting another pass. And the model's code accepts any number of passes, though the model card and the nnsight post both say Inkling 2 Mini was trained with exactly 3.</p>
+<p>We run the model once per question with the loop set to 20 passes, read the logit lens after every pass, and record what the model would answer if it stopped after that pass. The 10 practice questions and WorkspaceBench's 238 single-token questions are run and shown apart. The result is meant to be read by eye, in a readout grid that steps through the passes; two counts per pass say where to look.</p>
+<p>Nothing has been run.</p>
+</div>
+</section>
+
+<section>
+<h2>What we do</h2>
+<div class="prose">
+<h3>Why one run gives every pass</h3>
+<p>In the model's code (<code>modeling_inkling2_loop.py</code> in transformers), each pass of the loop starts again from the state before the loop. The only thing a pass gets from the one before is a message, read by learned gates at each of the 12 looped layers. Nothing tells a layer which pass it is on or how many are to come. So passes 1 to <i>k</i> of a 20-pass run are exactly the passes of a <i>k</i>-pass run, and one forward pass per question at <code>loop_num_passes=20</code> holds all of them: 6 visits before the loop, 240 inside it, and 6 after, 252 in all.</p>
+<p>The six layers after the loop, 18 to 23, see only the last pass. To learn what the model would answer after pass <i>k</i>, we run those six layers again on pass <i>k</i>'s states at every position, for each <i>k</i> from 1 to 20. That is the computation a <i>k</i>-pass model does, and it is checked against real runs at 1, 2 and 3 passes before anything else (below).</p>
+
+<h3>The input and the two positions read</h3>
+<p>Each question goes to the model as the challenge puts it: its chat format, thinking off, ending at the challenge's read position. At that position the model's next token is not the answer but a format marker: in the all-visits experiment the last visit read <code>&lt;|content_text|&gt;</code> and <code>&lt;|content_thinking|&gt;</code> as its top two on every practice question. So we add one token, the marker the model writes there at the normal 3 passes, and read two positions in the same forward pass. Because the model is causal, the added token changes nothing at the positions before it.</p>
+<table class="tbl">
+<thead><tr><th>Position</th><th>What is read there after each pass <i>k</i></th></tr></thead>
+<tbody>
+<tr><td>The read position, the challenge's</td><td>The logit lens at the 12 visits of pass <i>k</i> and at the six final layers run on pass <i>k</i>'s states: the top 10 tokens and the rank of the intermediate at each. The model's own output there, which says which marker it would write</td></tr>
+<tr><td>The answer position, after the added marker</td><td>The model's own output, as it would be with <i>k</i> passes: its top 10 tokens, the top one being the token it would answer with, and the rank of its 3-pass answer when that is not in the top 10</td></tr>
+</tbody>
+</table>
+<p>The logit lens is the one of the all-visits experiment: the model's own final norm and unembedding applied to the state entering each visit, with no trained weights. The visits before the loop are the same at every pass and are read once.</p>
+<p>The added marker is the 3-pass one at every <i>k</i>. If after some pass the model would write a different marker, the read-position output shows it, and the answer position then shows what it answers given the usual one.</p>
+
+<h3>The two counts</h3>
+<p>One count for each part of the claim, both on the same footing at every pass:</p>
+<ul>
+<li><b>Intermediate found, <i>I</i>(<i>k</i>)</b>: the number of questions whose intermediate is in the logit lens's top 10 at one or more of the 18 visits of pass <i>k</i> (its 12 looped visits and the six final layers run after it). The match is exact, in any case, with or without a leading space, as in the all-visits experiment. Every pass gets the same 18 visits, so a later pass has no more chances than an earlier one.</li>
+<li><b>Answer kept, <i>A</i>(<i>k</i>)</b>: the number of questions on which the model's answer after pass <i>k</i> is its answer after pass 3.</li>
+</ul>
+<p>The counts say where to look; the grid is what is read. Decided beforehand, for each question: the first pass at which the intermediate is in the top 10, and whether it stays; whether the answer changes, and to what; whether the rows of one pass look like those of the pass before. Every question is in the grid, none picked out.</p>
+
+<h3>How the results are shown</h3>
+<p>The readout grid of the all-visits experiment, one question at a time, with one change for 20 passes. Under the prompt and options, one line of 20 entries, one per pass, each giving the answer after that pass, the intermediate's best rank in it, and the 3-pass answer's rank when it is not in the top 10. Pressing an entry opens that pass below: the 12 looped visits and the six final layers run on it, as rows of the usual table. "← Pass" and "Pass →" step through the passes and are kept apart from "← Previous" and "Next →", which change the question. The layers before the loop are shown once, with pass 1.</p>
+<p>The practice questions and WorkspaceBench get their own result files, their own section under Results and their own grid. WorkspaceBench's three files (basic, multihop, multilingual) share one grid with a line of buttons, as in the all-visits experiment. The viewer is built once the first results are in, and the design rules get its rule then.</p>
+
+<h3>Where it runs</h3>
+<p>On our own GPU, an A100 with 80 GB, with the transformers model and local weights in bfloat16. Not on NDIF, whose hosted model has its pass count fixed, and nothing runs on the Mac. A question is one forward pass of 252 visits and 20 short reruns of the last six layers; the 248 questions are a short job.</p>
+</div>
+</section>
+
+<section>
+<h2>Competing explanations</h2>
+<div class="prose">
+<ul>
+<li><b>More passes refine.</b> Recurrent-depth models get better with more passes at test time (<a href="https://arxiv.org/abs/2502.05171" target="_blank" rel="noopener">Geiping et al., 2025</a>), but they were trained with the number of passes varied at random. Inkling 2 Mini was not, so this side has the weakest support here. It predicts <i>I</i>(<i>k</i>) rising past pass 3 while <i>A</i>(<i>k</i>) stays high.</li>
+<li><b>The loop settles.</b> All passes after the first share their weights and are linked only by the message, so the passes may settle where one more pass changes little. No paper in our readings tests this on this model. It predicts both counts flat from about pass 4, and rows that look alike from one pass to the next.</li>
+<li><b>The loop breaks past 3.</b> The model was trained only at 3 passes (model card, nnsight post), and Lee et al.'s coordinate turns negative after pass 3, as if the model expects no more. A fourth pass gets a message it never saw in training. It predicts <i>A</i>(<i>k</i>) falling, <i>I</i>(<i>k</i>) falling with it, and readouts drifting to tokens unrelated to the question.</li>
+<li><b>The loop cycles.</b> The same coordinate differs between passes 2 and 3 although the code runs them identically, so the message itself must carry where the model is in its passes. If it carries it as a cycle, later passes repeat an earlier pattern. It predicts counts going up and down with a regular period.</li>
+</ul>
+<p>The four predict results different in kind: up, flat, down, or alternating.</p>
+<p>Other reasons a result could arise:</p>
+<ul>
+<li><b>Rounding.</b> Twenty passes in bfloat16 could drift through rounding alone and look like a break. The practice questions are run again in float32; if their readouts at pass 20 agree with bfloat16, rounding is not the cause.</li>
+<li><b>A rise from more chances to match.</b> Ruled out by the count: each pass is read at the same 18 visits, and <i>I</i>(<i>k</i>) is never accumulated over passes.</li>
+<li><b>A rise from drift that happens to hit the intermediate.</b> If the readouts wander, a near-neighbour of the question (the next day, a nearby number) can turn up by chance. <i>A</i>(<i>k</i>) shows whether the model is still answering when it does. On WorkspaceBench's two-hop questions, where the intermediate is not the answer, nothing rules this out, and the grid has to be read.</li>
+<li><b>The added marker.</b> It is the 3-pass marker at every pass. If later passes would write another marker, the answer position reads the model in a state it would not have reached by itself. The read-position output says when this happens, and such questions are counted apart.</li>
+<li><b>Matching.</b> Exact matching misses some forms of an intermediate, the same at every pass, so it cannot make a rise or a fall.</li>
+</ul>
+</div>
+</section>
+
+<section>
+<h2>What we expect</h2>
+<div class="prose">
+<figure class="fig">
+<svg viewBox="0 0 340 232" style="max-width:480px" role="img" aria-label="A sketch, not data. The number of questions with the intermediate in the top 10, against the pass, from 1 to 20. All four curves rise together up to pass 3, the trained number, marked by a dashed line. After it, refinement rises further and levels off, settling stays flat, breaking falls to near the bottom by pass 10, and cycling alternates up and down at every pass.">
+  <g style="stroke:var(--rule)"><path d="M45 45 H310"/><path d="M45 80 H310"/><path d="M45 115 H310"/><path d="M45 150 H310"/><path d="M45 185 H310"/></g>
+  <path d="M45 20 V185 H310" fill="none" style="stroke:var(--ink-3)"/>
+  <path d="M72.9 22 V185" fill="none" style="stroke:var(--ink-3)" stroke-dasharray="3 3"/>
+  <text x="77" y="30">trained: 3 passes</text>
+  <path d="M45 170 C55 150 62 125 72.9 110" fill="none" style="stroke:var(--ink-2)" stroke-width="2.5"/>
+  <path d="M72.9 110 C100 90 130 66 160 62 S260 58 310 58" fill="none" style="stroke:var(--cat-1)" stroke-width="2.5"/>
+  <path d="M72.9 110 H310" fill="none" style="stroke:var(--cat-2)" stroke-width="2.5"/>
+  <path d="M72.9 110 C100 120 150 170 200 178 S280 182 310 182" fill="none" style="stroke:var(--cat-3)" stroke-width="2.5"/>
+  <path d="M72.9 110 L86.8 136 L100.8 104 L114.7 136 L128.7 104 L142.6 136 L156.6 104 L170.5 136 L184.5 104 L198.4 136 L212.4 104 L226.3 136 L240.3 104 L254.2 136 L268.2 104 L282.1 136 L296.1 104 L310.0 136" fill="none" style="stroke:var(--cat-4)" stroke-width="1.5" stroke-dasharray="4 3"/>
+  <g text-anchor="middle"><text x="45" y="200">1</text><text x="72.9" y="200">3</text><text x="100.8" y="200">5</text><text x="170.5" y="200">10</text><text x="240.3" y="200">15</text><text x="310" y="200">20</text><text x="177" y="218">Pass <tspan class="t-var">k</tspan></text><text transform="translate(14 105) rotate(-90)">Intermediate found, I(k)</text></g>
+  <g text-anchor="end"><text x="36" y="188">Fewer</text><text x="36" y="29">More</text></g>
+</svg>
+<figcaption><b>Hypothetical outcomes, not results.</b> <span class="nowrap"><span class="key" style="background:var(--cat-1)"></span>More passes refine</span> <span class="nowrap"><span class="key" style="background:var(--cat-2)"></span>The loop settles</span> <span class="nowrap"><span class="key" style="background:var(--cat-3)"></span>The loop breaks</span> <span class="nowrap"><span class="key" style="background:var(--cat-4)"></span>The loop cycles (dashed)</span></figcaption>
+</figure>
+<p>The thresholds, on WorkspaceBench's 238 questions; on the 10 practice questions the counts are too small to decide anything, and those are read by eye. Written on 25 Nov 2026 by the agent that drafted this page; the project's owner has not reviewed them.</p>
+<ul>
+<li><b>Refine.</b> At some pass from 4 to 20, <i>I</i>(<i>k</i>) is at least <i>I</i>(3) + 12, five per cent of the questions, while <i>A</i>(<i>k</i>) is at least 214, nine in ten.</li>
+<li><b>Settle.</b> At every pass from 5 to 20, <i>I</i>(<i>k</i>) is within 5 of <i>I</i>(3) and <i>A</i>(<i>k</i>) is at least 226, 95 per cent.</li>
+<li><b>Break.</b> By pass 10, <i>A</i>(<i>k</i>) is 119 or less, half the questions.</li>
+<li><b>Cycle.</b> From pass 4 on, <i>I</i>(<i>k</i>) or <i>A</i>(<i>k</i>) moves by 12 or more between neighbouring passes, with the same period at least three times in a row.</li>
+<li><b>Anything else</b> is reported as undecided and read in the grid before anything is built on it.</li>
+</ul>
+<p>The agent's own guess is a break, slow at first: a fourth pass gets a message the model never saw in training, and nothing in it is trained to stay stable. A result that settles would not surprise it.</p>
+</div>
+</section>
+
+<section>
+<h2>What would make us distrust a result</h2>
+<div class="prose">
+<ul>
+<li>Passes 1 to 3 of the 20-pass run, with the final layers run on pass 3, do not give the same top 10 at all 48 visits as a normal 3-pass run of the same question. Then the passes are read wrongly, or the rerun of the final layers is not what the model does. Checked first, before anything is saved.</li>
+<li>The model's output after pass 1 or pass 2 differs from a real run with <code>loop_num_passes</code> set to 1 or 2. Then the rerun of the final layers is wrong.</li>
+<li>Adding the marker changes any readout at the read position. Then the model is not reading causally as we assume.</li>
+<li>The practice questions in float32 disagree with bfloat16 at pass 20 on most questions. Then late passes reflect rounding, and only the passes before the disagreement are read.</li>
+</ul>
+<p>Two limits that hold whatever the result. The local model already disagreed with NDIF's readouts at about one visit in ten, through rounding; every comparison here is between passes of the same local run, so this does not touch them, but the pass-3 readouts here will not match NDIF's exactly. And the challenge scores the model at 3 passes, so nothing here goes into a submission directly: it says what the loop does with more passes, and which pass the intermediate comes from.</p>
+<p>All questions are run at once, with no single-question pilot first: the owner judged the run simple enough on 25 Nov 2026. The checks above still run first, inside the same job, and nothing is saved if they fail.</p>
+</div>
+</section>
+
+<section id="results">
+<h2>Results</h2>
+<div class="prose">
+<p>Empty until the experiment has run.</p>
+</div>
+</section>
+</main>
+
+</div>
+<script src="../resources.js"></script>
+<script src="../programs.js"></script>
+<script src="../app.js"></script>
+<script src="../toc.js"></script>
+<script src="../cite.js"></script>
+</body>
+</html>

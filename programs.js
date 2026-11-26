@@ -104,6 +104,14 @@ window.PROGRAMS = [
             href: "experiments/future-tuned-lens.html",
             summary: "Trains one affine translator per layer visit, twice: once to predict the model's next token, as a tuned lens does, and once to predict a weighted window of its outputs at the position before, the one read and the one after, the middle weighted most. A further condition trains three translators, one for each of those positions, and merges their readouts after unembedding. All are scored beside the logit lens on WorkspaceBench's 238 single-token questions by the challenge's voting rule, one visit at a time and as an entry of ten visits. The better one goes to a submission.",
           },
+          {
+            title: "What the logit lens reads when the loop runs 20 times",
+            status: "planned",
+            date: "2026-11-25",
+            tags: ["preliminary", "AI-assisted", "unreviewed"],
+            href: "experiments/loop-twenty-passes.html",
+            summary: "Runs Inkling 2 Mini on our own GPU with its loop set to 20 passes instead of the 3 it was trained with, on the 10 practice questions and on WorkspaceBench's 238 single-token questions, kept apart. After each pass it reads the logit lens at that pass's 12 layer visits and at the six final layers run on that pass's states, and records the token the model would answer with if it stopped there, with the rank of its usual 3-pass answer when that is outside the top 10. It asks whether the intermediate and the answer turn up at more questions once the loop runs past its third pass, and shows every pass in a readout grid that steps through the passes.",
+          },
         ],
         details: [
           {
