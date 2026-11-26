@@ -45,16 +45,18 @@
 <p>The six layers after the loop, 18 to 23, see only the last pass. To learn what the model would answer after pass <i>k</i>, we run those six layers again on pass <i>k</i>'s states at every position, for each <i>k</i> from 1 to 20. That is the computation a <i>k</i>-pass model does, and it is checked against real runs at 1, 2 and 3 passes before anything else (below).</p>
 
 <h3>The input and the two positions read</h3>
-<p>Each question goes to the model as the challenge puts it: its chat format, thinking off, ending at the challenge's read position. At that position the model's next token is not the answer but a format marker: in the all-visits experiment the last visit read <code>&lt;|content_text|&gt;</code> and <code>&lt;|content_thinking|&gt;</code> as its top two on every practice question. So we add one token, the marker the model writes there at the normal 3 passes, and read two positions in the same forward pass. Because the model is causal, the added token changes nothing at the positions before it.</p>
+<p>Each question goes to the model as its set puts it, ending at the read position of the all-visits experiment: the last token of the input. Everything read at that position comes from a 20-pass run on the question alone, with nothing added.</p>
+<p>Where the answer is read depends on the set. In the chat-format sets, the practice questions and WorkspaceBench's basic file, the read position is <code>&lt;|message_model|&gt;</code>, which opens the model's turn, and the model's next token there is a format marker, not the answer. Its own top token there is <code>&lt;|content_thinking|&gt;</code>, which would open a thinking block. Since thinking is off, we add <code>&lt;|content_text|&gt;</code> instead and read the answer one position later, in a second 20-pass run. In the plain-text sets, multihop and multilingual, the input ends just before the answer word, so the model's top token at the read position is already the answer (<code>␣Fe</code>, <code>␣drei</code>), and nothing is added.</p>
 <table class="tbl">
 <thead><tr><th>Position</th><th>What is read there after each pass <i>k</i></th></tr></thead>
 <tbody>
-<tr><td>The read position, the challenge's</td><td>The logit lens at the 12 visits of pass <i>k</i> and at the six final layers run on pass <i>k</i>'s states: the top 10 tokens and the rank of the intermediate at each. The model's own output there, which says which marker it would write</td></tr>
-<tr><td>The answer position, after the added marker</td><td>The model's own output, as it would be with <i>k</i> passes: its top 10 tokens, the top one being the token it would answer with, and the rank of its 3-pass answer when that is not in the top 10</td></tr>
+<tr><td>The read position, every set, from the question alone</td><td>The logit lens at the 12 visits of pass <i>k</i> and at the six final layers run on pass <i>k</i>'s states: the top 10 tokens and the rank of the intermediate at each. The model's own output: its top 10. In the plain-text sets this is the answer</td></tr>
+<tr><td>The answer position, chat sets only: after the added <code>&lt;|content_text|&gt;</code></td><td>The model's own output: its top 10, the top one being the token it would answer with</td></tr>
 </tbody>
 </table>
+<p>Wherever the answer is read, the rank of the 3-pass answer is kept at every pass and shown when it is not in the top 10.</p>
 <p>The logit lens is the one of the all-visits experiment: the model's own final norm and unembedding applied to the state entering each visit, with no trained weights. The visits before the loop are the same at every pass and are read once.</p>
-<p>The added marker is the 3-pass one at every <i>k</i>. If after some pass the model would write a different marker, the read-position output shows it, and the answer position then shows what it answers given the usual one.</p>
+<p>In the chat sets we also count, at each pass, the questions whose top token at the read position is no longer <code>&lt;|content_thinking|&gt;</code>. The answer position always follows <code>&lt;|content_text|&gt;</code>, so it shows what the model answers when it does not think.</p>
 
 <h3>The two counts</h3>
 <p>One count for each part of the claim, both on the same footing at every pass:</p>
@@ -88,7 +90,7 @@
 <li><b>Rounding.</b> Twenty passes in bfloat16 could drift through rounding alone and look like a break. The practice questions are run again in float32; if their readouts at pass 20 agree with bfloat16, rounding is not the cause.</li>
 <li><b>A rise from more chances to match.</b> Ruled out by the count: each pass is read at the same 18 visits, and <i>I</i>(<i>k</i>) is never accumulated over passes.</li>
 <li><b>A rise from drift that happens to hit the intermediate.</b> If the readouts wander, a near-neighbour of the question (the next day, a nearby number) can turn up by chance. <i>A</i>(<i>k</i>) shows whether the model is still answering when it does. On WorkspaceBench's two-hop questions, where the intermediate is not the answer, nothing rules this out, and the grid has to be read.</li>
-<li><b>The added marker.</b> It is the 3-pass marker at every pass. If later passes would write another marker, the answer position reads the model in a state it would not have reached by itself. The read-position output says when this happens, and such questions are counted apart.</li>
+<li><b>The added marker, in the chat sets.</b> The answer position always follows <code>&lt;|content_text|&gt;</code>, which is not the model's own top token there. So it reads the model in a turn the model would have opened another way. This holds at every pass alike, so it cannot make a rise or a fall by itself. The count of questions whose read-position top token changes says when later passes would open the turn differently.</li>
 <li><b>Matching.</b> Exact matching misses some forms of an intermediate, the same at every pass, so it cannot make a rise or a fall.</li>
 </ul>
 </div>
@@ -131,11 +133,18 @@
 <ul>
 <li>Passes 1 to 3 of the 20-pass run, with the final layers run on pass 3, do not give the same top 10 at all 48 visits as a normal 3-pass run of the same question. Then the passes are read wrongly, or the rerun of the final layers is not what the model does. Checked first, before anything is saved.</li>
 <li>The model's output after pass 1 or pass 2 differs from a real run with <code>loop_num_passes</code> set to 1 or 2. Then the rerun of the final layers is wrong.</li>
-<li>Adding the marker changes any readout at the read position. Then the model is not reading causally as we assume.</li>
+<li>Adding the marker changes readouts at the read position in a 3-pass run. Reported, not a gate: the saved readouts there come from the question alone, so the marker cannot reach them. A first run found 5 such visits in 2 of the 248 questions, all near-tied tokens trading places late in the network, which fits rounding from a longer input.</li>
 <li>The practice questions in float32 disagree with bfloat16 at pass 20 on most questions. Then late passes reflect rounding, and only the passes before the disagreement are read.</li>
 </ul>
 <p>Two limits that hold whatever the result. The local model already disagreed with NDIF's readouts at about one visit in ten, through rounding; every comparison here is between passes of the same local run, so this does not touch them, but the pass-3 readouts here will not match NDIF's exactly. And the challenge scores the model at 3 passes, so nothing here goes into a submission directly: it says what the loop does with more passes, and which pass the intermediate comes from.</p>
-<p>All questions are run at once, with no single-question pilot first: the owner judged the run simple enough on 25 Nov 2026. The checks above still run first, inside the same job, and nothing is saved if they fail.</p>
+<p>All questions are run at once, with no single-question pilot first: the owner judged the run simple enough on 25 Nov 2026. The first two checks still run first, inside the same job, and nothing is saved if they fail.</p>
+<p>Changed on 26 Nov 2026, before any result was saved. The first full run stopped when the marker check, then a gate, found the 5 near-tie differences above. Its debug run had also shown two flaws in the design as first written.</p>
+<ul>
+<li>The design read everything from one run with the marker added. It now reads the read position from the question alone, and the marker check is reported instead of blocking the save.</li>
+<li>The marker was to be the model's own 3-pass top token. In the chat sets that is <code>&lt;|content_thinking|&gt;</code>, so <code>&lt;|content_text|&gt;</code> is added instead.</li>
+<li>In the plain-text sets the model's top token at the read position is already the answer, so the token after it was mostly punctuation. The answer there is now read at the read position.</li>
+</ul>
+<p>The claim, the counts and the thresholds are unchanged.</p>
 </div>
 </section>
 
