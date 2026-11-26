@@ -97,6 +97,26 @@
 <li><b>More text:</b> the pilot's translators for <i>t</i> failed the overfitting check, so they are retrained on 5,000 passages in place of 1,000, and both versions are scored.</li>
 </ul>
 <p>This part measures how well a lens reproduces the output. It does not measure the intermediate, and the first part's pilot found the two pull apart.</p>
+<h3>Third part: a tuned lens on more and more varied text</h3>
+<p>Added on 25 Nov 2026 by the owner, after the first two parts had been read and before this part ran. It closes the work on the tuned lens: the same translator, trained on the model's output at <i>t</i>, at the six coda visits, on about five times the text and on text of more kinds.</p>
+<table class="tbl">
+<thead><tr><th>Kind of text</th><th class="num">Passages of 128 tokens</th></tr></thead>
+<tbody>
+<tr><td>English web text</td><td class="num">8,000</td></tr>
+<tr><td>Text in other languages</td><td class="num">6,000</td></tr>
+<tr><td>Mathematics, including generated sums and sequences</td><td class="num">3,000</td></tr>
+<tr><td>Code</td><td class="num">2,000</td></tr>
+<tr><td>Other kinds: scientific abstracts, news, dialogue</td><td class="num">2,000</td></tr>
+<tr><td>The model's own answers in its chat format</td><td class="num">3,000</td></tr>
+</tbody>
+</table>
+<p>That is about 24,000 passages and three million positions, the number of documents the Goodfire post used for its tuned lens. The benchmark's and the practice set's questions stay out, as before, and 5% of each kind is held out.</p>
+<ul>
+<li><b>One pass.</b> Each position is seen once, with a constant learning rate, so a translator saved partway is the lens trained on less text.</li>
+<li><b>Checkpoints</b> at 50,000, 100,000, 200,000, 400,000, 800,000 and 1,600,000 positions and at the end. Each is scored, which shows where more text stops helping.</li>
+<li><b>The same three measures as before,</b> at every checkpoint and visit: held-out KL to the model's output for each kind of text; next-token match; and the vote for the intermediate on the benchmark, by file and by family.</li>
+<li><b>The earlier translators are kept</b> unchanged as a first version and scored beside the new ones.</li>
+</ul>
 <h3>Where it runs</h3>
 <p>Training and scoring run on our own GPU from the model's downloaded weights, in the same separate folder and environment as the prediction-subspace experiment. A submission is a later step: the chosen translators are published to the Hugging Face Hub and the entry applies them on NDIF.</p>
 </div>
@@ -143,6 +163,15 @@
 <li>At the chat questions' read position the tuned translator's top token is a chat-format marker on nearly every question.</li>
 <li>With five times the text, the held-out KL falls below twice the learning KL at every visit.</li>
 </ul>
+<h3>Third part</h3>
+<p>Written on 25 Nov 2026 by the agent, before this part ran and with the first two parts' results known.</p>
+<ul>
+<li><b>Other languages.</b> On the multilingual questions, next-token match at visits 42 to 44 rises from about 0% to above 30%.</li>
+<li><b>English web text.</b> Next-token match rises by no more than 5 points over the translators trained on 5,000 passages.</li>
+<li><b>Where more text stops helping.</b> Held-out KL on English web text changes by less than 5% between 1.6 million positions and the end.</li>
+<li><b>The intermediate.</b> On the sum and sequence families the vote for the intermediate does not rise: it stays at one question or none in each family at every visit. On the multilingual file it rises at visits 42 and 43 and not at 44 and 45.</li>
+</ul>
+<p>If the last one holds, more text of the same kind does not reach those families, and a lens with a different target is needed for them.</p>
 </div>
 </section>
 
