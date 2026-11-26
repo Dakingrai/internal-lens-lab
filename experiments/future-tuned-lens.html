@@ -88,6 +88,15 @@
 <li><b>One visit at a time</b>, for each of the 48 visits: the share of questions where that single readout votes for the intermediate.</li>
 <li><b>As an entry of ten visits.</b> The questions of each file are split in half by a fixed seed. The ten visits are chosen on one half and the pass rate is reported on the other, so the visits are not chosen on the questions they are scored on.</li>
 </ul>
+<h3>Second part: decoding the next token in the coda</h3>
+<p>Added on 25 Nov 2026 by the owner, after the pilot of the first part had been read and before this part ran. The question is narrower: can a lens name the model's next token from the layers that run once at the end, before the last layer's output? It concerns the six coda visits only, 42 to 47, and no visit inside the loop.</p>
+<ul>
+<li><b>The lens:</b> the plain tuned translator, trained on the model's output at <i>t</i>, beside the logit lens. The translators for <i>t</i> − 1 and <i>t</i> + 1 are reported against their own targets, in separate columns.</li>
+<li><b>The metric:</b> next-token match, the share of positions where the lens's top token is the model's own top token; and, beside it, the share where the model's top token is in the lens's top 10. Control tokens count here and nothing is cleaned, because the model does write them.</li>
+<li><b>Where:</b> held-out FineWeb positions, held-out chat questions at their last token, and the 238 WorkspaceBench questions at their read positions.</li>
+<li><b>More text:</b> the pilot's translators for <i>t</i> failed the overfitting check, so they are retrained on 5,000 passages in place of 1,000, and both versions are scored.</li>
+</ul>
+<p>This part measures how well a lens reproduces the output. It does not measure the intermediate, and the first part's pilot found the two pull apart.</p>
 <h3>Where it runs</h3>
 <p>Training and scoring run on our own GPU from the model's downloaded weights, in the same separate folder and environment as the prediction-subspace experiment. A submission is a later step: the chosen translators are published to the Hugging Face Hub and the entry applies them on NDIF.</p>
 </div>
@@ -126,6 +135,14 @@
 <li><b>Each translator alone.</b> On the basic questions the translator for <i>t</i> + 1 votes for the intermediate far more often than the other two, and the one for <i>t</i> − 1 almost never does.</li>
 </ul>
 <p>If the two trained lenses gain equally, the window adds nothing and the plain tuned lens is the simpler entry. If neither gains on any file, the translators are not worth a submission and the Jacobian lens is next.</p>
+<h3>Second part</h3>
+<p>Written on 25 Nov 2026 by the agent, before this part ran but after the pilot's KL numbers were known: at visits 42 to 46 the translator's held-out KL to the model's output was a quarter or less of the untrained lens's.</p>
+<ul>
+<li>At each of visits 42 to 46, the tuned translator's next-token match is at least 15 points above the logit lens's on held-out text.</li>
+<li>At visit 47 the two are within 5 points of each other, both above 80%.</li>
+<li>At the chat questions' read position the tuned translator's top token is a chat-format marker on nearly every question.</li>
+<li>With five times the text, the held-out KL falls below twice the learning KL at every visit.</li>
+</ul>
 </div>
 </section>
 
